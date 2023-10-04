@@ -35,25 +35,27 @@ export default function PlantsList() {
 
   return (
     <>
-      {plants.map((t) => (
-        <div
-          key={t._id}
-          className="p-4 border border-slate-300 my-3 flex justify-between gap-5 items-start"
-        >
-          <div>
-            <h2 className="font-bold text-2xl">{t.title}</h2>
-            <div>{t.description}</div>
-            <div>{t.family}</div>
-          </div>
+      <div className="mt-32 flex flex-wrap justify-between max-w-[90%] m-auto">
+        {plants.map((t) => (
+          <div
+            key={t._id}
+            className="p-4 m-4 border border-slate-300 flex justify-between gap-5 items-start w-96"
+          >
+            <div>
+              <h2 className="font-bold text-2xl">{t.title}</h2>
+              <div>{t.description}</div>
+              <div>{t.family}</div>
+            </div>
 
-          <div className="flex gap-2">
-            <RemoveBtn id={t._id} />
-            <Link href={`/editPlant/${t._id}`}>
-              <HiPencilAlt size={24} />
-            </Link>
+            <div className="flex gap-2">
+              <RemoveBtn id={t._id} />
+              <Link href={`/editPlant/${t._id}`}>
+                <HiPencilAlt size={24} />
+              </Link>
+            </div>
           </div>
-        </div>
-      ))}
+        ))}
+      </div>
     </>
   );
 }

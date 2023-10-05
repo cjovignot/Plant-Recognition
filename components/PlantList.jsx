@@ -1,10 +1,11 @@
 "use client"
 import Link from "next/link";
+import AddPlant from '@/components/AddPlant';
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt, HiOutlinePlus } from "react-icons/hi";
 import { useState, useEffect } from 'react';
 
-const getTopics = async () => {
+const getPlants = async () => {
   try {
     const res = await fetch("http://localhost:3000/api/plants", {
       cache: "no-store",
@@ -23,9 +24,20 @@ const getTopics = async () => {
 export default function PlantsList() {
   const [plants, setPlants] = useState([]);
 
+  // Load plants from API and update state
+  const loadPlants = async () => {
+    const result = await getPlants();
+    console.log(result)
+    setPlants(result.plants || []);
+  };
+
+  useEffect(() => {
+    loadPlants();
+  }, []);
+
   useEffect(() => {
     async function fetchData() {
-      const result = await getTopics();
+      const result = await getPlants();
       console.log(result)
       setPlants(result.plants || []);
     }
@@ -47,8 +59,15 @@ export default function PlantsList() {
             key={t._id}
             className="card w-96 bg-base-100 shadow-xl m-4"
           >
-            <figure><img src="https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg" /></figure>
-            <div className="card-body">
+            <div className="w-full h-60 rounded-t-2xl" style={{
+              backgroundImage: "url('https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg')",
+              backgroundPosition: "center",
+              backgroundSize: "cover"
+            }}>
+
+            </div>
+            {/* <figure><img className="h-48" src="https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg" /></figure> */}
+            <div className="card-body p-4 pb-0">
               <h2 className="font-bold text-2xl">{t.name}</h2>
               <div>{t.family}</div>
               <div><i>{t.genre}</i></div>
@@ -56,8 +75,8 @@ export default function PlantsList() {
               <div>{t.cultivar}</div>
             </div>
 
-            <div className="flex fixed w-96 p-4 justify-between">
-              <RemoveBtn id={t._id} />
+            <div className="flex relative w-96 p-4 justify-between">
+              <RemoveBtn id={t._id} onPlantDeleted={loadPlants}/>
               <Link href={`/editPlant/${t._id}`}>
                 <HiPencilAlt size={30} />
               </Link>
@@ -70,6 +89,7 @@ export default function PlantsList() {
         <Link className="btn btn-ghost w-36 h-36 normal-case text-xl" href={"/addPlant"}>
           <HiOutlinePlus size={60} />
         </Link>
+          <AddPlant onPlantAdded={loadPlants}/>
       </div>
       </div>
     </>

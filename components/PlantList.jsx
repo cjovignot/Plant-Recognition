@@ -1,7 +1,7 @@
 "use client"
 import Link from "next/link";
 import RemoveBtn from "./RemoveBtn";
-import { HiPencilAlt } from "react-icons/hi";
+import { HiPencilAlt, HiOutlinePlus } from "react-icons/hi";
 import { useState, useEffect } from 'react';
 
 const getTopics = async () => {
@@ -35,32 +35,42 @@ export default function PlantsList() {
 
   return (
     <>
-      <div className="mt-32 flex flex-wrap justify-between max-w-[90%] m-auto">
+      <div className="mt-32 flex flex-wrap justify-start max-w-[90%] m-auto">
       {plants.length === 0 ? (
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
           </div>
         ) : (
         plants.map((t) => (
+          <>
           <div
             key={t._id}
-            className="p-4 m-4 border border-slate-300 flex justify-between gap-5 items-start w-96"
+            className="card w-96 bg-base-100 shadow-xl m-4"
           >
-            <div>
-              <h2 className="font-bold text-2xl">{t.title}</h2>
-              <div>{t.description}</div>
+            <figure><img src="https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg" /></figure>
+            <div className="card-body">
+              <h2 className="font-bold text-2xl">{t.name}</h2>
               <div>{t.family}</div>
+              <div><i>{t.genre}</i></div>
+              <div><i>{t.species}</i></div>
+              <div>{t.cultivar}</div>
             </div>
 
-            <div className="flex gap-2">
+            <div className="flex fixed w-96 p-4 justify-between">
               <RemoveBtn id={t._id} />
               <Link href={`/editPlant/${t._id}`}>
-                <HiPencilAlt size={24} />
+                <HiPencilAlt size={30} />
               </Link>
             </div>
           </div>
+          </>
           ))
         )}
+      <div className="flex w-96 m-4 justify-center items-center h-inherit">
+        <Link className="btn btn-ghost w-36 h-36 normal-case text-xl" href={"/addPlant"}>
+          <HiOutlinePlus size={60} />
+        </Link>
+      </div>
       </div>
     </>
   );

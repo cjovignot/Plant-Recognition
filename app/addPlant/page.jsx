@@ -4,17 +4,19 @@ import { useState } from "react";
 import { useRouter } from "next/navigation";
 
 export default function AddPlant() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [family, setFamily] = useState("")
+  const [name, setName] = useState("");
+  const [family, setFamily] = useState("");
+  const [genre, setGenre] = useState("")
+  const [species, setSpecies] = useState("")
+  const [cultivar, setCultivar] = useState("")
 
   const router = useRouter();
 
   const handleSubmit = async (e) => {
     e.preventDefault();
 
-    if (!title || !description || !family) {
-      alert("Title and description are required.");
+    if (!name || !family || !genre || !species || !cultivar) {
+      alert("Name and family are required.");
       return;
     }
 
@@ -24,9 +26,9 @@ export default function AddPlant() {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ title, description, family }),
+        body: JSON.stringify({ name, family, genre, species, cultivar }),
     });
-    console.log("body:", family)
+    console.log("body:", res.body)
 
       if (res.ok) {
         router.push("/settings");
@@ -43,16 +45,8 @@ export default function AddPlant() {
       <div className="w-96 m-auto">
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
           <input
-              onChange={(e) => setTitle(e.target.value)}
-              value={title}
-              type="text"
-              placeholder="Nom latin"
-              className="input input-bordered w-full max-w-xs"
-          />
-
-          <input
-              onChange={(e) => setDescription(e.target.value)}
-              value={description}
+              onChange={(e) => setName(e.target.value)}
+              value={name}
               type="text"
               placeholder="Nom commun"
               className="input input-bordered w-full max-w-xs"
@@ -63,6 +57,30 @@ export default function AddPlant() {
               value={family}
               type="text"
               placeholder="Famille"
+              className="input input-bordered w-full max-w-xs"
+          />
+
+          <input
+              onChange={(e) => setGenre(e.target.value)}
+              value={genre}
+              type="text"
+              placeholder="Genre"
+              className="input input-bordered w-full max-w-xs"
+          />
+
+          <input
+              onChange={(e) => setSpecies(e.target.value)}
+              value={species}
+              type="text"
+              placeholder="Espèce"
+              className="input input-bordered w-full max-w-xs"
+          />
+
+          <input
+              onChange={(e) => setCultivar(e.target.value)}
+              value={cultivar}
+              type="text"
+              placeholder="Cultivar"
               className="input input-bordered w-full max-w-xs"
           />
 

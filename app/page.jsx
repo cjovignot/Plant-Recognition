@@ -9,10 +9,10 @@ export default function Home() {
       <div className="hero-overlay bg-opacity-60"></div>
       <div className="hero-content text-center text-neutral-content">
         <div className="">
-          <h1 className="mb-5 text-9xl text-white font-bold">Vegetal Reco&apos;</h1>
-          <Link href="/gameMenu" className="btn btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Commencer</Link>
+          <h1 className="mb-5 text-8xl text-white font-bold">Vegetal Reco&apos;</h1>
         </div>
       </div>
+      <Link href="/gameMenu" className="btn fixed bottom-60 w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>
     </div>
   );
 }

@@ -1,10 +1,11 @@
 import mongoose, { Schema } from "mongoose";
-
 const plantSchema = new Schema(
   {
-    title: String,
-    description: String,
-    family: String
+    name: String, // Nom commun
+    family: String, // Famille
+    genre: String, // genre
+    species: String, // espèce
+    cultivar: String // cultivar
   }
 );
 

@@ -10,6 +10,7 @@ export default function AddPlant({ onPlantAdded }) {
   const [genre, setGenre] = useState("")
   const [species, setSpecies] = useState("")
   const [cultivar, setCultivar] = useState("")
+  const [group, setGroup] = useState("Groupe")
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -22,7 +23,8 @@ export default function AddPlant({ onPlantAdded }) {
         family: "Famille",
         genre: "Genre",
         species: "Espèce",
-        cultivar: "Cultivar"
+        cultivar: "Cultivar",
+        group: "Groupe"
     };
 
     const emptyFields = Object.keys(fieldNames).filter(key => !eval(key)); // Here, `eval(key)` will get the value of the state variable named by the `key`
@@ -41,13 +43,14 @@ export default function AddPlant({ onPlantAdded }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ name, family, genre, species, cultivar }),
+        body: JSON.stringify({ name, family, genre, species, cultivar, group }),
     });
     console.log("body:", res.body)
 
 
     if (res.ok) {
         router.push("/settings");
+        resetForm();
         if (onPlantAdded) onPlantAdded();  // Call the function to re-fetch plants
       } else {
         throw new Error("Failed to create a plant");
@@ -56,6 +59,16 @@ export default function AddPlant({ onPlantAdded }) {
       console.log(error);
     }
   };
+  
+  const resetForm = () => {
+    setName("");
+    setFamily("");
+    setGenre("");
+    setSpecies("");
+    setCultivar("");
+    setGroup("Groupe");
+    setErrorMessage("");
+};
 
   return (
     <>
@@ -105,6 +118,19 @@ export default function AddPlant({ onPlantAdded }) {
                     placeholder="Cultivar"
                     className="input input-bordered w-full"
                 />
+
+                <select className="select select-bordered w-full"
+                    onChange={(e) => setGroup(e.target.value)}
+                    value={group}
+                >
+                    <option disabled selected>Groupe</option>
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                </select>
                 {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
 
                 <div className="flex justify-between mt-4">
@@ -113,7 +139,7 @@ export default function AddPlant({ onPlantAdded }) {
                         className="bg-red-600 font-bold text-white py-3 px-6 w-fit m-auto rounded-lg"
                         onClick={() => {
                             document.getElementById('my_modal_5').close();
-                            setErrorMessage("");
+                            resetForm();
                         }}
                     >
                         Annuler

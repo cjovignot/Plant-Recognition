@@ -20,11 +20,11 @@ const getPlantById = async (id) => {
 export default async function EditPlant({ params }) {
   const { id } = params;
   const { plant } = await getPlantById(id);
-  const { name, family, genre, species, cultivar } = plant;
+  const { name, family, genre, species, cultivar, group } = plant;
 
   return (
     <div className="flex justify-center">
-      <EditPlantForm id={id} name={name} family={family} genre={genre} species={species} cultivar={cultivar} />
+      <EditPlantForm id={id} name={name} family={family} genre={genre} species={species} cultivar={cultivar} group={group} />
     </div>
   );
 }

@@ -3,12 +3,13 @@
 import { useState } from "react";
 import { useRouter } from "next/navigation";
 
-export default function EditPlantForm({ id, name, family, genre, species, cultivar }) {
+export default function EditPlantForm({ id, name, family, genre, species, cultivar, group }) {
   const [newName, setNewName] = useState(name);
   const [newFamily, setNewFamily] = useState(family);
   const [newGenre, setNewGenre] = useState(genre);
   const [newSpecies, setNewSpecies] = useState(species);
   const [newCultivar, setNewCultivar] = useState(cultivar);
+  const [newGroup, setNewGroup] = useState(group);
 
   const router = useRouter();
 
@@ -21,7 +22,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar }),
+        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup }),
       });
 
       if (!res.ok) {
@@ -77,6 +78,19 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
             placeholder="Cultivar"
             className="input input-bordered w-full"
         />
+
+        <select className="select select-bordered w-full"
+            onChange={(e) => setNewGroup(e.target.value)}
+            value={newGroup}
+        >
+            <option disabled selected>Groupe</option>
+            <option>1</option>
+            <option>2</option>
+            <option>3</option>
+            <option>4</option>
+            <option>5</option>
+            <option>6</option>
+        </select>
 
         <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit m-auto">
           Sauvegarder

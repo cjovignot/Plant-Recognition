@@ -3,9 +3,9 @@ import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, family, genre, species, cultivar } = await request.json();
+  const { name, family, genre, species, cultivar, group } = await request.json();
   await connectMongoDB();
-  await Plant.create({ name, family, genre, species, cultivar });
+  await Plant.create({ name, family, genre, species, cultivar, group });
   return NextResponse.json({ message: "Plant Created" }, { status: 201 });
 }
 

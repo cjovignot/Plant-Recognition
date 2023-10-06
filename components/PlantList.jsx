@@ -3,6 +3,7 @@ import Link from "next/link";
 import AddPlant from '@/components/AddPlant';
 import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt, HiOutlinePlus } from "react-icons/hi";
+import { FaLayerGroup } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
 
 const getPlants = async () => {
@@ -47,7 +48,7 @@ export default function PlantsList() {
 
   return (
     <>
-      <div className="mt-32 flex flex-wrap justify-start max-w-[90%] m-auto">
+      <div className="mt-32 flex flex-wrap justify-center max-w-[90%] m-auto">
       {plants.length === 0 ? (
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
@@ -68,6 +69,7 @@ export default function PlantsList() {
             </div>
             {/* <figure><img className="h-48" src="https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg" /></figure> */}
             <div className="card-body p-4 pb-0">
+              <div className="flex items-center"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
               <h2 className="font-bold text-2xl">{t.name}</h2>
               <div>{t.family}</div>
               <div><i>{t.genre}</i></div>

@@ -86,9 +86,6 @@ export default function PlantsList() {
           ))
         )}
       <div className="flex w-96 m-4 justify-center items-center h-inherit">
-        <Link className="btn btn-ghost w-36 h-36 normal-case text-xl" href={"/addPlant"}>
-          <HiOutlinePlus size={60} />
-        </Link>
           <AddPlant onPlantAdded={loadPlants}/>
       </div>
       </div>

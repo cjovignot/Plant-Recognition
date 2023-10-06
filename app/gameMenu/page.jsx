@@ -13,12 +13,11 @@ export default function Settings() {
         <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_zhEzXEHxYu_RB05zlkJbnrWH4RME42hJsEPvxMUy_Ub8WLuIStfyYXFXBie1ZuPw2SA&usqp=CAU"/></figure>
           <div className="card-body">
             <h2 className="card-title text-2xl flex justify-center">DECOUVERTE</h2><br/>
-            <p><b>Teste tes connaissances sur les points suivant :</b>
-              <li>Nom commun</li>
+            <p><b>Teste tes connaissances sur les points suivant :</b></p>
+            <li>Nom commun</li>
               <li>Famille</li>
               <li>Espèce</li>
               <li>Cultivar</li>
-            </p>
             <div className="card-actions justify-end">
               <Link href="/level1" className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">Jouer</Link>
             </div>
@@ -44,7 +43,7 @@ export default function Settings() {
 
         
         <div className="card w-96 h-128 bg-base-100 shadow-xl m-8">
-        <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSeWcdwroHHVpKfdVvjJTvcqeaMbjizQ5b3PBQr5d7hu2HzPT-warPP6iumhzhWcMbkulQ&usqp=CAU"/></figure>
+        <figure><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTN-bDe8IPzmu5qyKcgdNRzsa-NxBSauy3R_VHmNKk-_YdbQa1d9ABpdtjY1z99pzSfwZQ&usqp=CAU"/></figure>
           <div className="card-body">
             <h2 className="card-title text-2xl flex justify-center">PRO</h2><br/>
             <p><b>Teste tes connaissances sur les points suivant :</b>

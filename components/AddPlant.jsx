@@ -2,6 +2,7 @@
 
 import { useState } from "react";
 import { useRouter } from "next/navigation";
+import { HiOutlinePlus } from "react-icons/hi";
 
 export default function AddPlant({ onPlantAdded }) {
   const [name, setName] = useState("");
@@ -59,7 +60,7 @@ export default function AddPlant({ onPlantAdded }) {
   return (
     <>
     {/* Open the modal using document.getElementById('ID').showModal() method */}
-    <button className="btn" onClick={()=>document.getElementById('my_modal_5').showModal()}>open modal</button>
+    <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
     <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
         <div className="modal-box">
             <h2 className="text-3xl font-bold text-center my-8">Ajouter une plante</h2>

@@ -76,7 +76,7 @@ export default function PlantsList() {
 
             <div className="flex relative w-96 p-4 justify-between">
               <RemoveBtn id={t._id} onPlantDeleted={loadPlants}/>
-              <Link href={`/editPlant/${t._id}`}>
+              <Link href={`/editPlant/${t._id}`} params={t._id}>
                 <HiPencilAlt size={30} />
               </Link>
             </div>

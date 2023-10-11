@@ -12,6 +12,7 @@ export default function AddPlant({ onPlantAdded }) {
   const [cultivar, setCultivar] = useState("")
   const [group, setGroup] = useState("Groupe")
   const [imageUrl, setImageUrl] = useState([])
+  const [isUploading, setIsUploading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -77,13 +78,13 @@ export default function AddPlant({ onPlantAdded }) {
         }).then(r => r.json());
 
         uploadedUrls.push(data.secure_url); // Save each uploaded URL
-        console.log(uploadedUrls)
+        setIsUploading(true)
     }
 
     const stringifiedUrls = uploadedUrls.map(url => url)
     // const urls = prevState => [...prevState, ...stringifiedUrls]
     setImageUrl(stringifiedUrls);
-    console.log(stringifiedUrls) // Set state with all uploaded image URLs
+    setIsUploading(false)
 };
   
   const resetForm = () => {
@@ -93,7 +94,7 @@ export default function AddPlant({ onPlantAdded }) {
     setSpecies("");
     setCultivar("");
     setGroup("Groupe");
-    setImageUrl("");
+    setImageUrl([]);
     setErrorMessage("");
 };
 
@@ -101,27 +102,38 @@ export default function AddPlant({ onPlantAdded }) {
     <>
     {/* Open the modal using document.getElementById('ID').showModal() method */}
     <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
-    <dialog id="my_modal_5" className="modal modal-bottom sm:modal-middle">
+    <dialog id="my_modal_5" className="z-10 modal modal-bottom sm:modal-middle">
         <div className="modal-box">
             <h2 className="text-3xl font-bold text-center my-8">Ajouter une plante</h2>
-            <div className="w-96 m-auto">
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                {imageUrl &&
-                  <div className="w-full h-60 rounded-2xl" style={{
-                    backgroundImage:`url(${imageUrl})`,
-                    backgroundPosition: "center",
-                    backgroundSize: "cover"
-                  }}>
-                  </div>
+            <div className="flex justify-center max-h-128">
+                {imageUrl.length > 0 && isUploading === false &&
+                    <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll pr-4 mr-4">
+                        {imageUrl.map((url, index) => (
+                            <>
+                            <div key={index} className="m-2 rounded-2xl w-[5rem] mx-1 text-white text-opacity-50 flex justify-center items-center text-5xl" style={{
+                                backgroundImage: `url(${url})`,
+                                backgroundPosition: "center",
+                                backgroundSize: "cover"
+                            }}><div>{index+1}</div>
+                            </div>
+                            </>
+                        ))}
+                    </div>
                 }
-                <input 
-                    type="file"
-                    multiple
-                    onChange={(e) => {
-                        handleImageUpload(e);
-                    }}
-                    className="input input-bordered w-full mt-4"
-                />
+                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                <div className="flex">
+                    {isUploading === true &&
+                        <span className="fixed right-10 mt-2 loading loading-spinner text-success w-8 h-8"></span>
+                    }
+                    <input 
+                        type="file"
+                        multiple
+                        onChange={(e) => {
+                            handleImageUpload(e);
+                        }}
+                        className="file-input file-input-bordered file-input-success w-full"
+                    />
+                </div>
 
                 <input
                     onChange={(e) => setName(e.target.value)}

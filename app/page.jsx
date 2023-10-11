@@ -1,6 +1,5 @@
-import TopicsList from "@/components/TopicsList";
-import PlantList from "@/components/PlantList";
 import Link from "next/link";
+import SignUp from "@/components/SignUp";
 
 export default function Home() {
   
@@ -10,6 +9,7 @@ export default function Home() {
       <div className="hero-content text-center text-neutral-content">
         <div className="">
           <h1 className="mb-5 text-8xl text-white font-bold">Vegetal Reco&apos;</h1>
+          <SignUp/>
         </div>
       </div>
       <Link href="/gameMenu" className="btn fixed bottom-60 w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>

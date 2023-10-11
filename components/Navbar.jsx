@@ -1,10 +1,14 @@
 "use client"
 
+import { useEffect, useState } from 'react';
 import Link from "next/link";
-import { useState } from 'react';
+import Login from '@/components/Login';
+import SignUp from '@/components/SignUp';
+import { RiAccountCircleLine } from 'react-icons/ri';
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
+  const [isLoggedIn, setIsLoggedIn] = useState("")
   
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -13,6 +17,11 @@ export default function Navbar() {
   const closeDropdown = () => {
     setDropdownOpen(false);
   };
+
+  const handleUserLogin = (pseudo) => {
+    setIsLoggedIn(pseudo);
+  };
+
   return (
     <>
       <div className="navbar bg-emerald-600	top-0 text-white fixed h-20 z-10">
@@ -38,18 +47,26 @@ export default function Navbar() {
         <div className="navbar-center">
           <Link href="/" className="btn btn-ghost normal-case text-xl">Vegetal Reco&apos;</Link>
         </div>
+
         <div className="navbar-end">
+          {isLoggedIn === "" ? (
+            <>
+            <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_login').showModal()}><RiAccountCircleLine size={25}/>Login</button>
+            <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={25}/>SignUp</button>
+            <Login onUserLogin={handleUserLogin}/>
+            <SignUp/>
+            </>
+          ) : (
+            <button className="btn btn-ghost"
+              onClick={()=> {
+                localStorage.removeItem('clients')
+                setIsLoggedIn("")
+              }
+              }><RiAccountCircleLine size={25}/>Logout</button>
+          )
+          }
         </div>
       </div>
-
-      {/* <nav className="flex justify-between items-center bg-slate-800 px-8 py-3">
-        <Link className="text-white font-bold" href={"/"}>
-          GTCoding.
-        </Link>
-        <Link className="bg-white p-2" href={"/addTopic"}>
-          Add Topic
-        </Link>
-      </nav> */}
     </>
   );
 }

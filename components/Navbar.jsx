@@ -5,6 +5,8 @@ import Link from "next/link";
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
 import { RiAccountCircleLine } from 'react-icons/ri';
+import { PiPlantDuotone } from 'react-icons/pi';
+import { FcAbout } from 'react-icons/fc';
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -38,7 +40,10 @@ export default function Navbar() {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
               >
                 <li onClick={closeDropdown}>
-                    <Link href="/settings">Végétaux</Link>
+                  {localStorage.getItem('client') &&
+                    <Link className='btn btn-ghost btn-sm flex justify-start' href="/settings"><PiPlantDuotone size={25}/>Végétaux</Link>
+                  }
+                  <Link className='btn btn-ghost btn-sm flex justify-start' href="/"><FcAbout size={25}/>A propos</Link>
                 </li>
               </ul>
             )}
@@ -49,7 +54,7 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end">
-          {isLoggedIn === "" ? (
+          {!localStorage.getItem('client') ? (
             <>
             <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_login').showModal()}><RiAccountCircleLine size={25}/>Login</button>
             <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={25}/>SignUp</button>
@@ -59,7 +64,7 @@ export default function Navbar() {
           ) : (
             <button className="btn btn-ghost"
               onClick={()=> {
-                localStorage.removeItem('clients')
+                localStorage.removeItem('client')
                 setIsLoggedIn("")
               }
               }><RiAccountCircleLine size={25}/>Logout</button>

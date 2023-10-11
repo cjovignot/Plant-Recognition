@@ -113,8 +113,10 @@ export default function GameMenu() {
                     <div className="flex flex-col card-actions items-center">
                     <div className="multi-select-dropdown">
                         <div className="dropdown dropdown-right">
+                                
                             <label tabIndex={0} className="btn m-1">Groupes<BiSolidDownArrow/></label>
-                            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-sm">
+                            <ul tabIndex={0} className="dropdown-content max-h-40 z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                            <div className='overflow-y-scroll'>
                                 {['1', '2', '3', '4', '5', '6'].map((item) => (
                                     <li key={item}>
                                         <label>
@@ -126,6 +128,7 @@ export default function GameMenu() {
                                         />{item}</label>
                                     </li>
                                 ))}
+                            </div>
                             </ul>
                         </div>
                     </div>

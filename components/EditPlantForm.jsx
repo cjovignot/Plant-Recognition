@@ -40,9 +40,9 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
   
   const handleImageUpload = async (e) => {
     const fileInput = e.target;
-    const uploadedUrls = []; // Array to collect the URLs of the uploaded images
 
-    for (const file of fileInput.files) {
+    // Convert FileList to an array and map it
+    const uploadPromises = Array.from(fileInput.files).map(async file => {
         const formData = new FormData();
         formData.append('file', file);
         formData.append('upload_preset', 'ml_default');
@@ -52,93 +52,98 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
             body: formData
         }).then(r => r.json());
 
-        uploadedUrls.push(data.secure_url);
-        console.log(11, uploadedUrls)
-    }
+        return data.secure_url;
+    });
 
+    const uploadedUrls = await Promise.all(uploadPromises);
     setNewImageUrl(uploadedUrls);
   };
 
+
   return (
-    <div className="mt-32 w-[500px]">
-      <div className="w-full flex">
+    <>
+    <div className="pt-32 w-[90%] h-screen flex justify-around items-center">
+      <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll no-scrollbar">
         {newImageUrl.map((url, index) => (
-          <div key={index} className="h-60 rounded-2xl w-full mb-4" style={{
+          <div key={index} className="h-38 rounded-2xl w-96 mb-4 mx-1 text-white text-opacity-50 flex pl-4 items-center text-8xl" style={{
             backgroundImage: `url(${url})`,
             backgroundPosition: "center",
             backgroundSize: "cover"
-          }}>
+          }}><div>{index+1}</div>
           </div>
         ))}
       </div>
-      <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-        <input 
-            type="file"
-            multiple
-            onChange={(e) => {
-                handleImageUpload(e);
-            }}
-            className="input input-bordered w-full mt-4"
-        />
-        <input type="text" value={newImageUrl} hidden />
+      <div className="w-[500px]">
+        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-h-128">
+          <input 
+              type="file"
+              multiple
+              onChange={(e) => {
+                  handleImageUpload(e);
+              }}
+              className="file-input file-input-bordered file-input-success w-full"
+          />
+          <input type="text" value={newImageUrl} hidden />
 
-        <input
-            onChange={(e) => setNewName(e.target.value)}
-            value={newName}
-            type="text"
-            placeholder="Nom commun"
-            className="input input-bordered w-full"
-        />
+          <input
+              onChange={(e) => setNewName(e.target.value)}
+              value={newName}
+              type="text"
+              placeholder="Nom commun"
+              className="input input-bordered w-full"
+          />
 
-        <input
-            onChange={(e) => setNewFamily(e.target.value)}
-            value={newFamily}
-            type="text"
-            placeholder="Famille"
-            className="input input-bordered w-full"
-        />
+          <input
+              onChange={(e) => setNewFamily(e.target.value)}
+              value={newFamily}
+              type="text"
+              placeholder="Famille"
+              className="input input-bordered w-full"
+          />
 
-        <input
-            onChange={(e) => setNewGenre(e.target.value)}
-            value={newGenre}
-            type="text"
-            placeholder="Genre"
-            className="input input-bordered w-full"
-        />
+          <input
+              onChange={(e) => setNewGenre(e.target.value)}
+              value={newGenre}
+              type="text"
+              placeholder="Genre"
+              className="input input-bordered w-full"
+          />
 
-        <input
-            onChange={(e) => setNewSpecies(e.target.value)}
-            value={newSpecies}
-            type="text"
-            placeholder="Espèce"
-            className="input input-bordered w-full"
-        />
+          <input
+              onChange={(e) => setNewSpecies(e.target.value)}
+              value={newSpecies}
+              type="text"
+              placeholder="Espèce"
+              className="input input-bordered w-full"
+          />
 
-        <input
-            onChange={(e) => setNewCultivar(e.target.value)}
-            value={newCultivar}
-            type="text"
-            placeholder="Cultivar"
-            className="input input-bordered w-full"
-        />
+          <input
+              onChange={(e) => setNewCultivar(e.target.value)}
+              value={newCultivar}
+              type="text"
+              placeholder="Cultivar"
+              className="input input-bordered w-full"
+          />
 
-        <select className="select select-bordered w-full"
-            onChange={(e) => setNewGroup(e.target.value)}
-            value={newGroup}
-        >
-            <option disabled selected>Groupe</option>
-            <option>1</option>
-            <option>2</option>
-            <option>3</option>
-            <option>4</option>
-            <option>5</option>
-            <option>6</option>
-        </select>
+          <select className="select select-bordered w-full"
+              onChange={(e) => setNewGroup(e.target.value)}
+              value={newGroup}
+          >
+              <option disabled selected>Groupe</option>
+              <option>1</option>
+              <option>2</option>
+              <option>3</option>
+              <option>4</option>
+              <option>5</option>
+              <option>6</option>
+          </select>
 
-        <button className="bg-green-600 font-bold text-white py-3 px-6 w-fit m-auto">
-          Sauvegarder
-        </button>
-      </form>
+          <button className="btn mt-10 w-40 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">
+            Sauvegarder
+          </button>
+        </form>
+      </div>
     </div>
+    </>
   );
 }

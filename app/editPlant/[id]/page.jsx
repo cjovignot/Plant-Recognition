@@ -18,7 +18,6 @@ const getPlantById = async (id) => {
 };
 
 export default async function EditPlant({params}) {
-  console.log(params)
   const { id } = params;
   const { plant } = await getPlantById(id);
   const { name, family, genre, species, cultivar, group, imageUrl } = plant;

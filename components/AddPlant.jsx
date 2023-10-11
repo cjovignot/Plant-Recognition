@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { HiOutlinePlus } from "react-icons/hi";
 
@@ -11,6 +11,7 @@ export default function AddPlant({ onPlantAdded }) {
   const [species, setSpecies] = useState("")
   const [cultivar, setCultivar] = useState("")
   const [group, setGroup] = useState("Groupe")
+  const [imageUrl, setImageUrl] = useState([])
   const [errorMessage, setErrorMessage] = useState("");
 
   const router = useRouter();
@@ -24,7 +25,8 @@ export default function AddPlant({ onPlantAdded }) {
         genre: "Genre",
         species: "Espèce",
         cultivar: "Cultivar",
-        group: "Groupe"
+        imageUrl: "Image",
+        group: "Groupe",
     };
 
     const emptyFields = Object.keys(fieldNames).filter(key => !eval(key)); // Here, `eval(key)` will get the value of the state variable named by the `key`
@@ -43,7 +45,7 @@ export default function AddPlant({ onPlantAdded }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ name, family, genre, species, cultivar, group }),
+        body: JSON.stringify({ name, family, genre, species, cultivar, group, imageUrl }),
     });
     console.log("body:", res.body)
 
@@ -60,6 +62,30 @@ export default function AddPlant({ onPlantAdded }) {
     }
   };
   
+  const handleImageUpload = async (e) => {
+    const fileInput = e.target;
+    const uploadedUrls = []; // Array to collect the URLs of the uploaded images
+
+    for (const file of fileInput.files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ml_default');
+
+        const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+            method: 'POST',
+            body: formData
+        }).then(r => r.json());
+
+        uploadedUrls.push(data.secure_url); // Save each uploaded URL
+        console.log(uploadedUrls)
+    }
+
+    const stringifiedUrls = uploadedUrls.map(url => url)
+    // const urls = prevState => [...prevState, ...stringifiedUrls]
+    setImageUrl(stringifiedUrls);
+    console.log(stringifiedUrls) // Set state with all uploaded image URLs
+};
+  
   const resetForm = () => {
     setName("");
     setFamily("");
@@ -67,6 +93,7 @@ export default function AddPlant({ onPlantAdded }) {
     setSpecies("");
     setCultivar("");
     setGroup("Groupe");
+    setImageUrl("");
     setErrorMessage("");
 };
 
@@ -79,6 +106,23 @@ export default function AddPlant({ onPlantAdded }) {
             <h2 className="text-3xl font-bold text-center my-8">Ajouter une plante</h2>
             <div className="w-96 m-auto">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+                {imageUrl &&
+                  <div className="w-full h-60 rounded-2xl" style={{
+                    backgroundImage:`url(${imageUrl})`,
+                    backgroundPosition: "center",
+                    backgroundSize: "cover"
+                  }}>
+                  </div>
+                }
+                <input 
+                    type="file"
+                    multiple
+                    onChange={(e) => {
+                        handleImageUpload(e);
+                    }}
+                    className="input input-bordered w-full mt-4"
+                />
+
                 <input
                     onChange={(e) => setName(e.target.value)}
                     value={name}

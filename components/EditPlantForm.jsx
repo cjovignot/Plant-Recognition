@@ -1,14 +1,15 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 
-export default function EditPlantForm({ id, name, family, genre, species, cultivar, group }) {
+export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, imageUrl }) {
   const [newName, setNewName] = useState(name);
   const [newFamily, setNewFamily] = useState(family);
   const [newGenre, setNewGenre] = useState(genre);
   const [newSpecies, setNewSpecies] = useState(species);
   const [newCultivar, setNewCultivar] = useState(cultivar);
+  const [newImageUrl, setNewImageUrl] = useState(imageUrl);
   const [newGroup, setNewGroup] = useState(group);
 
   const router = useRouter();
@@ -22,7 +23,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup }),
+        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newImageUrl }),
       });
 
       if (!res.ok) {
@@ -36,9 +37,51 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
     }
   };
 
+  
+  const handleImageUpload = async (e) => {
+    const fileInput = e.target;
+    const uploadedUrls = []; // Array to collect the URLs of the uploaded images
+
+    for (const file of fileInput.files) {
+        const formData = new FormData();
+        formData.append('file', file);
+        formData.append('upload_preset', 'ml_default');
+
+        const data = await fetch(`https://api.cloudinary.com/v1_1/${process.env.NEXT_PUBLIC_CLOUDINARY_CLOUD_NAME}/auto/upload`, {
+            method: 'POST',
+            body: formData
+        }).then(r => r.json());
+
+        uploadedUrls.push(data.secure_url);
+        console.log(11, uploadedUrls)
+    }
+
+    setNewImageUrl(uploadedUrls);
+  };
+
   return (
     <div className="mt-32 w-[500px]">
+      <div className="w-full flex">
+        {newImageUrl.map((url, index) => (
+          <div key={index} className="h-60 rounded-2xl w-full mb-4" style={{
+            backgroundImage: `url(${url})`,
+            backgroundPosition: "center",
+            backgroundSize: "cover"
+          }}>
+          </div>
+        ))}
+      </div>
       <form onSubmit={handleSubmit} className="flex flex-col gap-3">
+        <input 
+            type="file"
+            multiple
+            onChange={(e) => {
+                handleImageUpload(e);
+            }}
+            className="input input-bordered w-full mt-4"
+        />
+        <input type="text" value={newImageUrl} hidden />
+
         <input
             onChange={(e) => setNewName(e.target.value)}
             value={newName}

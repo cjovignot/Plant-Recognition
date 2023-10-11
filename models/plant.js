@@ -6,7 +6,9 @@ const plantSchema = new Schema(
     genre: String, // genre
     species: String, // espèce
     cultivar: String, // cultivar
-    group: String // Groupe d'apprentissage
+    picture: String,
+    group: String, // Groupe d'apprentissage
+    imageUrl: [String]
   }
 );
 

@@ -28,7 +28,6 @@ export default function PlantsList() {
   // Load plants from API and update state
   const loadPlants = async () => {
     const result = await getPlants();
-    console.log(result)
     setPlants(result.plants || []);
   };
 
@@ -39,7 +38,6 @@ export default function PlantsList() {
   useEffect(() => {
     async function fetchData() {
       const result = await getPlants();
-      console.log(result)
       setPlants(result.plants || []);
     }
 
@@ -61,13 +59,12 @@ export default function PlantsList() {
             className="card w-96 bg-base-100 shadow-xl m-4"
           >
             <div className="w-full h-60 rounded-t-2xl" style={{
-              backgroundImage: "url('https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg')",
+              backgroundImage:`url(${t.imageUrl[0]})`,
               backgroundPosition: "center",
               backgroundSize: "cover"
             }}>
-
             </div>
-            {/* <figure><img className="h-48" src="https://www.lesjardinsdelaterre.com/926-thickbox_default/mimosa-d-hiver-acacia-dealbata-gaulois-astier-.jpg" /></figure> */}
+
             <div className="card-body p-4 pb-0">
               <div className="flex items-center"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
               <h2 className="font-bold text-2xl">{t.name}</h2>

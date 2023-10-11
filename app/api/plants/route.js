@@ -3,16 +3,22 @@ import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, family, genre, species, cultivar, group } = await request.json();
+  const { name, family, genre, species, cultivar, group, imageUrl } = await request.json();
   await connectMongoDB();
-  await Plant.create({ name, family, genre, species, cultivar, group });
+  await Plant.create({ name, family, genre, species, cultivar, group, imageUrl });
   return NextResponse.json({ message: "Plant Created" }, { status: 201 });
 }
 
 export async function GET() {
-  await connectMongoDB();
-  const plants = await Plant.find();
-  return NextResponse.json({ plants });
+  try {
+      await connectMongoDB();
+
+      const plants = await Plant.find();
+      return NextResponse.json({ plants });
+  } catch (error) {
+      console.error('Error fetching plants:', error);
+      return NextResponse.serverError('Error fetching plants.');
+  }
 }
 
 export async function DELETE(request) {

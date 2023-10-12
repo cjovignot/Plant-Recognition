@@ -1,8 +1,6 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { useSearchParams } from 'next/navigation'
-import Link from "next/link";
 
 
 const getPlants = async (params) => {

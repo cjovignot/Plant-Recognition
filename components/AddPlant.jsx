@@ -41,7 +41,7 @@ export default function AddPlant({ onPlantAdded }) {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/plants", {
+      const res = await fetch(`${process.env.ROOTPATH}/api/plants`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

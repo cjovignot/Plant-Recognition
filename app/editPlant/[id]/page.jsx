@@ -3,7 +3,7 @@ import EditPlantForm from "@/components/EditPlantForm";
 
 const getPlantById = async (id) => {
   try {
-    const res = await fetch(`http://localhost:3000/api/plants/${id}`, {
+    const res = await fetch(`${process.env.ROOTPATH}/api/plants/${id}`, {
       cache: "no-store",
     });
 

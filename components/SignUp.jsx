@@ -29,7 +29,7 @@ export default function SignUp() {
     }
 
     try {
-      const res = await fetch("http://localhost:3000/api/users", {
+      const res = await fetch(`${process.env.ROOTPATH}/api/users`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

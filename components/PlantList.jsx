@@ -8,7 +8,7 @@ import { useState, useEffect } from 'react';
 
 const getPlants = async () => {
   try {
-    const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/route`, {
       cache: "no-store",
     });
 

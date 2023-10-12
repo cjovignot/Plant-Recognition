@@ -30,7 +30,7 @@ export default function Login({ onUserLogin }) {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/login/`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/login/route`, {
         method: "POST",
         headers: {
           "Content-Type": "application/json",

@@ -29,7 +29,7 @@ export default function SignUp() {
     }
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/users`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/users/route`, {
         method: "POST",
         headers: {
           "Content-type": "application/json",

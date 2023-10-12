@@ -16,7 +16,7 @@ export default function Settings() {
   }, []);
 
 
-  if (!localStorage.getItem('client')) {
+  if (!isLoggedIn) {
     router.push("/");
   }
 

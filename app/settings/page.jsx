@@ -13,12 +13,11 @@ export default function Settings() {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
     setIsLoggedIn(!!client); // Convert to boolean and set state
+
+    if (!client) {
+      router.push("/");
+    }
   }, []);
-
-
-  if (!isLoggedIn) {
-    router.push("/");
-  }
 
   return (
     <div className="mx-8">

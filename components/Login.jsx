@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { RiAccountCircleLine } from 'react-icons/ri'
 
 export default function Login({ onUserLogin }) {
   const [pseudo, setPseudo] = useState("");
@@ -61,9 +62,11 @@ export default function Login({ onUserLogin }) {
 
   return (
     <>
-    <dialog id="my_modal_login" className="modal modal-bottom sm:modal-middle">
-        <div className="modal-box text-black">
-            <h2 className="text-3xl font-bold text-center my-8">Login</h2>
+    <dialog id="my_modal_login" className="modal modal-middle  lg:modal-middle">
+
+        <div className="modal-box flex flex-col items-center text-black">
+            <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={25}/>SignUp</button>
+            <h2 className="text-3xl font-bold text-center mb-8 mt-4">Login</h2>
             <div className="flex justify-center max-h-128">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input

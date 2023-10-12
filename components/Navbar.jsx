@@ -63,15 +63,11 @@ export default function Navbar() {
           {!isLoggedIn ? (
             <>
             <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_login').showModal()}><RiAccountCircleLine size={25}/>Login</button>
-            <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={25}/>SignUp</button>
             <Login onUserLogin={handleUserLogin}/>
             <SignUp/>
             </>
           ) : (
             <>
-            <div className='mr-3'>
-              Salut {localStorage.getItem('client')} !
-            </div>
             <button className="btn btn-ghost"
               onClick={()=> {
                 localStorage.removeItem('client')

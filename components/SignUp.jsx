@@ -59,7 +59,7 @@ export default function SignUp() {
 
   return (
     <>
-    <dialog id="my_modal_signup" className="modal modal-bottom sm:modal-middle">
+    <dialog id="my_modal_signup" className="modal modal-middle lg:modal-middle">
         <div className="modal-box text-black">
             <h2 className="text-3xl font-bold text-center my-8">SignUp</h2>
             <div className="flex justify-center max-h-128">

@@ -21,7 +21,7 @@ export default function Home() {
             </div>
         </div>
       </div>
-      <Link href="/gameMenu" className="btn fixed bottom-28 w-[30%] lg:fixed lg:bottom-40 lg:w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>
+      <Link href="/gameMenu" className="btn mt-60 w-[30%] lg:fixed lg:bottom-40 lg:w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>
     </div>
   );
 }

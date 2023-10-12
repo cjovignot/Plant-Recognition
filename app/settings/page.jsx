@@ -1,7 +1,8 @@
 "use client";
 
 import { useRouter } from "next/navigation";
-import PlantList from '@/components/PlantList'
+import PlantList from '@/components/PlantList';
+import { useEffect, useState } from 'react';
 
 export default function Settings() {
   const [isLoggedIn, setIsLoggedIn] = useState(false)

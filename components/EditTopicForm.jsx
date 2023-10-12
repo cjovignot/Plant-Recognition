@@ -13,7 +13,7 @@ export default function EditTopicForm({ id, title, description }) {
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.ROOTPATH}/api/topics/${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/topics/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

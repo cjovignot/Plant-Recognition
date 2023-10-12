@@ -28,7 +28,7 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
   // };
   
   const handleConfirm = async () => {
-    const res = await fetch(`${process.env.ROOTPATH}/api/plants?id=${id}`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants?id=${id}`, {
       method: "DELETE",
     });
 
@@ -45,7 +45,7 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
     const confirmed = confirm("Are you sure?");
 
     if (confirmed) {
-      const res = await fetch(`${process.env.ROOTPATH}/api/plants?id=${id}`, {
+      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants?id=${id}`, {
         method: "DELETE",
       });
 

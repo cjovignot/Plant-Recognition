@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 const getTopics = async () => {
   try {
-    const res = await fetch(`${process.env.ROOTPATH}/api/topics`, {
+    const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/topics`, {
       cache: "no-store",
     });
 

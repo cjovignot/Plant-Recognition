@@ -79,8 +79,8 @@ export default function Level1(params) {
   useEffect(() => {
     async function fetchData() {
       const result = await getPlants(groups);
-      setPlants(result?.plants || []);
-      setQuestions(result?.plants.length)
+      setPlants(result.plants || []);
+      setQuestions(result.plants.length)
     }
     
     fetchData();

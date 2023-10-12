@@ -90,7 +90,7 @@ export default function Level1(params) {
   return (
     <div className="hero min-h-screen" style={{backgroundImage: 'url(https://images.pexels.com/photos/68507/spring-flowers-flowers-collage-floral-68507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)'}}>
       <div className="hero-overlay bg-opacity-60"></div>
-      {questions == 0 && finish === false &&
+      {questions === 0 && finish === false &&
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
           </div>

@@ -23,7 +23,6 @@ export async function GET() {
 
 export async function DELETE(request) {
   const id = request.nextUrl.searchParams.get("id");
-  console.log(id)
   await connectMongoDB();
   await Plant.findByIdAndDelete(id);
   return NextResponse.json({ message: "Plant deleted" }, { status: 200 });

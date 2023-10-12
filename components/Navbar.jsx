@@ -10,8 +10,14 @@ import { FcAbout } from 'react-icons/fc';
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
-  const [isLoggedIn, setIsLoggedIn] = useState("")
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   
+  useEffect(() => {
+    // Check localStorage inside useEffect
+    const client = localStorage.getItem('client');
+    setIsLoggedIn(!!client); // Convert to boolean and set state
+  }, []);
+
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
   };
@@ -54,7 +60,7 @@ export default function Navbar() {
         </div>
 
         <div className="navbar-end">
-          {!localStorage.getItem('client') ? (
+          {!isLoggedIn ? (
             <>
             <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_login').showModal()}><RiAccountCircleLine size={25}/>Login</button>
             <button className="btn btn-ghost" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={25}/>SignUp</button>
@@ -62,12 +68,17 @@ export default function Navbar() {
             <SignUp/>
             </>
           ) : (
+            <>
+            <div className='mr-3'>
+              Salut {localStorage.getItem('client')} !
+            </div>
             <button className="btn btn-ghost"
               onClick={()=> {
                 localStorage.removeItem('client')
                 setIsLoggedIn("")
               }
               }><RiAccountCircleLine size={25}/>Logout</button>
+            </>
           )
           }
         </div>

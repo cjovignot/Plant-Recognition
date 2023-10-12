@@ -110,7 +110,7 @@ export default function AddPlant({ onPlantAdded }) {
                     <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll pr-4 mr-4">
                         {imageUrl.map((url, index) => (
                             <>
-                            <div key={index} className="m-2 rounded-2xl w-[5rem] mx-1 text-white text-opacity-50 flex justify-center items-center text-5xl" style={{
+                            <div key={index} className="m-1 rounded-lg w-[5rem] h-[5rem] mx-1 text-black text-opacity-50 flex justify-center items-center text-5xl" style={{
                                 backgroundImage: `url(${url})`,
                                 backgroundPosition: "center",
                                 backgroundSize: "cover"

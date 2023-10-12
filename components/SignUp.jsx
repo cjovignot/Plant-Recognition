@@ -74,7 +74,7 @@ export default function SignUp() {
                 <input
                     onChange={(e) => setPassword(e.target.value)}
                     value={password}
-                    type="text"
+                    type="password"
                     placeholder="Mot de passe"
                     className="input input-bordered w-full"
                 />

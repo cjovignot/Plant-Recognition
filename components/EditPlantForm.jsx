@@ -18,7 +18,8 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
     e.preventDefault();
 
     try {
-      const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/${id}/route`, {
+      // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/${id}`, {
+        const res = await fetch(`/api/plants/${id}`, {
         method: "PUT",
         headers: {
           "Content-type": "application/json",

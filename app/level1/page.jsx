@@ -6,7 +6,8 @@ import { useState, useEffect } from "react";
 const getPlants = async (params) => {
   try {
     // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/groups/groups?${params}`, {
-      const res = await fetch(`/api/groups?${params}`, {
+      // const res = await fetch(`/api/groups?${params}`, {
+        const res = await fetch(`/api/plants`, {
       cache: "no-store",
     });
 
@@ -78,13 +79,13 @@ export default function Level1(params) {
     
   useEffect(() => {
     async function fetchData() {
-      const result = await getPlants(groups);
+      const result = await getPlants();
       setPlants(result.plants || []);
       setQuestions(result.plants.length)
     }
     
     fetchData();
-  }, [groups]);
+  }, []);
 
 
   return (

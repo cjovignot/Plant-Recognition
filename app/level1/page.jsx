@@ -3,10 +3,26 @@
 import { useState, useEffect } from "react";
 
 
-const getPlants = async (params) => {
+const getPlants = async (groups) => {
   try {
     // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/groups/groups?${params}`, {
-      // const res = await fetch(`/api/groups?${params}`, {
+      const res = await fetch(`/api/groups?groups=${groups}`, {
+        // const res = await fetch(`/api/plants`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch plants");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log("Error loading plants: ", error);
+  }
+};
+
+const getAllPlants = async () => {
+  try {
         const res = await fetch(`/api/plants`, {
       cache: "no-store",
     });
@@ -21,7 +37,7 @@ const getPlants = async (params) => {
   }
 };
 
-export default function Level1(params) {
+export default function Level1() {
   const [plants, setPlants] = useState([]);
   const [questions, setQuestions] = useState(0)
   const [name, setName] = useState("");
@@ -29,7 +45,13 @@ export default function Level1(params) {
   const [trueArray, setTrueArray] = useState([]);
   const [falseArray, setFalseArray] = useState([]);
   const [finish, setFinish] = useState(false);
-  const groups = params.searchParams.groups
+  const [groups, setGroups] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const currentGroups = params.get("groups");
+    setGroups(currentGroups);
+  }, []);
 
   const handleButtonClick = () => {
       setFinish(true);
@@ -79,13 +101,20 @@ export default function Level1(params) {
     
   useEffect(() => {
     async function fetchData() {
-      const result = await getPlants();
-      setPlants(result.plants || []);
-      setQuestions(result.plants.length)
+      if (groups) {
+        const result = await getPlants(groups);
+        setPlants(result.plants || []);
+        setQuestions(result.plants.length);
+      } else {
+        const alternativeResult = await getAllPlants();
+        setPlants(alternativeResult.plants || []);
+        setQuestions(alternativeResult.plants.length);
+      }
     }
-    
+  
     fetchData();
-  }, []);
+  }, [groups]);
+  
 
 
   return (

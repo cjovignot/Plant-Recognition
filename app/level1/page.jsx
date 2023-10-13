@@ -6,7 +6,7 @@ import { useState, useEffect } from "react";
 const getPlants = async (params) => {
   try {
     // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/groups/groups?${params}`, {
-      const res = await fetch(`/api/plants/groups/groups?${params}`, {
+      const res = await fetch(`/api/groups?${params}`, {
       cache: "no-store",
     });
 

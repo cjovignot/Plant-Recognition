@@ -3,11 +3,14 @@ import Link from "next/link";
 import { useEffect, useState } from 'react';
 
 export default function Home() {
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [name, setName] = useState("")
+
   useEffect(() => {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
     setName(client)
+    setIsLoggedIn(!!client)
   }, []);
   
   return (
@@ -16,9 +19,11 @@ export default function Home() {
       <div className="hero-content text-center text-neutral-content">
         <div className="">
           <h1 className="mb-5 text-5xl lg:text-8xl text-white font-bold">Vegetal Reco&apos;</h1>
+          {isLoggedIn &&
             <div className='mr-3 text-2xl'>
               Salut {name} !
             </div>
+          }
         </div>
       </div>
       <Link href="/gameMenu" className="btn mt-60 w-[30%] lg:fixed lg:bottom-40 lg:w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>

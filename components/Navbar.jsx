@@ -71,7 +71,7 @@ export default function Navbar() {
             <button className="btn btn-ghost"
               onClick={()=> {
                 localStorage.removeItem('client')
-                setIsLoggedIn("")
+                setIsLoggedIn(false)
               }
               }><RiAccountCircleLine size={25}/>Logout</button>
             </>

@@ -23,7 +23,7 @@ const getPlants = async (groups) => {
 
 const getAllPlants = async () => {
   try {
-        const res = await fetch(`/api/plants`, {
+      const res = await fetch(`/api/plants`, {
       cache: "no-store",
     });
 
@@ -103,12 +103,12 @@ export default function Level1() {
     async function fetchData() {
       if (groups) {
         const result = await getPlants(groups);
-        setPlants(result.plants || []);
-        setQuestions(result.plants.length);
+        setPlants(result?.plants || []);
+        setQuestions(result?.plants.length);
       } else {
         const alternativeResult = await getAllPlants();
-        setPlants(alternativeResult.plants || []);
-        setQuestions(alternativeResult.plants.length);
+        setPlants(alternativeResult?.plants || []);
+        setQuestions(alternativeResult?.plants.length);
       }
     }
   

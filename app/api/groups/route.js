@@ -11,11 +11,9 @@ export async function GET(request) {
     let plants;
 
     if (groupArray.length === 0 && groupArray === "") {
-      console.log("NO CHOICES", groupArray)
       plants = await Plant.find();
     } else if (groupArray.length >= 1 && groupArray !== "") {
       const resultArray = groupArray.split(",");
-      console.log("CHOICES", groupArray)
       plants = await Plant.find({ group: { $in: resultArray } });
     }
 

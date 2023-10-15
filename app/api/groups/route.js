@@ -20,6 +20,6 @@ export async function GET(request) {
     return NextResponse.json({ plants });
   } catch (error) {
     console.error('Error fetching plants:', error);
-    return NextResponse.serverError('Error fetching plants.');
+    return NextResponse.error('Error fetching plants.');
   }
 }

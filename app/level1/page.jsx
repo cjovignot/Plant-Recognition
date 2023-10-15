@@ -45,12 +45,15 @@ export default function Level1() {
   const [trueArray, setTrueArray] = useState([]);
   const [falseArray, setFalseArray] = useState([]);
   const [finish, setFinish] = useState(false);
-  const [groups, setGroups] = useState(null);
+  const [groups, setGroups] = useState('');
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const currentGroups = params.get("groups");
-    setGroups(currentGroups);
+    if (currentGroups !== '') {
+      console.log(currentGroups)
+      setGroups(currentGroups);
+    }
   }, []);
 
   const handleButtonClick = () => {
@@ -101,7 +104,7 @@ export default function Level1() {
     
   useEffect(() => {
     async function fetchData() {
-      if (groups) {
+      if (groups !== '') {
         const result = await getPlants(groups);
         setPlants(result?.plants || []);
         setQuestions(result?.plants.length);

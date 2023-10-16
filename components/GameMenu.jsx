@@ -10,6 +10,16 @@ export default function GameMenu() {
     const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?']
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
+    const [selectAll, setSelectAll] = useState(false);
+
+    const handleSelectAll = () => {
+        setSelectAll(true);
+        setSelectedItems(['1', '2', '3', '4', '5', '6']); // Assuming these are your options
+    };
+    const handleSelectNone = () => {
+        setSelectAll(false);
+        setSelectedItems([]); // Assuming these are your options
+    };
 
     const handleSelectionChange = (item) => {
         setSelectedItems(prevItems => {
@@ -117,6 +127,18 @@ export default function GameMenu() {
                             <label tabIndex={0} className="btn m-1">Groupes<BiSolidDownArrow/></label>
                             <ul tabIndex={0} className="dropdown-content max-h-40 z-[1] menu p-2 shadow bg-base-100 rounded-box">
                             <div className='overflow-y-scroll'>
+                                <button
+                                    onClick={handleSelectAll}
+                                    className="btn btn-sm text-[10px] btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                                >
+                                    Tout sélectionner
+                                </button>
+                                <button
+                                    onClick={handleSelectNone}
+                                    className="btn btn-sm text-[10px] mt-1 btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                                >
+                                    Tout désélectionner
+                                </button>
                                 {['1', '2', '3', '4', '5', '6'].map((item) => (
                                     <li key={item}>
                                         <label>
@@ -138,7 +160,10 @@ export default function GameMenu() {
                                 query: { groups: selectedItems.join(",") }
                             }}
                             params={selectedItems}
-                            className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">
+                            className={`btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600 ${selectedItems.length === 0 ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
+                            // Add the disabled attribute based on selectedItems.length
+                            disabled={selectedItems.length === 0}
+                        >
                             Jouer
                         </Link>
                     </div>

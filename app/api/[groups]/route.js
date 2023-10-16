@@ -6,7 +6,6 @@ export async function GET(request) {
   try {
     await connectMongoDB();
 
-    console.log(1)
     const groupArray = request.url.split("groups=")[1];
     const resultArray = groupArray.split(",");
     const plants = await Plant.find({ group: { $in: resultArray } });

@@ -21,22 +21,6 @@ const getPlants = async (groups) => {
   }
 };
 
-const getAllPlants = async () => {
-  try {
-      const res = await fetch(`/api/plants`, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch plants");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log("Error loading plants: ", error);
-  }
-};
-
 export default function Level1() {
   const [plants, setPlants] = useState([]);
   const [questions, setQuestions] = useState(0)
@@ -101,7 +85,7 @@ export default function Level1() {
     
   useEffect(() => {
     async function fetchData() {
-      if (groups && groups !== null) { // Check if groups is not empty
+      if (groups !== null) {
         try {
           const result = await getPlants(groups);
           setPlants(result?.plants || []);
@@ -110,15 +94,14 @@ export default function Level1() {
           console.error("Error fetching plants:", error);
           // Handle the error appropriately
         }
-      } else {
-        const alternativeResult = await getAllPlants();
-        setPlants(alternativeResult?.plants || []);
-        setQuestions(alternativeResult?.plants.length);
       }
     }
-
-    fetchData();
+  
+    if (groups !== null) {
+      fetchData();
+    }
   }, [groups]);
+  
   
 
 

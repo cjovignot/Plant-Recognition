@@ -4,10 +4,9 @@ import { useState, useEffect } from "react";
 
 
 const getPlants = async (groups) => {
-  console.log("front", groups)
   try {
     // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/groups/groups?${params}`, {
-      const res = await fetch(`/api/groups?groups=${groups}`, {
+      const res = await fetch(`/api/${groups}?groups=${groups}`, {
         // const res = await fetch(`/api/plants`, {
       cache: "no-store",
     });
@@ -15,12 +14,28 @@ const getPlants = async (groups) => {
     if (!res.ok) {
       throw new Error("Failed to fetch plants");
     }
+
     return res.json();
   } catch (error) {
     console.log("Error loading plants: ", error);
   }
 };
 
+const getAllPlants = async () => {
+  try {
+      const res = await fetch(`/api/plants`, {
+      cache: "no-store",
+    });
+
+    if (!res.ok) {
+      throw new Error("Failed to fetch plants");
+    }
+
+    return res.json();
+  } catch (error) {
+    console.log("Error loading plants: ", error);
+  }
+};
 
 export default function Level1() {
   const [plants, setPlants] = useState([]);
@@ -30,14 +45,12 @@ export default function Level1() {
   const [trueArray, setTrueArray] = useState([]);
   const [falseArray, setFalseArray] = useState([]);
   const [finish, setFinish] = useState(false);
-  const [groups, setGroups] = useState("");
+  const [groups, setGroups] = useState(null);
 
   useEffect(() => {
     const params = new URLSearchParams(window.location.search);
     const currentGroups = params.get("groups");
-    if (currentGroups !== '') {
-      setGroups(currentGroups);
-    }
+    setGroups(currentGroups);
   }, []);
 
   const handleButtonClick = () => {
@@ -86,29 +99,25 @@ export default function Level1() {
     setErrorMessage("");
   };
     
-  
   useEffect(() => {
-    let isMounted = true; // Flag to track if the component is still mounted
-  
     async function fetchData() {
-      try {
-        const result = await getPlants(groups);
-        // Check if the component is still mounted before updating state
-        if (isMounted) {
+      if (groups && groups !== null) { // Check if groups is not empty
+        try {
+          const result = await getPlants(groups);
           setPlants(result?.plants || []);
           setQuestions(result?.plants.length);
+        } catch (error) {
+          console.error("Error fetching plants:", error);
+          // Handle the error appropriately
         }
-      } catch (error) {
-        console.error("Error loading plants: ", error);
+      } else {
+        const alternativeResult = await getAllPlants();
+        setPlants(alternativeResult?.plants || []);
+        setQuestions(alternativeResult?.plants.length);
       }
     }
-  
+
     fetchData();
-  
-    // Cleanup function to set isMounted to false when the component unmounts
-    return () => {
-      isMounted = false;
-    };
   }, [groups]);
   
 

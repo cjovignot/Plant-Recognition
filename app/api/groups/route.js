@@ -6,7 +6,10 @@ export async function GET(request) {
   try {
     await connectMongoDB();
 
+    console.log('Request URL:', request.url);
+
     const groupArray = request.url.split("groups=")[1];
+    console.log('Parsed groupArray:', groupArray);
 
     let plants;
 
@@ -20,6 +23,6 @@ export async function GET(request) {
     return NextResponse.json({ plants });
   } catch (error) {
     console.error('Error fetching plants:', error);
-    return NextResponse.error('Error fetching plants.');
+    return NextResponse.error(`Error fetching plants: ${error.message}`);
   }
 }

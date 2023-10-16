@@ -12,6 +12,7 @@ export async function POST(request) {
 export async function GET() {
   try {
       await connectMongoDB();
+      console.log(2)
 
       const plants = await Plant.find();
       return NextResponse.json({ plants });

@@ -5,9 +5,9 @@ import { useState, useEffect } from "react";
 
 const getPlants = async (groups) => {
   try {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/groups/groups?${params}`, {
-      const res = await fetch(`/api/groups?groups=${groups}`, {
-        // const res = await fetch(`/api/plants`, {
+    const url = `/api/plants/groups?groups=${groups}`; // Modify the URL structure to include the 'groups' parameter
+
+    const res = await fetch(url, {
       cache: "no-store",
     });
 

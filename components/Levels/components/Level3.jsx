@@ -93,7 +93,10 @@ export default function Level3({params}) {
   
   return (
     <>
-      {questions === 0 && finish === false &&
+      <div className='mt-[100px] text-white'>
+        <h2>Level3</h2>
+      </div>
+      {/* {questions === 0 && finish === false &&
         <div className="flex w-full h-[80vh] justify-center items-center">
           <span className="loading loading-spinner text-success w-16 h-16"></span>
         </div>
@@ -156,7 +159,7 @@ export default function Level3({params}) {
             </div>
           </div>
         </div>
-      }
+      } */}
     </>
   );
 }

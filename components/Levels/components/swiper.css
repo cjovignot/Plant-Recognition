@@ -1,8 +1,17 @@
+@media only screen and (max-width: 600px) {
+    .swiper {
+        width: 50%;
+        height: 45%!important;
+        margin-top: 90px!important;
+        /* border: 1px solid black; */
+    }
+}
+
 .swiper {
     width: 94%;
     height: 70%;
     border-radius: 8px;
-    margin: 20px;
+    margin-top: 20px;
 }
   
 .swiper-slide {

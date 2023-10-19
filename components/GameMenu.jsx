@@ -60,11 +60,11 @@ export default function GameMenu() {
   return (
     <>
         <div className="lg:mt-20 lg:card w-screen lg:h-auto h-screen lg:w-auto bg-base-100 shadow-xl">
-            <div className="card-body flex flex-col h-128 lg:min-w-[550px]">
-                <h2 className="pt-20 lg:pt-0 text-center text-3xl lg:text-4xl font-bold">Game Menu</h2>
+            <div className="card-body flex flex-col lg:min-w-[550px] justify-start">
+                <h2 className="pt-20 lg:pt-0 text-center text-2xl lg:text-4xl font-bold">Game Menu</h2>
 
                 <div className="mt-4">
-                    <h2 className="sm:text-sm lg:text-lg"><b>Difficulté :</b> {selectedLevel}</h2>
+                    <h2 className="sm:text-sm lg:text-lg h-10"><b>Difficulté :</b> {selectedLevel}</h2>
                     <input
                         onChange={handleRangeChange}
                         type="range"
@@ -84,7 +84,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Chill' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-3xl text-2xl font-bold justify-center h-[200px]">
+                                <p className="flex items-center lg:text-3xl text-xl font-bold justify-center h-[120px]">
                                     Photo<ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                     Nom commun
                                 </p>
@@ -94,9 +94,9 @@ export default function GameMenu() {
                         {selectedLevel === 'Entrainement' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-3xl text-2xl font-bold justify-center h-[200px]">Photo
+                                <p className="flex items-center lg:text-3xl text-md font-bold justify-center h-[120px]">Photo
                                     <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
-                                    <div className="flex flex-col text-xl font-bold ml-8">
+                                    <div className="flex flex-col text-md font-bold ml-8">
                                         <p>1. Nom commun</p>
                                         <p>2. Famille</p>
                                         <p>3. Genre</p>
@@ -110,7 +110,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex flex-col items-center lg:text-3xl text-2xl text-center font-bold justify-center h-[200px]">Photo
+                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px]">Photo
                                     <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
                                         <h3>4 choix pour chaque élément</h3>
                                 </p>
@@ -120,7 +120,7 @@ export default function GameMenu() {
                     </div>
                 </div>
 
-                <div className="multi-select-dropdown m-auto">
+                <div className="multi-select-dropdown mx-auto">
                     <div className="dropdown dropdown-right">
                             
                         <label tabIndex={0} className="btn w-32">Groupes<BiSolidDownArrow/></label>

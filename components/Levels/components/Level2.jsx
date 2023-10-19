@@ -140,7 +140,6 @@ export default function Level2({params}) {
             </Swiper>
 
               <div className="flex flex-col h-60 justify-around items-center pb-10">
-              <h2 className="card-title text-2xl">Réponse</h2>
                 <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-3">
                   <input
                       onChange={(e) => setName(e.target.value)}

@@ -4,8 +4,6 @@ import { useEffect, useState } from 'react';
 export default function Level2({params}) {
   const {level} = params.level
   const {groups} = params.groups
-  console.log("lvl =>", level)
-  console.log("groups =>", groups)
 
   const [plants, setPlants] = useState([]);
   const [questions, setQuestions] = useState(0)

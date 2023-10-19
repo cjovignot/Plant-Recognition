@@ -1,5 +1,16 @@
 "use client"
 import { useEffect, useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import './swiper.css';
+
+// import required modules
+import { Pagination } from 'swiper/modules';
 
 export default function Level2({params}) {
   const {level} = params.level
@@ -103,11 +114,34 @@ export default function Level2({params}) {
         <div className="h-screen flex justify-center items-center m-auto lg:pt-[5rem]">
         <div className="bg-base-100 shadow-xl lg:rounded-3xl">
           <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-between">
-            <div className="w-auto h-[30rem] lg:rounded-t-3xl" style={{
+            {/* <div className="w-auto h-[30rem] lg:rounded-t-3xl" style={{
               backgroundImage: `url(${plants[0].imageUrl[0]})`,
               backgroundPosition: "center",
               backgroundSize: "cover"
-            }}></div>
+            }}></div> */}
+            <Swiper
+              style={{
+                "--swiper-pagination-color": "#ffffff",
+                "--swiper-pagination-bullet-inactive-color": "#000000",
+                "--swiper-pagination-bullet-inactive-opacity": "1",
+                "--swiper-pagination-bullet-size": "10px",
+                "--swiper-pagination-bullet-horizontal-gap": "3px"
+              }}
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              {plants[0].imageUrl.map((image, index) => (
+                <SwiperSlide key={index} style={{
+                  backgroundImage: `url(${image})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover",
+                  height: '30rem'
+                }}></SwiperSlide>
+              ))}
+            </Swiper>
 
               <div className="flex flex-col h-60 justify-around items-center pb-10">
               <h2 className="card-title text-2xl">Réponse</h2>

@@ -1,27 +1,12 @@
-"use client";
+"use client"
+import { useEffect, useState } from 'react';
 
-import { useState, useEffect } from "react";
+export default function Level1({params}) {
+  const {level} = params.level
+  const {groups} = params.groups
+  console.log("lvl =>", level)
+  console.log("groups =>", groups)
 
-
-const getPlants = async (groups) => {
-  try {
-    const url = `/api/plants/groups?groups=${groups}`; // Modify the URL structure to include the 'groups' parameter
-
-    const res = await fetch(url, {
-      cache: "no-store",
-    });
-
-    if (!res.ok) {
-      throw new Error("Failed to fetch plants");
-    }
-
-    return res.json();
-  } catch (error) {
-    console.log("Error loading plants: ", error);
-  }
-};
-
-export default function Level1() {
   const [plants, setPlants] = useState([]);
   const [questions, setQuestions] = useState(0)
   const [name, setName] = useState("");
@@ -29,37 +14,62 @@ export default function Level1() {
   const [trueArray, setTrueArray] = useState([]);
   const [falseArray, setFalseArray] = useState([]);
   const [finish, setFinish] = useState(false);
-  const [groups, setGroups] = useState(null);
+
+  const getPlants = async () => {
+    try {
+      const url = `/api/${groups}`;
+  
+      const res = await fetch(url, {
+        cache: "no-store",
+      });
+  
+      if (!res.ok) {
+        throw new Error("Failed to fetch plants");
+      }
+  
+      return res.json();
+    } catch (error) {
+      console.log("Error loading plants: ", error);
+    }
+  };
 
   useEffect(() => {
-    const params = new URLSearchParams(window.location.search);
-    const currentGroups = params.get("groups");
-    setGroups(currentGroups);
-  }, []);
+    async function fetchData() {
+      try {
+        const result = await getPlants(groups);
+        setPlants(result?.plants || []);
+        setQuestions(result?.plants.length);
+      } catch (error) {
+        console.error("Error fetching plants:", error);
+      }
+    }
+    fetchData()
+  }, [groups]);
 
+  
   const handleButtonClick = () => {
-      setFinish(true);
+    setFinish(true);
   };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
-  
+
     const fieldNames = {
       name: "Nom commun"
     };
-  
+
     // Check if any of the required fields are empty
     const emptyFields = Object.keys(fieldNames).filter(key => !fieldNames[key]);
-  
+
     if (emptyFields.length) {
       const fieldsToFill = emptyFields.map(key => fieldNames[key]).join(', ');
       setErrorMessage(`Merci de remplir les champs suivants : ${fieldsToFill}`);
     } else {
       setErrorMessage(""); // Clear the error message if all fields are filled
-  
+
       if (plants.length > 0) {
         const plant = plants[0];
-  
+
         // Check if the input value matches the corresponding field in the plant object
         if (name === plant.name) {
           setTrueArray(prevArray => [...prevArray, plant]);
@@ -73,7 +83,7 @@ export default function Level1() {
         }
         setPlants(prevPlants => prevPlants.slice(1));
       }
-  
+
       resetForm();
     }
   };
@@ -82,39 +92,17 @@ export default function Level1() {
     setName("");
     setErrorMessage("");
   };
-    
-  useEffect(() => {
-    async function fetchData() {
-      if (groups !== null) {
-        try {
-          const result = await getPlants(groups);
-          setPlants(result?.plants || []);
-          setQuestions(result?.plants.length);
-        } catch (error) {
-          console.error("Error fetching plants:", error);
-          // Handle the error appropriately
-        }
-      }
-    }
   
-    if (groups !== null) {
-      fetchData();
-    }
-  }, [groups]);
-  
-  
-
-
   return (
-    <div className="hero min-h-screen" style={{backgroundImage: 'url(https://images.pexels.com/photos/68507/spring-flowers-flowers-collage-floral-68507.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=2)'}}>
-      <div className="hero-overlay bg-opacity-60"></div>
+    <>
       {questions === 0 && finish === false &&
-          <div className="flex w-full h-[80vh] justify-center items-center">
-            <span className="loading loading-spinner text-success w-16 h-16"></span>
-          </div>
+        <div className="flex w-full h-[80vh] justify-center items-center">
+          <span className="loading loading-spinner text-success w-16 h-16"></span>
+        </div>
       }
+        
       {plants.length > 0 &&
-        <div className="h-screen flex justify-center items-center m-auto lg:pt-28">
+        <div className="h-screen flex justify-center items-center m-auto lg:pt-[5rem]">
         <div className="bg-base-100 shadow-xl lg:rounded-3xl">
           <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-between">
             <div className="w-auto h-[45rem] lg:rounded-t-3xl" style={{
@@ -158,6 +146,7 @@ export default function Level1() {
         </div>
       }
 
+      
       {finish === true &&
         <div className="h-screen flex justify-center items-center m-auto lg:pt-20">
           <div className="bg-base-100 shadow-xl lg:rounded-3xl">
@@ -170,6 +159,6 @@ export default function Level1() {
           </div>
         </div>
       }
-    </div>
+    </>
   );
 }

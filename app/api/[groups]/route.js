@@ -2,11 +2,11 @@ import connectMongoDB from "@/libs/mongodb";
 import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 
-export async function GET(req) {
+export async function GET(req, {params}) {
   try {
     await connectMongoDB();
 
-    const groupArray = req.url.split("groups=")[1];
+    const groupArray = params.groups;
     const resultArray = groupArray.split(",");
     const plants = await Plant.find({ group: { $in: resultArray } });
 

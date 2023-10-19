@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect } from 'react';
+import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { ImArrowRight } from 'react-icons/im';
 import { ImArrowDown } from 'react-icons/im';
@@ -119,84 +120,64 @@ export default function GameMenu() {
                     </div>
                 </div>
 
-                {selectedLevel === 'Chill' &&
-                    <div className="flex flex-col card-actions items-center">
-                    <div className="multi-select-dropdown">
-                        <div className="dropdown dropdown-right">
-                                
-                            <label tabIndex={0} className="btn m-1">Groupes<BiSolidDownArrow/></label>
-                            <ul tabIndex={0} className="dropdown-content max-h-40 z-[1] menu p-2 shadow bg-base-100 rounded-box">
-                            <div className='overflow-y-scroll'>
-                                <button
-                                    onClick={handleSelectAll}
-                                    className="btn btn-sm text-[10px] btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
-                                >
-                                    Tout sélectionner
-                                </button>
-                                <button
-                                    onClick={handleSelectNone}
-                                    className="btn btn-sm text-[10px] mt-1 btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
-                                >
-                                    Tout désélectionner
-                                </button>
-                                {['1', '2', '3', '4', '5', '6'].map((item) => (
-                                    <li key={item}>
-                                        <label>
-                                        <input 
-                                            type="checkbox" 
-                                            value={item}
-                                            checked={selectedItems.includes(item)}
-                                            onChange={() => handleSelectionChange(item)}
-                                        />{item}</label>
-                                    </li>
-                                ))}
-                            </div>
-                            </ul>
+                <div className="multi-select-dropdown m-auto">
+                    <div className="dropdown dropdown-right">
+                            
+                        <label tabIndex={0} className="btn w-32">Groupes<BiSolidDownArrow/></label>
+                        <ul tabIndex={0} className="dropdown-content max-h-40 z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                        <div className='overflow-y-scroll'>
+                            <button
+                                onClick={handleSelectAll}
+                                className="btn btn-sm text-[10px] btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                            >
+                                Tout sélectionner
+                            </button>
+                            <button
+                                onClick={handleSelectNone}
+                                className="btn btn-sm text-[10px] mt-1 btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                            >
+                                Tout désélectionner
+                            </button>
+                            {['1', '2', '3', '4', '5', '6'].map((item) => (
+                                <li key={item}>
+                                    <label>
+                                    <input 
+                                        type="checkbox" 
+                                        value={item}
+                                        checked={selectedItems.includes(item)}
+                                        onChange={() => handleSelectionChange(item)}
+                                    />{item}</label>
+                                </li>
+                            ))}
                         </div>
+                        </ul>
                     </div>
-                        <Link
-                            href={{
-                                pathname: '/level1',
-                                query: { groups: selectedItems.join(",") }
-                            }}
-                            params={selectedItems}
-                            className={`btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600 ${selectedItems.length === 0 ? 'disabled:opacity-50 cursor-not-allowed' : ''}`}
-                            // Add the disabled attribute based on selectedItems.length
-                            disabled={selectedItems.length === 0}
-                        >
-                            Jouer
-                        </Link>
-                    </div>
-                }
-                {selectedLevel === 'Entrainement' &&
-                    <div className="flex flex-col card-actions items-center">
-                        <select className="select select-bordered w-sm -mt-4 mb-2"
-                        >
-                            <option disabled selected>Groupe</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                        </select>
-                        <Link href="/level2" className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">Jouer</Link>
-                    </div>
-                }
-                {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
-                    <div className="flex flex-col card-actions items-center">
-                        <select className="select select-bordered w-sm -mt-4 mb-2"
-                        >
-                            <option disabled selected>Groupe</option>
-                            <option>1</option>
-                            <option>2</option>
-                            <option>3</option>
-                            <option>4</option>
-                            <option>5</option>
-                            <option>6</option>
-                        </select>
-                        <Link href="/level3" className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">Jouer</Link>
-                    </div>
+                </div>
+                
+                {selectedItems.length < 1 ? (
+                    <Link 
+                        disabled
+                        className="btn w-32 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                        
+                        href={{
+                            pathname: `/levels/${selectedLevel}`,
+                            query: { groups: selectedItems }
+                        }}
+                    >
+                        Jouer
+                    </Link>
+                ) : (
+                    <Link 
+                        className="btn w-32 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"
+                        
+                        href={{
+                            pathname: `/levels/${selectedLevel}`,
+                            query: { groups: selectedItems }
+                        }}
+                    >
+                        Jouer
+                    </Link>
+                )
                 }
             </div>
         </div>

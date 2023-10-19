@@ -47,7 +47,7 @@ export default function PlantsList() {
 
   return (
     <>
-      <div className="mt-32 flex flex-wrap justify-center max-w-[90%] m-auto">
+      <div className="mt-16 lg:mt-24 flex flex-wrap justify-center max-w-[90%] m-auto">
       {plants.length === 0 ? (
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
@@ -57,9 +57,9 @@ export default function PlantsList() {
           <>
           <div
             key={t._id}
-            className="card w-96 bg-base-100 shadow-xl m-4"
+            className="card w-80 lg:w-96 bg-base-100 shadow-xl lg:m-4 my-3"
           >
-            <div className="w-full h-60 rounded-t-2xl" style={{
+            <div className="w-full h-40 lg:h-60 rounded-t-2xl" style={{
               backgroundImage:`url(${t.imageUrl[0]})`,
               backgroundPosition: "center",
               backgroundSize: "cover"
@@ -68,24 +68,24 @@ export default function PlantsList() {
 
             <div className="card-body p-4 pb-0">
               <div className="flex items-center"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
-              <h2 className="font-bold text-2xl">{t.name}</h2>
+              <h2 className="font-bold text-xl lg:text-2xl">{t.name}</h2>
               <div>{t.family}</div>
               <div><i>{t.genre}</i></div>
               <div><i>{t.species}</i></div>
               <div>{t.cultivar}</div>
             </div>
 
-            <div className="flex relative w-96 p-4 justify-between">
-              <RemoveBtn id={t._id} onPlantDeleted={loadPlants}/>
+            <div className="flex relative w-80 lg:w-96 p-4 justify-between">
+              <RemoveBtn size={20} id={t._id} onPlantDeleted={loadPlants}/>
               <Link href={`/editPlant/${t._id}`}>
-                <HiPencilAlt size={30} />
+                <HiPencilAlt size={20} />
               </Link>
             </div>
           </div>
           </>
           ))
         )}
-      <div className="flex w-96 m-4 justify-center items-center h-inherit">
+      <div className="flex w-80 lg:w-96 m-4 justify-center items-center h-inherit">
           <AddPlant onPlantAdded={loadPlants}/>
       </div>
       </div>

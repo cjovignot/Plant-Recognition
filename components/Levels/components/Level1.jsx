@@ -228,7 +228,7 @@ export default function Level1({params}) {
 
               <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-3">
                 <div className='flex flex-col items-center'>
-                  <div className='flex mt-4 w-96'>
+                  <div className='flex mt-4 w-80 lg:w-96'>
                     <select className="select select-sm select-success w-[100%] mb-2"
                       value={answers.name}
                       onChange={(e) => setAnswers(prev => ({ ...prev, name: e.target.value }))}
@@ -240,7 +240,7 @@ export default function Level1({params}) {
                     </select>
                   </div>
 
-                  <div className="flex w-96">
+                  <div className="flex w-80 lg:w-96">
                     <select className="select select-sm select-success w-[100%] mr-1"
                       value={answers.family}
                       onChange={(e) => setAnswers(prev => ({ ...prev, family: e.target.value }))}
@@ -261,7 +261,7 @@ export default function Level1({params}) {
                     </select>
                   </div>
 
-                  <div className="flex mt-2 w-96">
+                  <div className="flex mt-2 w-80 lg:w-96">
                     <select className="select select-sm select-success w-[100%] mr-1"
                       value={answers.species}
                       required
@@ -286,7 +286,7 @@ export default function Level1({params}) {
                   {plants.length === 1 ? (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600 w-96 mb-2"
+                        className="btn btn-outlined bg-green-600 w-80 lg:w-96 mb-2"
                         onClick={handleButtonClick}
                     >
                         Valider
@@ -294,7 +294,7 @@ export default function Level1({params}) {
                   ) : (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600 w-96 mb-2"
+                        className="btn btn-outlined bg-green-600 w-80 lg:w-96 mb-2"
                     >
                         Valider
                     </button>

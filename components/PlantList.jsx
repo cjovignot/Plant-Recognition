@@ -57,23 +57,23 @@ export default function PlantsList() {
           <>
           <div
             key={t._id}
-            className="card w-80 lg:w-96 bg-base-100 shadow-xl lg:m-4 my-3"
+            className="card w-80 lg:w-60 bg-base-100 shadow-xl lg:m-4 my-3"
           >
             <div className="flex">
-              <div className="w-48 lg:w-full h-42 lg:h-60 rounded-tl-2xl mr-1" style={{
+              <div className="w-48 lg:w-36 h-42 lg:h-48 rounded-tl-2xl mr-1" style={{
                 backgroundImage:`url(${t.imageUrl[0]})`,
                 backgroundPosition: "center",
                 backgroundSize: "cover"
               }}>
               </div>
               <div className="flex flex-col">
-                <div className="w-36 h-20 lg:h-[50%] rounded-tr-2xl" style={{
+                <div className="w-36 lg:w-24 h-20 lg:h-[50%] rounded-tr-2xl" style={{
                   backgroundImage:`url(${t.imageUrl[1]})`,
                   backgroundPosition: "center",
                   backgroundSize: "cover"
                 }}>
                 </div>
-                <div className="w-36 h-20 lg:h-[50%] mt-1" style={{
+                <div className="w-36 lg:w-24 h-20 lg:h-[50%] mt-1" style={{
                   backgroundImage:`url(${t.imageUrl[2]})`,
                   backgroundPosition: "center",
                   backgroundSize: "cover"
@@ -83,15 +83,18 @@ export default function PlantsList() {
             </div>
 
             <div className="card-body p-4 pb-0">
-              <div className="flex items-center"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
-              <h2 className="font-bold text-xl lg:text-2xl">{t.name}</h2>
-              <div>{t.family}</div>
-              <div><i>{t.genre}</i></div>
-              <div><i>{t.species}</i></div>
-              <div>{t.cultivar}</div>
+              <div className="flex items-center lg:text-sm"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
+              <h2 className="font-bold text-xl lg:text-sm">{t.name}</h2>
+              <div className="lg:text-sm">
+                {t.family}<br />
+                <i>{t.genre}</i><br />
+                <i>{t.species}</i><br />
+                {t.cultivar}<br />
+              </div>
+              <div className="lg:text-sm"></div>
             </div>
 
-            <div className="flex relative w-80 lg:w-96 p-4 justify-between">
+            <div className="flex relative w-80 lg:w-60 p-4 justify-between">
               <RemoveBtn size={20} id={t._id} onPlantDeleted={loadPlants}/>
               <Link href={`/editPlant/${t._id}`}>
                 <HiPencilAlt size={20} />

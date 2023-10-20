@@ -146,7 +146,8 @@ export default function Level2({params}) {
                       onChange={(e) => setName(e.target.value)}
                       value={name}
                       type="text"
-                      placeholder="Nom commun"
+                      // placeholder="Nom commun"
+                      placeholder={plants[0].name}
                       className="input input-bordered w-full"
                   />
                   {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}

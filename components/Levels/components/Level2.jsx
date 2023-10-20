@@ -175,7 +175,7 @@ export default function Level2({params}) {
       }
 
       
-      {!finish === true &&
+      {finish === true &&
         <Scores trueArray={trueArray} falseArray={falseArray} />
       }
     </>

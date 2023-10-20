@@ -45,16 +45,26 @@ export default function Level2({params}) {
 
   useEffect(() => {
     async function fetchData() {
-      try {
-        const result = await getPlants(groups);
-        setPlants(result?.plants || []);
-        setQuestions(result?.plants.length);
-      } catch (error) {
-        console.error("Error fetching plants:", error);
-      }
+        try {
+            const result = await getPlants(groups);
+            const shuffledPlants = shuffleArray(result?.plants || []);
+            setPlants(shuffledPlants);
+            setQuestions(shuffledPlants.length);
+        } catch (error) {
+            console.error("Error fetching plants:", error);
+        }
     }
-    fetchData()
+    fetchData();
   }, [groups]);
+
+  // Fisher-Yates (aka Durstenfeld) shuffle algorithm
+  function shuffleArray(array) {
+      for (let i = array.length - 1; i > 0; i--) {
+          const j = Math.floor(Math.random() * (i + 1)); // random index from 0 to i
+          [array[i], array[j]] = [array[j], array[i]]; // swap elements
+      }
+      return array;
+  }
 
   
   const handleButtonClick = () => {
@@ -146,8 +156,8 @@ export default function Level2({params}) {
                       onChange={(e) => setName(e.target.value)}
                       value={name}
                       type="text"
-                      // placeholder="Nom commun"
-                      placeholder={plants[0].name}
+                      placeholder="Nom commun"
+                      // placeholder={plants[0].name}
                       className="input input-bordered w-full"
                   />
                   {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}

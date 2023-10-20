@@ -9,7 +9,7 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 export default function GameMenu() {
     const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?']
-    const [selectedLevel, setSelectedLevel] = useState(levels[0]);
+    const [selectedLevel, setSelectedLevel] = useState(levels[1]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
 
@@ -66,11 +66,12 @@ export default function GameMenu() {
                 <div className="mt-4">
                     <h2 className="sm:text-sm lg:text-lg h-10"><b>Difficulté :</b> {selectedLevel}</h2>
                     <input
-                        onChange={handleRangeChange}
+                        // onChange={handleRangeChange}
                         type="range"
                         min={0}
                         max={100}
-                        value={getRangeValue(selectedLevel)}
+                        value={50}
+                        // value={getRangeValue(selectedLevel)}
                         className="range range-success range-xs mt-3" 
                         step="50"
                     />
@@ -84,6 +85,16 @@ export default function GameMenu() {
                         {selectedLevel === 'Chill' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
+                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
+                                    <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
+                                        <h3>4 choix pour chaque élément</h3>
+                                </p>
+                            </div>
+                            </>
+                        }
+                        {selectedLevel === 'Entrainement' &&
+                            <>
+                            <div className="mt-4 flex flex-col items-center">
                                 <p className="flex items-center lg:text-3xl text-xl font-bold justify-center h-[120px] lg:h-[200px]">
                                     Photo<ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                     Nom commun
@@ -91,7 +102,7 @@ export default function GameMenu() {
                             </div>
                             </>
                         }
-                        {selectedLevel === 'Entrainement' &&
+                        {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
                                 <p className="flex items-center lg:text-2xl text-md font-bold justify-center h-[120px] lg:h-[200px]">Photo
@@ -103,16 +114,6 @@ export default function GameMenu() {
                                         <p>4. Espèce</p>
                                         <p>5. Cultivar</p>
                                     </div>
-                                </p>
-                            </div>
-                            </>
-                        }
-                        {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
-                            <>
-                            <div className="mt-4 flex flex-col items-center">
-                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
-                                    <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
-                                        <h3>4 choix pour chaque élément</h3>
                                 </p>
                             </div>
                             </>

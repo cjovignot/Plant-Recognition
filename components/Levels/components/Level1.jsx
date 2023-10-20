@@ -1,17 +1,33 @@
 "use client"
 import { useEffect, useState } from 'react';
+// Import Swiper React components
+import { Swiper, SwiperSlide } from 'swiper/react';
+
+// Import Swiper styles
+import 'swiper/css';
+import 'swiper/css/pagination';
+
+import './swiper.css';
+
+// import required modules
+import { Pagination } from 'swiper/modules';
+import Scores from '@/components/Scores';
 
 export default function Level1({params}) {
-  const {level} = params.level
   const {groups} = params.groups
 
   const [plants, setPlants] = useState([]);
   const [questions, setQuestions] = useState(0)
-  const [name, setName] = useState("");
+
+  const [selectedAnswers, setSelectedAnswers] = useState([]);
   const [errorMessage, setErrorMessage] = useState("");
+
   const [trueArray, setTrueArray] = useState([]);
   const [falseArray, setFalseArray] = useState([]);
+
   const [finish, setFinish] = useState(false);
+
+  const possibleAnswers = ["Nom commun", "Famille", "Genre", "Espèce", "Cultivar"];
 
   const getPlants = async () => {
     try {
@@ -44,59 +60,15 @@ export default function Level1({params}) {
     fetchData()
   }, [groups]);
 
-  
-  const handleButtonClick = () => {
-    setFinish(true);
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    const fieldNames = {
-      name: "Nom commun"
-    };
-
-    // Check if any of the required fields are empty
-    const emptyFields = Object.keys(fieldNames).filter(key => !fieldNames[key]);
-
-    if (emptyFields.length) {
-      const fieldsToFill = emptyFields.map(key => fieldNames[key]).join(', ');
-      setErrorMessage(`Merci de remplir les champs suivants : ${fieldsToFill}`);
-    } else {
-      setErrorMessage(""); // Clear the error message if all fields are filled
-
-      if (plants.length > 0) {
-        const plant = plants[0];
-
-        // Check if the input value matches the corresponding field in the plant object
-        if (name === plant.name) {
-          setTrueArray(prevArray => [...prevArray, plant]);
-        } else {
-          // Add the 'answer' property to the plant object in the falseArray
-          const plantWithAnswer = {
-            ...plant,
-            answer: {name}
-          };
-          setFalseArray(prevArray => [...prevArray, plantWithAnswer]);
-        }
-        setPlants(prevPlants => prevPlants.slice(1));
-      }
-
-      resetForm();
-    }
-  };
 
   const resetForm = () => {
-    setName("");
+    setSelectedAnswers([]);
     setErrorMessage("");
   };
   
   return (
     <>
-    <div className='mt-[100px] text-white'>
-      <h2>Level1</h2>
-    </div>
-      {/* {questions === 0 && finish === false &&
+      {questions === 0 && finish === false &&
         <div className="flex w-full h-[80vh] justify-center items-center">
           <span className="loading loading-spinner text-success w-16 h-16"></span>
         </div>
@@ -105,61 +77,40 @@ export default function Level1({params}) {
       {plants.length > 0 &&
         <div className="h-screen flex justify-center items-center m-auto lg:pt-[5rem]">
         <div className="bg-base-100 shadow-xl lg:rounded-lg">
-          <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-between">
-            <div className="w-auto h-[45rem] lg:rounded-t-3xl" style={{
-              backgroundImage: `url(${plants[0].imageUrl[Math.floor(Math.random() * plants[0].imageUrl.length)]})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover"
-            }}></div>
-
-              <div className="flex flex-col h-60 justify-around items-center pb-10">
-              <h2 className="card-title text-2xl">Réponse</h2>
-                <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-3">
-                  <input
-                      onChange={(e) => setName(e.target.value)}
-                      value={name}
-                      type="text"
-                      placeholder="Nom commun"
-                      className="input input-bordered w-full"
-                  />
-                  {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
-
-                  {plants.length === 1 ? (
-                    <button
-                        type="submit"
-                        className="btn btn-outlined bg-green-600"
-                        onClick={handleButtonClick}
-                    >
-                        Valider
-                    </button>
-                  ) : (
-                    <button
-                        type="submit"
-                        className="btn btn-outlined bg-green-600"
-                    >
-                        Valider
-                    </button>
-                  )}
-                </form>
-              </div>
+          <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-start">
+            <Swiper
+              style={{
+                "--swiper-pagination-color": "#ffffff",
+                "--swiper-pagination-bullet-inactive-color": "#000000",
+                "--swiper-pagination-bullet-inactive-opacity": "1",
+                "--swiper-pagination-bullet-size": "10px",
+                "--swiper-pagination-bullet-horizontal-gap": "3px"
+              }}
+              pagination={{
+                dynamicBullets: true,
+              }}
+              modules={[Pagination]}
+              className="mySwiper"
+            >
+              {plants[0].imageUrl.map((image, index) => (
+                <SwiperSlide key={index} style={{
+                  backgroundImage: `url(${image})`,
+                  backgroundPosition: "top",
+                  backgroundSize: "contain",
+                  backgroundRepeat: 'no-repeat',
+                  height: '30rem'
+                }}></SwiperSlide>
+              ))}
+            </Swiper>
           </div>
         </div>
         </div>
       }
 
       
-      {finish === true &&
-        <div className="h-screen flex justify-center items-center m-auto lg:pt-20">
-          <div className="bg-base-100 shadow-xl lg:rounded-lg">
-            <div className="flex flex-col h-screen lg:h-[600px] w-screen lg:max-w-[1000px] justify-between">
-                <div className="flex flex-col h-60 justify-around items-center pb-10">
-                  <h2 className="pt-20 card-title text-2xl">Résultats</h2>
-                  <p>{trueArray.length}/{falseArray.length}</p>
-                </div>
-            </div>
-          </div>
-        </div>
-      } */}
+      {plants.length === 0 && finish === true &&
+        <Scores trueArray={trueArray} falseArray={falseArray} />
+      }
     </>
   );
 }

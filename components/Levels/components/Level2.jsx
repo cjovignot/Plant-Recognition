@@ -189,7 +189,7 @@ export default function Level2({params}) {
 
       
       {plants.length === 0 && finish === true &&
-        <Scores trueArray={trueArray} falseArray={falseArray} />
+        <Scores trueArray={trueArray} falseArray={falseArray} level={level}/>
       }
     </>
   );

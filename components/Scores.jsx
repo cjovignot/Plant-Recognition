@@ -3,7 +3,7 @@ import React, { useEffect, useState } from 'react';
 import Donut from '@/components/Charts/Donut';
 import Table from '@/components/Table'
 
-export default function Scores({ trueArray, falseArray }) {
+export default function Scores({ trueArray, falseArray, level }) {
     const series = [trueArray.length, falseArray.length]
 
     return (
@@ -15,7 +15,7 @@ export default function Scores({ trueArray, falseArray }) {
                             <h2 className="pt-20 card-title text-2xl">Résultats</h2>
                             <div>
                                 <Donut series={series}/>
-                                <Table data={falseArray}/>
+                                <Table data={falseArray} level={level}/>
                             </div>
                         </div>
                     </div>

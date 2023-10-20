@@ -1,19 +1,36 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 
-export default function Table({data}) {
-    console.log(data)
+export default function Table({data, level}) {
+
+    const redCount = data.reduce((acc, plant) => {
+        if (plant.answer.name !== plant.name) acc++;
+        if (plant.answer.family !== plant.family) acc++;
+        if (plant.answer.genre !== plant.genre) acc++;
+        if (plant.answer.species !== plant.species) acc++;
+        if (plant.answer.cultivar !== plant.cultivar) acc++;
+        return acc;
+    }, 0);
+
+    const itemsDisplayedCount = data.reduce((acc, plant) => {
+        acc += 1; // for plant.name
+        if (level !== 'Entrainement') acc += 4; // for family, genre, species, and cultivar
+        return acc;
+    }, 0);
+    const percentage = (((itemsDisplayedCount - redCount) / itemsDisplayedCount) * 100).toFixed(2);
+
 
     return (
         <>
-        <div className="my-20">
+        <div className="mt-10 mb-20">
+            
+            <div className='text-xl text-center mb-5'>Taux de réussite : {percentage}%</div>
             <table className="table">
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Nom commun</th>
-                        <th>Réponse</th>
-                        <th></th>
+                        <th>Nomenclatures</th>
+                        <th>Réponses</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -30,8 +47,38 @@ export default function Table({data}) {
                                     </div>
                                 </div>
                             </td>
-                            <td>{plant.name}</td>
-                            <td className='text-red-700	'>{plant.answer.name}</td>
+                            <td>
+                                <b>{plant.name}</b><br></br>
+                                {level !== 'Entrainement' &&
+                                <>
+                                    {plant.family}<br></br>
+                                    <i>{plant.genre}</i><br></br>
+                                    <i>{plant.species}</i><br></br>
+                                    {plant.cultivar}<br></br>
+                                </>
+                                }
+                            </td>
+                            <td>
+                                <b style={{ color: plant.answer.name !== plant.name ? 'red' : 'green' }}>
+                                    {plant.answer.name}
+                                </b><br></br>
+                                {level !== 'Entrainement' &&
+                                <>
+                                    <span style={{ color: plant.answer.family !== plant.family ? 'red' : 'green' }}>
+                                        {plant.answer.family}
+                                    </span><br></br>
+                                    <i style={{ color: plant.answer.genre !== plant.genre ? 'red' : 'green' }}>
+                                        {plant.answer.genre}
+                                    </i><br></br>
+                                    <i style={{ color: plant.answer.species !== plant.species ? 'red' : 'green' }}>
+                                        {plant.answer.species}
+                                    </i><br></br>
+                                    <span style={{ color: plant.answer.cultivar !== plant.cultivar ? 'red' : 'green' }}>
+                                        {plant.answer.cultivar}
+                                    </span><br></br>
+                                </>
+                                }
+                            </td>
                         </tr>
                     ))}
                 </tbody>

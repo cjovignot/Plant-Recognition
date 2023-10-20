@@ -15,6 +15,7 @@ import Scores from '@/components/Scores';
 
 export default function Level1({params}) {
   const {groups} = params.groups
+  const {level} = params.level
 
   const [plants, setPlants] = useState([]);
   const [plantsCopy, setPlantsCopy] = useState([])
@@ -308,7 +309,7 @@ export default function Level1({params}) {
 
       
       {plants.length === 0 && finish === true &&
-        <Scores trueArray={trueArray} falseArray={falseArray} />
+        <Scores trueArray={trueArray} falseArray={falseArray} level={level}/>
       }
     </>
   );

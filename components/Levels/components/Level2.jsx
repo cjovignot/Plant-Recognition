@@ -70,6 +70,8 @@ export default function Level2({params}) {
   const handleButtonClick = () => {
     setFinish(true);
   };
+  
+  console.log(falseArray)
 
   const handleSubmit = async (e) => {
     e.preventDefault();

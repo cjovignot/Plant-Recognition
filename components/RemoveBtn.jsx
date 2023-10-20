@@ -34,7 +34,6 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
     });
 
     if (res.ok) {
-      router.push("/settings");
       if (onPlantDeleted) onPlantDeleted();
       setShowModal(false);
     } else {
@@ -52,7 +51,6 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
       });
 
       if (res.ok) {
-          router.push("/settings");
           if (onPlantDeleted) onPlantDeleted();  // Call the function to re-fetch plants
       } else {
         throw new Error("Failed to create a plant");

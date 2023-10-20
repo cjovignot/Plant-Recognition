@@ -53,7 +53,6 @@ export default function AddPlant({ onPlantAdded }) {
 
 
     if (res.ok) {
-        router.push("/settings");
         resetForm();
         if (onPlantAdded) onPlantAdded();  // Call the function to re-fetch plants
       } else {

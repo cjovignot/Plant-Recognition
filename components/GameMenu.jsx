@@ -9,13 +9,14 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 export default function GameMenu() {
     const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?']
-    const [selectedLevel, setSelectedLevel] = useState(levels[1]);
+    const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
+    const levelNumbers = ['1', '2', '3']
 
     const handleSelectAll = () => {
         setSelectAll(true);
-        setSelectedItems(['1', '2']); // Assuming these are your options
+        setSelectedItems(levelNumbers); // Assuming these are your options
     };
     const handleSelectNone = () => {
         setSelectAll(false);
@@ -66,12 +67,12 @@ export default function GameMenu() {
                 <div className="mt-4">
                     <h2 className="sm:text-sm lg:text-lg h-10"><b>Difficulté :</b> {selectedLevel}</h2>
                     <input
-                        // onChange={handleRangeChange}
+                        onChange={handleRangeChange}
                         type="range"
                         min={0}
                         max={100}
-                        value={50}
-                        // value={getRangeValue(selectedLevel)}
+                        // value={50}
+                        value={getRangeValue(selectedLevel)}
                         className="range range-success range-xs mt-3" 
                         step="50"
                     />
@@ -87,7 +88,7 @@ export default function GameMenu() {
                             <div className="mt-4 flex flex-col items-center">
                                 <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
                                     <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
-                                        <h3>4 choix pour chaque élément</h3>
+                                        4 choix pour chaque élément
                                 </p>
                             </div>
                             </>
@@ -143,7 +144,7 @@ export default function GameMenu() {
                             </div>
 
                             <div className='pt-1'>
-                                {['1', '2'].map((item) => (
+                                {levelNumbers.map((item) => (
                                     <li key={item}>
                                         <label>
                                         <input 

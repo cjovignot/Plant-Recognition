@@ -84,7 +84,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Chill' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-3xl text-xl font-bold justify-center h-[120px]">
+                                <p className="flex items-center lg:text-3xl text-xl font-bold justify-center h-[120px] lg:h-[200px]">
                                     Photo<ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                     Nom commun
                                 </p>
@@ -94,7 +94,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Entrainement' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-3xl text-md font-bold justify-center h-[120px]">Photo
+                                <p className="flex items-center lg:text-2xl text-md font-bold justify-center h-[120px] lg:h-[200px]">Photo
                                     <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                     <div className="flex flex-col text-md font-bold ml-8">
                                         <p>1. Nom commun</p>
@@ -110,7 +110,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
-                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px]">Photo
+                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
                                     <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
                                         <h3>4 choix pour chaque élément</h3>
                                 </p>

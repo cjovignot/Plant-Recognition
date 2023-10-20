@@ -59,11 +59,27 @@ export default function PlantsList() {
             key={t._id}
             className="card w-80 lg:w-96 bg-base-100 shadow-xl lg:m-4 my-3"
           >
-            <div className="w-full h-40 lg:h-60 rounded-t-2xl" style={{
-              backgroundImage:`url(${t.imageUrl[0]})`,
-              backgroundPosition: "center",
-              backgroundSize: "cover"
-            }}>
+            <div className="flex">
+              <div className="w-48 lg:w-full h-42 lg:h-60 rounded-tl-2xl mr-1" style={{
+                backgroundImage:`url(${t.imageUrl[0]})`,
+                backgroundPosition: "center",
+                backgroundSize: "cover"
+              }}>
+              </div>
+              <div className="flex flex-col">
+                <div className="w-36 h-20 lg:h-[50%] rounded-tr-2xl" style={{
+                  backgroundImage:`url(${t.imageUrl[1]})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover"
+                }}>
+                </div>
+                <div className="w-36 h-20 lg:h-[50%] mt-1" style={{
+                  backgroundImage:`url(${t.imageUrl[2]})`,
+                  backgroundPosition: "center",
+                  backgroundSize: "cover"
+                }}>
+                </div>
+              </div>
             </div>
 
             <div className="card-body p-4 pb-0">

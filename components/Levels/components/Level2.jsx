@@ -113,7 +113,7 @@ export default function Level2({params}) {
         
       {plants.length > 0 &&
         <div className="h-screen flex justify-center items-center m-auto lg:pt-[5rem]">
-        <div className="bg-base-100 shadow-xl lg:rounded-3xl">
+        <div className="bg-base-100 shadow-xl lg:rounded-lg">
           <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-start">
             <Swiper
               style={{
@@ -176,7 +176,7 @@ export default function Level2({params}) {
       }
 
       
-      {finish === true &&
+      {plants.length === 0 && finish === true &&
         <Scores trueArray={trueArray} falseArray={falseArray} />
       }
     </>

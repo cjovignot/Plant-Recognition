@@ -104,7 +104,7 @@ export default function Level1({params}) {
         
       {plants.length > 0 &&
         <div className="h-screen flex justify-center items-center m-auto lg:pt-[5rem]">
-        <div className="bg-base-100 shadow-xl lg:rounded-3xl">
+        <div className="bg-base-100 shadow-xl lg:rounded-lg">
           <div className="flex flex-col h-screen lg:h-[35rem] w-screen lg:max-w-[700px] justify-between">
             <div className="w-auto h-[45rem] lg:rounded-t-3xl" style={{
               backgroundImage: `url(${plants[0].imageUrl[Math.floor(Math.random() * plants[0].imageUrl.length)]})`,
@@ -150,7 +150,7 @@ export default function Level1({params}) {
       
       {finish === true &&
         <div className="h-screen flex justify-center items-center m-auto lg:pt-20">
-          <div className="bg-base-100 shadow-xl lg:rounded-3xl">
+          <div className="bg-base-100 shadow-xl lg:rounded-lg">
             <div className="flex flex-col h-screen lg:h-[600px] w-screen lg:max-w-[1000px] justify-between">
                 <div className="flex flex-col h-60 justify-around items-center pb-10">
                   <h2 className="pt-20 card-title text-2xl">Résultats</h2>

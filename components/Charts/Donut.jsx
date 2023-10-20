@@ -2,7 +2,6 @@ import React, { useState } from 'react';
 import Chart from 'react-apexcharts';
 
 function Donut({ series }) {
-    console.log("series =>", series)
 
     const correct = series[0];
     const incorrect = series[1];
@@ -65,7 +64,7 @@ function Donut({ series }) {
     });
 
     return (
-        <div className="donut">
+        <div className="donut flex justify-center">
             <Chart options={chartData.options} series={chartData.series} type="donut" width="380" />
         </div>
     );

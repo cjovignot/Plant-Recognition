@@ -47,7 +47,7 @@ export default function Table({data, level}) {
                                     </div>
                                 </div>
                             </td>
-                            <td>
+                            <td className='text-[10px]'>
                                 <b>{plant.name}</b><br></br>
                                 {level !== 'Entrainement' &&
                                 <>
@@ -58,7 +58,7 @@ export default function Table({data, level}) {
                                 </>
                                 }
                             </td>
-                            <td>
+                            <td className='text-[10px]'>
                                 <b style={{ color: plant.answer.name !== plant.name ? 'red' : 'green' }}>
                                     {plant.answer.name}
                                 </b><br></br>

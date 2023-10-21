@@ -15,7 +15,7 @@ export default function Scores({ trueArray, falseArray, level }) {
                             <h2 className="pt-20 card-title text-2xl">Résultats</h2>
                             <div>
                                 <Donut series={series}/>
-                                <Table data={falseArray} level={level}/>
+                                <Table trueArray={trueArray} falseArray={falseArray} level={level}/>
                             </div>
                         </div>
                     </div>

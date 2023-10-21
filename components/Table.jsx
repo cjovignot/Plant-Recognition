@@ -5,10 +5,12 @@ export default function Table({trueArray, falseArray, level}) {
 
     const redCount = falseArray.reduce((acc, plant) => {
         if (plant.answer.name !== plant.name) acc++;
-        if (plant.answer.family !== plant.family) acc++;
-        if (plant.answer.genre !== plant.genre) acc++;
-        if (plant.answer.species !== plant.species) acc++;
-        if (plant.answer.cultivar !== plant.cultivar) acc++;
+        if (level !== 'Entrainement') {
+            if (plant.answer.family !== plant.family) acc++;
+            if (plant.answer.genre !== plant.genre) acc++;
+            if (plant.answer.species !== plant.species) acc++;
+            if (plant.answer.cultivar !== plant.cultivar) acc++;
+        }
         return acc;
     }, 0);
 
@@ -24,20 +26,20 @@ export default function Table({trueArray, falseArray, level}) {
     }, 0);
 
     // const percentage = ((trueArray.length / (trueArray.length + falseArray.length)) * 100).toFixed(1);
-    const percentage = ((itemsFalseCount + itemsTrueCount));
+    const total = ((itemsFalseCount + itemsTrueCount));
 
 
     return (
         <>
         <div className="mt-10 mb-20">
             
-            <div className='text-xl text-center mb-5'>{percentage - redCount}/{percentage}</div>
+            <div className='text-xl text-center mb-5'>{total - redCount}/{total}</div>
             <table className="table">
                 <thead>
                     <tr>
                         <th>Image</th>
-                        <th>Nomenclatures</th>
-                        <th>Réponses</th>
+                        <th>Réponse</th>
+                        <th>Correction</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,17 +55,6 @@ export default function Table({trueArray, falseArray, level}) {
                                             }}></div>
                                     </div>
                                 </div>
-                            </td>
-                            <td className='text-[10px]'>
-                                <b>{plant.name}</b><br></br>
-                                {level !== 'Entrainement' &&
-                                <>
-                                    {plant.family}<br></br>
-                                    <i>{plant.genre}</i><br></br>
-                                    <i>{plant.species}</i><br></br>
-                                    {plant.cultivar}<br></br>
-                                </>
-                                }
                             </td>
                             <td className='text-[10px]'>
                                 <b style={{ color: plant.answer.name !== plant.name ? 'red' : 'green' }}>
@@ -86,6 +77,17 @@ export default function Table({trueArray, falseArray, level}) {
                                 </>
                                 }
                             </td>
+                            <td className='text-[10px]'>
+                                <b>{plant.name}</b><br></br>
+                                {level !== 'Entrainement' &&
+                                <>
+                                    {plant.family}<br></br>
+                                    <i>{plant.genre}</i><br></br>
+                                    <i>{plant.species}</i><br></br>
+                                    {plant.cultivar}<br></br>
+                                </>
+                                }
+                            </td>
                         </tr>
                     ))}
                     {trueArray.map((plant, index) => (
@@ -100,17 +102,6 @@ export default function Table({trueArray, falseArray, level}) {
                                             }}></div>
                                     </div>
                                 </div>
-                            </td>
-                            <td className='text-[10px]'>
-                                <b>{plant.name}</b><br></br>
-                                {level !== 'Entrainement' &&
-                                <>
-                                    {plant.family}<br></br>
-                                    <i>{plant.genre}</i><br></br>
-                                    <i>{plant.species}</i><br></br>
-                                    {plant.cultivar}<br></br>
-                                </>
-                                }
                             </td>
                             <td className='text-[10px]'>
                                 <b style={{ color: plant.name !== plant.name ? 'red' : 'green' }}>
@@ -130,6 +121,17 @@ export default function Table({trueArray, falseArray, level}) {
                                     <span style={{ color: plant.cultivar !== plant.cultivar ? 'red' : 'green' }}>
                                         {plant.cultivar}
                                     </span><br></br>
+                                </>
+                                }
+                            </td>
+                            <td className='text-[10px]'>
+                                <b>{plant.name}</b><br></br>
+                                {level !== 'Entrainement' &&
+                                <>
+                                    {plant.family}<br></br>
+                                    <i>{plant.genre}</i><br></br>
+                                    <i>{plant.species}</i><br></br>
+                                    {plant.cultivar}<br></br>
                                 </>
                                 }
                             </td>

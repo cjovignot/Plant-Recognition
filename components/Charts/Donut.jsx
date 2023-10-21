@@ -6,6 +6,7 @@ function Donut({ series }) {
     const correct = series[0];
     const incorrect = series[1];
     const ratio = `${correct}/${correct+incorrect}`;
+    console.log(correct)
 
     const options = {
         labels: ['Validé', 'A revoir'],

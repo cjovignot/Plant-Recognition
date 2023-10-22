@@ -72,9 +72,10 @@ export default function Level1({params}) {
     async function fetchData() {
       try {
         const result = await getPlants(groups);
-        setPlants(result?.plants || []);
-        setPlantsCopy(result?.plants || [])
-        setQuestions(result?.plants.length);
+        const shuffledPlants = shuffle(result?.plants || []); // Shuffle the plants here
+        setPlants(shuffledPlants);
+        setPlantsCopy(shuffledPlants);
+        setQuestions(shuffledPlants.length);
       } catch (error) {
         console.error("Error fetching plants:", error);
       }

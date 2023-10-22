@@ -92,14 +92,20 @@ export default function Level2({params}) {
       if (plants.length > 0) {
         const plant = plants[0];
 
+        const normalize = (str) => {
+          return str.toLowerCase().replace(/[^a-z0-9]/g, '');
+        };
+
         // Check if the input value matches the corresponding field in the plant object
-        if (name === plant.name) {
+        if (normalize(name) === normalize(plant.name)) {
+          console.log("ok", normalize(name), normalize(plant.name))
           setTrueArray(prevArray => [...prevArray, plant]);
         } else {
           // Add the 'answer' property to the plant object in the falseArray
+          console.log("false", normalize(name), normalize(plant.name))
           const plantWithAnswer = {
             ...plant,
-            answer: {name}
+            answer: { name }
           };
           setFalseArray(prevArray => [...prevArray, plantWithAnswer]);
         }

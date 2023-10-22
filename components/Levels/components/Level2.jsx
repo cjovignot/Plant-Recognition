@@ -96,8 +96,10 @@ export default function Level2({params}) {
 
         // Check if the input value matches the corresponding field in the plant object
         if (processedName === plant.name) {
+          console.log(processedName)
           setTrueArray(prevArray => [...prevArray, plant]);
         } else {
+          console.log(processedName)
           // Add the 'answer' property to the plant object in the falseArray
           const plantWithAnswer = {
             ...plant,

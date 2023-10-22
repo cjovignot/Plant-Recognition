@@ -82,6 +82,22 @@ export default function Level1({params}) {
     fetchData()
   }, [groups]);
 
+  const usedAnswers = new Set();
+
+  function getRandomAnswers(field) {
+      let randomOptions = [];
+      while (randomOptions.length < 3) {
+          const rndIndex = Math.floor(Math.random() * plantsCopy.length);
+          const potentialAnswer = plantsCopy[rndIndex][field];
+
+          if (!usedAnswers.has(potentialAnswer) && potentialAnswer !== plants[0][field]) {
+              randomOptions.push(potentialAnswer);
+              usedAnswers.add(potentialAnswer);
+          }
+      }
+      return randomOptions;
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
   
@@ -162,12 +178,8 @@ export default function Level1({params}) {
   function generateQuestion() {
     if (plantsCopy.length === 0) return;
 
-    const correctAnswer = plantsCopy[0];
-
-    const getRandomAnswers = (field) => {
-        const randomIndices = getRandomIndices(plantsCopy.length, 0);
-        return randomIndices.map(index => plantsCopy[index][field]);
-    };
+    // Reset usedAnswers for each question generation
+    usedAnswers.clear();
 
     const question = {
       name: shuffle([...getRandomAnswers('name'), plants[0].name]),

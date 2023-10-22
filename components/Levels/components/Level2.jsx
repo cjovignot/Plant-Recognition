@@ -80,6 +80,8 @@ export default function Level2({params}) {
       name: "Nom commun"
     };
 
+    const processedName = name.replace(/´/g, "'");
+
     // Check if any of the required fields are empty
     const emptyFields = Object.keys(fieldNames).filter(key => !fieldNames[key]);
 
@@ -93,13 +95,13 @@ export default function Level2({params}) {
         const plant = plants[0];
 
         // Check if the input value matches the corresponding field in the plant object
-        if (name === plant.name) {
+        if (processedName === plant.name) {
           setTrueArray(prevArray => [...prevArray, plant]);
         } else {
           // Add the 'answer' property to the plant object in the falseArray
           const plantWithAnswer = {
             ...plant,
-            answer: {name}
+            answer: {processedName}
           };
           setFalseArray(prevArray => [...prevArray, plantWithAnswer]);
         }

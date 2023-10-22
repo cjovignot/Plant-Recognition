@@ -21,6 +21,13 @@ export default function Level1({params}) {
   const [plantsCopy, setPlantsCopy] = useState([])
   const [questions, setQuestions] = useState(0);
   const [currentQuestion, setCurrentQuestion] = useState({});
+  const INITIAL_ANSWERS_STATE = {
+    name: "",
+    family: "",
+    genre: "",
+    species: "",
+    cultivar: ""
+  };
   const [answers, setAnswers] = useState({
     name: "",
     family: "",
@@ -126,10 +133,10 @@ export default function Level1({params}) {
       generateQuestion();
     }
   };
-  console.log(falseArray)
 
   const resetForm = () => {
     setSelectedAnswers([]);
+    setAnswers(INITIAL_ANSWERS_STATE)
     setErrorMessage("");
   };
 

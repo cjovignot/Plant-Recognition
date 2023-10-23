@@ -8,6 +8,7 @@ import { RiAccountCircleLine } from 'react-icons/ri';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { FcAbout } from 'react-icons/fc';
 import { LuSettings } from 'react-icons/lu';
+import { HiOutlinePlus } from 'react-icons/hi';
 import { TbLogin2, TbLogout2 } from 'react-icons/tb';
 import { FcStatistics } from 'react-icons/fc';
 
@@ -50,9 +51,12 @@ export default function Navbar() {
               >
                 <li onClick={closeDropdown}>
                   {localStorage.getItem('client') &&
-                    <Link className='btn btn-ghost btn-sm flex justify-start' href="/settings"><PiPlantDuotone size={20}/>Végétaux</Link>
+                  <>
+                    <button className="btn btn-ghost btn-sm flex justify-start text-[11px] items-center" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={20} />Ajouter une plante</button>
+                    <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/settings"><PiPlantDuotone size={20}/>Végétaux</Link>
+                  </>
                   }
-                  <Link className='btn btn-ghost btn-sm flex justify-start' href="/"><FcAbout size={20}/>A propos</Link>
+                  <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/"><FcAbout size={20}/>A propos</Link>
                 </li>
               </ul>
             )}

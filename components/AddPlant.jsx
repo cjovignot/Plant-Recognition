@@ -6,6 +6,8 @@ import { HiOutlinePlus } from "react-icons/hi";
 
 export default function AddPlant({ onPlantAdded }) {
   const [name, setName] = useState("");
+  const [secondNameAllowed, setSecondNameAllowed] = useState(false)
+  const [secondName, setSecondName] = useState("");
   const [family, setFamily] = useState("");
   const [genre, setGenre] = useState("")
   const [species, setSpecies] = useState("")
@@ -17,8 +19,17 @@ export default function AddPlant({ onPlantAdded }) {
 
   const router = useRouter();
 
+  const handleCheckboxChange = (e) => {
+    setSecondNameAllowed(e.target.checked);
+  }
+  const handleSecondNameChange = (e) => {
+    setSecondName(e.target.value);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+    
+    const combinedNames = [name, secondName];
 
     const fieldNames = {
         name: "Nom commun",
@@ -47,7 +58,7 @@ export default function AddPlant({ onPlantAdded }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ name, family, genre, species, cultivar, group, imageUrl }),
+        body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, imageUrl }),
     });
     console.log("body:", res.body)
 
@@ -89,6 +100,7 @@ export default function AddPlant({ onPlantAdded }) {
   
   const resetForm = () => {
     setName("");
+    setSecondName("");
     setFamily("");
     setGenre("");
     setSpecies("");
@@ -131,7 +143,7 @@ export default function AddPlant({ onPlantAdded }) {
                         onChange={(e) => {
                             handleImageUpload(e);
                         }}
-                        className="file-input file-input-bordered file-input-success w-full"
+                        className="file-input file-input-sm file-input-bordered file-input-success w-full"
                     />
                 </div>
 
@@ -140,15 +152,35 @@ export default function AddPlant({ onPlantAdded }) {
                     value={name}
                     type="text"
                     placeholder="Nom commun"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                 />
+                <div className="form-control">
+                    <label className="label cursor-pointer">
+                        <input 
+                            type="checkbox" 
+                            className="checkbox" 
+                            onChange={handleCheckboxChange}
+                        />
+                        <span className="label-text text-slate-400 ml-2">Ajouter une deuxième option de nom commun</span> 
+                    </label>
+                </div>
+
+                { secondNameAllowed && (
+                    <input
+                        onChange={handleSecondNameChange}
+                        value={secondName}
+                        type="text"
+                        placeholder="Nom commun autorisé"
+                        className="input input-sm input-bordered w-full"
+                    />
+                ) }
 
                 <input
                     onChange={(e) => setFamily(e.target.value)}
                     value={family}
                     type="text"
                     placeholder="Famille"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                 />
 
                 <input
@@ -156,7 +188,7 @@ export default function AddPlant({ onPlantAdded }) {
                     value={genre}
                     type="text"
                     placeholder="Genre"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                 />
 
                 <input
@@ -164,7 +196,7 @@ export default function AddPlant({ onPlantAdded }) {
                     value={species}
                     type="text"
                     placeholder="Espèce"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                 />
 
                 <input
@@ -172,10 +204,10 @@ export default function AddPlant({ onPlantAdded }) {
                     value={cultivar}
                     type="text"
                     placeholder="Cultivar"
-                    className="input input-bordered w-full"
+                    className="input input-sm input-bordered w-full"
                 />
 
-                <select className="select select-bordered w-full"
+                <select className="select select-sm select-bordered w-full"
                     onChange={(e) => setGroup(e.target.value)}
                     value={group}
                 >

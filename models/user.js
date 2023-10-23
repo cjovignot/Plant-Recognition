@@ -3,6 +3,7 @@ const userSchema = new Schema(
   {
     pseudo: String,
     password: String,
+    // role: String,
   }
 );
 

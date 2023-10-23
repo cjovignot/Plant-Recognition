@@ -86,17 +86,24 @@ export default function Level1({params}) {
   const usedAnswers = new Set();
 
   function getRandomAnswers(field) {
-      let randomOptions = [];
-      while (randomOptions.length < 3) {
-          const rndIndex = Math.floor(Math.random() * plantsCopy.length);
-          const potentialAnswer = plantsCopy[rndIndex][field];
-
-          if (!usedAnswers.has(potentialAnswer) && potentialAnswer !== plants[0][field]) {
-              randomOptions.push(potentialAnswer);
-              usedAnswers.add(potentialAnswer);
-          }
-      }
-      return randomOptions;
+    let randomOptions = [];
+    while (randomOptions.length < 3) {
+        const rndIndex = Math.floor(Math.random() * plantsCopy.length);
+        
+        // Check if the field is "name" and its value is an array
+        let potentialAnswer;
+        if (field === "name" && Array.isArray(plantsCopy[rndIndex][field])) {
+            potentialAnswer = plantsCopy[rndIndex][field][0];
+        } else {
+            potentialAnswer = plantsCopy[rndIndex][field];
+        }
+  
+        if (!usedAnswers.has(potentialAnswer) && potentialAnswer !== (Array.isArray(plants[0][field]) ? plants[0][field][0] : plants[0][field])) {
+            randomOptions.push(potentialAnswer);
+            usedAnswers.add(potentialAnswer);
+        }
+    }
+    return randomOptions;
   }
 
   const handleSubmit = async (e) => {
@@ -183,7 +190,7 @@ export default function Level1({params}) {
     usedAnswers.clear();
 
     const question = {
-      name: shuffle([...getRandomAnswers('name'), plants[0].name]),
+      name: shuffle([...getRandomAnswers('name'), plants[0].name[0]]),
       family: shuffle([...getRandomAnswers('family'), plants[0].family]),
       genre: shuffle([...getRandomAnswers('genre'), plants[0].genre]),
       species: shuffle([...getRandomAnswers('species'), plants[0].species]),

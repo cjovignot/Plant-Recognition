@@ -57,7 +57,7 @@ export default function Table({trueArray, falseArray, level}) {
                                 </div>
                             </td>
                             <td className='text-[10px]'>
-                                <b style={{ color: plant.answer.name !== plant.name ? 'red' : 'green' }}>
+                                <b style={{ color: !plant.answer.name.includes(plant.name[0] || !plant.answer.name.includes(plant.name[1])) ? 'red' : 'green' }}>
                                     {plant.answer.name}
                                 </b><br></br>
                                 {level !== 'Entrainement' &&
@@ -78,7 +78,7 @@ export default function Table({trueArray, falseArray, level}) {
                                 }
                             </td>
                             <td className='text-[10px]'>
-                                <b>{plant.name}</b><br></br>
+                                <b>{plant.name[0]}</b><br></br>
                                 {level !== 'Entrainement' &&
                                 <>
                                     {plant.family}<br></br>
@@ -105,7 +105,7 @@ export default function Table({trueArray, falseArray, level}) {
                             </td>
                             <td className='text-[10px]'>
                                 <b style={{ color: plant.name !== plant.name ? 'red' : 'green' }}>
-                                    {plant.name}
+                                    {plant.name[0]}
                                 </b><br></br>
                                 {level !== 'Entrainement' &&
                                 <>
@@ -125,7 +125,7 @@ export default function Table({trueArray, falseArray, level}) {
                                 }
                             </td>
                             <td className='text-[10px]'>
-                                <b>{plant.name}</b><br></br>
+                                <b>{plant.name[0]}</b><br></br>
                                 {level !== 'Entrainement' &&
                                 <>
                                     {plant.family}<br></br>

@@ -44,6 +44,7 @@ export default function PlantsList() {
 
     fetchData();
   }, []);
+  console.log(plants)
 
   return (
     <>
@@ -84,7 +85,7 @@ export default function PlantsList() {
 
             <div className="card-body p-4 pb-0">
               <div className="flex items-center lg:text-sm"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
-              <h2 className="font-bold text-xl lg:text-sm">{t.name}</h2>
+              <h2 className="font-bold text-xl lg:text-sm">{t.name[0]}</h2>
               <div className="lg:text-sm">
                 {t.family}<br />
                 <i>{t.genre}</i><br />

@@ -89,10 +89,8 @@ export default function Level2({params}) {
 
       if (plants.length > 0) {
         const plant = plants[0];
-        console.log("correction =>", plant.name)
 
         const normalize = (str) => {
-          console.log("in normalize =>", str)
           return str.toLowerCase().replace(/[^a-z0-9]/g, '');
         };
 
@@ -101,10 +99,8 @@ export default function Level2({params}) {
             normalize(name) === normalize(plant.name[0]) || 
             normalize(name) === normalize(plant.name[1])
           ) {
-            console.log("is array & true")
             setTrueArray(prevArray => [...prevArray, plant]);
           } else {
-            console.log("is array & false")
             // Add the 'answer' property to the plant object in the falseArray
             const plantWithAnswer = {
               ...plant,
@@ -113,11 +109,9 @@ export default function Level2({params}) {
             setFalseArray(prevArray => [...prevArray, plantWithAnswer]);
           }
         } else if (normalize(name) === normalize(plant.name[0])) {
-          console.log("not array & true")
           setTrueArray(prevArray => [...prevArray, plant]);
         } else {
           // Add the 'answer' property to the plant object in the falseArray
-          console.log("not array & false")
           const plantWithAnswer = {
             ...plant,
             answer: { name }

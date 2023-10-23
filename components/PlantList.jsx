@@ -44,7 +44,6 @@ export default function PlantsList() {
 
     fetchData();
   }, []);
-  console.log(plants)
 
   return (
     <>

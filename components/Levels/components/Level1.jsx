@@ -133,10 +133,8 @@ export default function Level1({params}) {
       const allAnswersCorrect = Object.keys(fieldNames).every(key => answers[key] === plant[key]);
   
       if (allAnswersCorrect) {
-        console.log('juste')
         setTrueArray(prevArray => [...prevArray, plant]);
       } else {
-        console.log('faux');
     
         // Gather all answers for the plant
         const allAnswersForPlant = Object.keys(fieldNames).map(key => ({ [key]: answers[key] }));

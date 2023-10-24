@@ -5,6 +5,7 @@ import Link from "next/link";
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
 import { RiAccountCircleLine } from 'react-icons/ri';
+import { FaUserCircle } from 'react-icons/fa';
 import { PiPlantDuotone } from 'react-icons/pi';
 import { FcAbout } from 'react-icons/fc';
 import { LuSettings } from 'react-icons/lu';
@@ -18,19 +19,21 @@ export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [isAdmin, setIsAdmin] = useState(false)
+  const [pseudo, setPseudo] = useState("")
 
   const router = useRouter();
   
   useEffect(() => {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
+    setPseudo(client)
     const role = localStorage.getItem('role');
 
     if(role === 'admin') {
       setIsAdmin(true); // Convert to boolean and set state
     }
     setIsLoggedIn(!!client); // Convert to boolean and set state
-  }, []);
+  }, [isLoggedIn]);
 
   const toggleDropdown = () => {
     setDropdownOpen(!dropdownOpen);
@@ -60,7 +63,7 @@ export default function Navbar() {
                 className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
               >
                 <li onClick={closeDropdown}>
-                  {localStorage.getItem('client') &&
+                  {isLoggedIn &&
                   <>
                     {isAdmin &&
                       <button className="btn btn-ghost btn-sm flex justify-start text-[11px] items-center" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={20} />Ajouter une plante</button>
@@ -81,9 +84,17 @@ export default function Navbar() {
         <Login onUserLogin={handleUserLogin}/>
         <SignUp/>
         <div className="navbar-end">
-          <div className="dropdown dropdown-end">
+          <div className="dropdown dropdown-end flex items-center">
+            {isLoggedIn &&
+            <>
+              {pseudo}
+              <div className="avatar online mx-2">
+                <FaUserCircle size={20}/>
+              </div>
+            </>
+            }
             <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
-            <ul tabIndex={0} className="dropdown-content z-[1] menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
+            <ul tabIndex={0} className="dropdown-content z-[1] mt-36 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
               {!isLoggedIn ? (
                 <>
                 <li>
@@ -100,6 +111,7 @@ export default function Navbar() {
                       localStorage.removeItem('client')
                       localStorage.removeItem('role')
                       setIsLoggedIn(false)
+                      setPseudo("")
                       router.push("/");
                     }
                     }><TbLogout2 size={20}/>Logout</button>

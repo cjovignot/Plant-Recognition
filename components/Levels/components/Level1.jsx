@@ -132,8 +132,6 @@ export default function Level1({params}) {
   
       const allAnswersCorrect = Object.keys(fieldNames).every(key => {
         if (key === 'name' && Array.isArray(plant[key])) {
-          console.log("rep", answers[key])
-          console.log(plant[key][0])
           return plant[key][0].includes(answers[key]);
         } else {
           return answers[key] === plant[key];
@@ -141,7 +139,6 @@ export default function Level1({params}) {
       });
   
       if (allAnswersCorrect) {
-        console.log(11)
         setTrueArray(prevArray => [...prevArray, plant]);
       } else {
     
@@ -157,9 +154,6 @@ export default function Level1({params}) {
       }
       setPlants(prevPlants => prevPlants.slice(1));
     }
-      
-    console.log("true", trueArray)
-    console.log("false", falseArray)
   
     resetForm();
     if (!finish === true) {

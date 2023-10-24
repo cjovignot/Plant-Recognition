@@ -89,7 +89,6 @@ export default function Navbar() {
             <>
               <div className="avatar online mx-2 rounded-full border-white border-2 w-7">
                 <p className='mx-auto font-bold'>{pseudo}</p>
-                {/* <FaUserCircle size={20}/> */}
               </div>
             </>
             }
@@ -118,11 +117,13 @@ export default function Navbar() {
                 </li>
                 </>
               )}
-              <li>
-                <button>
-                  <FcStatistics size={20}/>Statistiques
-                </button>
-              </li>
+              {isLoggedIn &&
+                <li>
+                  <button>
+                    <FcStatistics size={20}/>Statistiques
+                  </button>
+                </li>
+              }
             </ul>
           </div>
         </div>

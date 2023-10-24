@@ -12,14 +12,23 @@ import { HiOutlinePlus } from 'react-icons/hi';
 import { TbLogin2, TbLogout2 } from 'react-icons/tb';
 import { FcStatistics } from 'react-icons/fc';
 import AddPlant from './AddPlant';
+import { useRouter } from "next/navigation";
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
   const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  const router = useRouter();
   
   useEffect(() => {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
+    const role = localStorage.getItem('role');
+
+    if(role === 'admin') {
+      setIsAdmin(true); // Convert to boolean and set state
+    }
     setIsLoggedIn(!!client); // Convert to boolean and set state
   }, []);
 
@@ -53,7 +62,9 @@ export default function Navbar() {
                 <li onClick={closeDropdown}>
                   {localStorage.getItem('client') &&
                   <>
-                    <button className="btn btn-ghost btn-sm flex justify-start text-[11px] items-center" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={20} />Ajouter une plante</button>
+                    {isAdmin &&
+                      <button className="btn btn-ghost btn-sm flex justify-start text-[11px] items-center" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={20} />Ajouter une plante</button>
+                    }
                     <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/settings"><PiPlantDuotone size={20}/>Végétaux</Link>
                   </>
                   }
@@ -87,7 +98,9 @@ export default function Navbar() {
                   <button
                     onClick={()=> {
                       localStorage.removeItem('client')
+                      localStorage.removeItem('role')
                       setIsLoggedIn(false)
+                      router.push("/");
                     }
                     }><TbLogout2 size={20}/>Logout</button>
                 </li>

@@ -25,6 +25,15 @@ const getPlants = async () => {
 
 export default function PlantsList() {
   const [plants, setPlants] = useState([]);
+  const [isAdmin, setIsAdmin] = useState(false)
+
+  useEffect(() => {
+    const role = localStorage.getItem('role');
+    
+    if(role === 'admin') {
+      setIsAdmin(true); // Convert to boolean and set state
+    }
+  })
 
   // Load plants from API and update state
   const loadPlants = async () => {
@@ -94,22 +103,27 @@ export default function PlantsList() {
               <div className="lg:text-sm"></div>
             </div>
 
-            <div className="flex relative w-80 lg:w-60 p-4 justify-between">
-              <RemoveBtn size={20} id={t._id} onPlantDeleted={loadPlants}/>
-              <Link href={`/editPlant/${t._id}`}>
-                <HiPencilAlt size={20} />
-              </Link>
-            </div>
+            {isAdmin &&
+              <div className="flex relative w-80 lg:w-60 p-4 justify-between">
+                <RemoveBtn size={20} id={t._id} onPlantDeleted={loadPlants}/>
+                <Link href={`/editPlant/${t._id}`}>
+                  <HiPencilAlt size={20} />
+                </Link>
+              </div>
+            }
           </div>
           </>
           ))
         )}
       <div className="flex w-80 lg:w-96 m-4 justify-center items-center h-inherit">
         
-          {/* Open the modal using document.getElementById('ID').showModal() method */}
-          <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
-          
-          <AddPlant onPlantAdded={loadPlants}/>
+        {isAdmin &&
+          <>
+            {/* Open the modal using document.getElementById('ID').showModal() method */}
+            <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
+          </>
+        }
+        <AddPlant onPlantAdded={loadPlants}/>
       </div>
       </div>
     </>

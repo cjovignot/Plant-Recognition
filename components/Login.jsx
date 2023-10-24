@@ -41,8 +41,10 @@ export default function Login({ onUserLogin }) {
       });
 
       if (res.ok) {
+        const data = await res.json();
         router.push("/");
         localStorage.setItem('client', pseudo);
+        localStorage.setItem('role', data.role);
         resetForm();
         onUserLogin(pseudo); 
       } else {

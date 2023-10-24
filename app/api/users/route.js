@@ -13,7 +13,7 @@ export async function POST(request) {
     await connectMongoDB();
 
     // Save the hashed password
-    await User.create({ pseudo, password: hashedPassword });
+    await User.create({ pseudo, password: hashedPassword, role: 'user' });
 
     return NextResponse.json({ message: "User Created" }, { status: 201 });
 }
@@ -21,7 +21,7 @@ export async function POST(request) {
 export async function GET() {
   await connectMongoDB();
   const users = await User.find();
-  return NextResponse.json({ topics });
+  return NextResponse.json({ users });
 }
 
 export async function DELETE(request) {

@@ -19,7 +19,7 @@ export default function Home() {
       <div className="hero-content text-center text-neutral-content">
         <div className="">
           <h1 className="mb-5 text-5xl lg:text-8xl text-white font-bold">Vegetal Reco&apos;</h1>
-          {isLoggedIn !== false &&
+          {isLoggedIn &&
             <div className='mr-3 text-2xl'>
               Salut {name} !
             </div>

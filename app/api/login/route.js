@@ -22,5 +22,5 @@ export async function POST(request) {
 
     // You can also add logic here to generate JWT or set session, etc. for user authentication
 
-    return NextResponse.json({ message: "Successfully logged in" });
+    return NextResponse.json({ message: "Successfully logged in", role: user.role });
 }

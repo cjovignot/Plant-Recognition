@@ -26,7 +26,7 @@ export default function Navbar() {
   useEffect(() => {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
-    setPseudo(client)
+    setPseudo(client?.substring(0, 1).toUpperCase())
     const role = localStorage.getItem('role');
 
     if(role === 'admin') {
@@ -87,9 +87,9 @@ export default function Navbar() {
           <div className="dropdown dropdown-end flex items-center">
             {isLoggedIn &&
             <>
-              {pseudo}
-              <div className="avatar online mx-2">
-                <FaUserCircle size={20}/>
+              <div className="avatar online mx-2 rounded-full border-white border-2 w-7">
+                <p className='mx-auto font-bold'>{pseudo}</p>
+                {/* <FaUserCircle size={20}/> */}
               </div>
             </>
             }

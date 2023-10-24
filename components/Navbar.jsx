@@ -11,6 +11,7 @@ import { LuSettings } from 'react-icons/lu';
 import { HiOutlinePlus } from 'react-icons/hi';
 import { TbLogin2, TbLogout2 } from 'react-icons/tb';
 import { FcStatistics } from 'react-icons/fc';
+import AddPlant from './AddPlant';
 
 export default function Navbar() {
   const [dropdownOpen, setDropdownOpen] = useState(false);
@@ -101,6 +102,9 @@ export default function Navbar() {
           </div>
         </div>
       </div>
+
+
+      <AddPlant />
     </>
   );
 }

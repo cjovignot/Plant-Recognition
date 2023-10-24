@@ -105,6 +105,10 @@ export default function PlantsList() {
           ))
         )}
       <div className="flex w-80 lg:w-96 m-4 justify-center items-center h-inherit">
+        
+          {/* Open the modal using document.getElementById('ID').showModal() method */}
+          <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
+          
           <AddPlant onPlantAdded={loadPlants}/>
       </div>
       </div>

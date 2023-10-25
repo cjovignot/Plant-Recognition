@@ -15,8 +15,6 @@ export default function GameMenu() {
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
-    const [role, setRole] = useState(localStorage.getItem('role'))
-    console.log(role)
 
     const getPlants = async () => {
         try {

@@ -8,11 +8,27 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 
 export default function GameMenu() {
-    const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?']
+    const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?', 'test']
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
-    const levelNumbers = ['1', '2', '3']
+    const levelNumbers = ['1', '2', '3', '4']
+    const [activeButtons, setActiveButtons] = useState({
+        "Nom commun": false,
+        "Famille": false,
+        "Genre": false,
+        "Espèce": false,
+        "Cultivar": false,
+    });
+
+    console.log(activeButtons)
+
+    const toggleButtonActive = (label) => {
+        setActiveButtons(prevState => ({
+            ...prevState,
+            [label]: !prevState[label]
+        }));
+    }
 
     const handleSelectAll = () => {
         setSelectAll(true);
@@ -37,12 +53,14 @@ export default function GameMenu() {
         const value = parseFloat(e.target.value);
         let index;
         
-        if (value <= 49) {
+        if (value < 33) {
             index = 0;
-        } else if (value <= 90) {
+        } else if (value < 66) {
             index = 1;
-        } else {
+        } else if (value < 99) {
             index = 2;
+        } else {
+            index = 3;
         }
 
         setSelectedLevel(levels[index]);
@@ -52,8 +70,9 @@ export default function GameMenu() {
         const index = levels.indexOf(level);
         switch(index) {
             case 0: return 0;
-            case 1: return 50;
-            case 2: return 100;
+            case 1: return 33;
+            case 2: return 66;
+            case 3: return 100;
             default: return 0;
         }
     }
@@ -71,12 +90,13 @@ export default function GameMenu() {
                         type="range"
                         min={0}
                         max={100}
-                        // value={50}
+                        // value={0}
                         value={getRangeValue(selectedLevel)}
                         className="range range-success range-xs mt-3" 
-                        step="50"
+                        step="33.33"
                     />
                     <div className="w-full flex justify-between text-xs px-2">
+                        <span>|</span>
                         <span>|</span>
                         <span>|</span>
                         <span>|</span>
@@ -114,6 +134,48 @@ export default function GameMenu() {
                                         <p>3. Genre</p>
                                         <p>4. Espèce</p>
                                         <p>5. Cultivar</p>
+                                    </div>
+                                </p>
+                            </div>
+                            </>
+                        }
+                        {selectedLevel === 'test' &&
+                            <>
+                            <div className="mt-4 flex flex-col items-center">
+                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
+                                    <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
+                                        Question au hasard :
+                                    <div>
+                                        <button 
+                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Nom commun"] ? 'bg-[#059669] text-white' : ''}`} 
+                                            onClick={() => toggleButtonActive("Nom commun")}
+                                        >
+                                            Nom commun
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Famille"] ? 'bg-[#059669] text-white' : ''}`} 
+                                            onClick={() => toggleButtonActive("Famille")}
+                                        >
+                                            Famille
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Genre"] ? 'bg-[#059669] text-white' : ''}`} 
+                                            onClick={() => toggleButtonActive("Genre")}
+                                        >
+                                            Genre
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Espèce"] ? 'bg-[#059669] text-white' : ''}`} 
+                                            onClick={() => toggleButtonActive("Espèce")}
+                                        >
+                                            Espèce
+                                        </button>
+                                        <button 
+                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Cultivar"] ? 'bg-[#059669] text-white' : ''}`} 
+                                            onClick={() => toggleButtonActive("Cultivar")}
+                                        >
+                                            Cultivar
+                                        </button>
                                     </div>
                                 </p>
                             </div>

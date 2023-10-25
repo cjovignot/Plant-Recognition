@@ -85,14 +85,23 @@ export default function Navbar() {
         <SignUp/>
         <div className="navbar-end">
           <div className="dropdown dropdown-end flex items-center">
-            {isLoggedIn &&
-            <>
-            <div className="avatar online placeholder mr-2">
-              <div className="bg-neutral-focus text-neutral-content rounded-full w-7">
-                <span className="text-lg font-bold">{pseudo}</span>
+            {isLoggedIn ? (
+              <>
+              <div className="avatar placeholder mr-2 ring ring-success ring-offset-1 rounded-full">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-7">
+                  <span className="text-lg font-bold">{pseudo}</span>
+                </div>
               </div>
-            </div>
-            </>
+              </>
+            ) : (
+              <>
+              <div className="avatar placeholder mr-2 ring ring-base-300 ring-offset-1 rounded-full">
+                <div className="bg-neutral-focus text-neutral-content rounded-full w-7">
+                  <span className="text-lg font-bold"></span>
+                </div>
+              </div>
+              </>
+            )
             }
             <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
             <ul tabIndex={0} className="dropdown-content z-[1] mt-36 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">

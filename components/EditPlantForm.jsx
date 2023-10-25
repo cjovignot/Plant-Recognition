@@ -144,6 +144,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
           </select>
 
           <div className="divider">CARACTERISTIQUES</div>
+          <p className='font-bold text-red-600 text-center -mt-3 mb-2'>🚧 En cours de développement 🚧</p>
 
           <select className="select select-sm select-bordered lg:w-full w-60"
               onChange={(e) => setNewPh(e.target.value)}

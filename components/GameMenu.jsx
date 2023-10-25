@@ -5,6 +5,7 @@ import Link from "next/link";
 import { ImArrowRight, ImArrowDown } from 'react-icons/im';
 import { HiOutlineSun, HiOutlineMoon } from 'react-icons/hi'
 import { BiSolidDownArrow } from 'react-icons/bi';
+import { PLANT_GROUPS } from '@/app/utils/plants/plants'
 
 
 export default function GameMenu() {
@@ -14,6 +15,8 @@ export default function GameMenu() {
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
+    const [role, setRole] = useState(localStorage.getItem('role'))
+    console.log(role)
 
     const getPlants = async () => {
         try {
@@ -67,7 +70,7 @@ export default function GameMenu() {
 
     const handleSelectAll = () => {
         setSelectAll(true);
-        setSelectedItems(levelNumbers); // Assuming these are your options
+        setSelectedItems(PLANT_GROUPS); // Assuming these are your options
     };
     const handleSelectNone = () => {
         setSelectAll(false);
@@ -149,13 +152,14 @@ export default function GameMenu() {
                         {selectedLevel === 'Entrainement' &&
                             <>
                             <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
-                                <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
+                                <ImArrowDown style={{ marginLeft: '10px', marginRight: '10px' }} />
                                 Nom commun
                             </div>
                             </>
                         }
                         {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
+                            <p className='font-bold text-red-600 text-center'>🚧 En cours de développement 🚧</p>
                             <div className="flex self-center my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit h-fit p-4 border-4 border-[#059669]">Photo
                                 <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                 <div className="flex flex-col text-md font-bold ml-8">
@@ -171,6 +175,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Custom' &&
                             <>
                             <div className="flex flex-col items-center">
+                                <p className='font-bold text-red-600 text-center'>🚧 En cours de développement 🚧</p>
                                 <div className="flex flex-col items-center">
                                     <p className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
                                         <ImArrowDown style={{ marginTop: '4px', marginBottom: '4px' }} />
@@ -255,7 +260,7 @@ export default function GameMenu() {
                     </div>
                 </div>
                 
-                {selectedItems.length < 1 ? (
+                {selectedItems.length < 1 || selectedLevel === 'Custom' || selectedLevel === 'Qui veut gagner des graines en masse ?' ? (
                     <Link 
                         disabled
                         className="btn w-32 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600"

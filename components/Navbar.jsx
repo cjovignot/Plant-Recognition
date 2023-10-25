@@ -104,7 +104,7 @@ export default function Navbar() {
             )
             }
             <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
-            <ul tabIndex={0} className="dropdown-content z-[1] lg:mt-36 mt-28 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
+            <ul tabIndex={0} className="dropdown-content z-[1] lg:mt-30 mt-28 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
               {!isLoggedIn ? (
                 <>
                 <li>
@@ -131,7 +131,7 @@ export default function Navbar() {
               {isLoggedIn &&
                 <li>
                   <button>
-                    <FcStatistics size={20}/>Statistiques
+                    <FcStatistics size={20} disabled/>🚧 Statistiques 🚧
                   </button>
                 </li>
               }

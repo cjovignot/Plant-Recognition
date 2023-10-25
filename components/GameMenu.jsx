@@ -9,10 +9,47 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 export default function GameMenu() {
     const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?', 'test']
+    const [plants, setPlants] = useState([])
+    const [groups, setGroups] = useState([])
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
     const levelNumbers = ['1', '2', '3', '4']
+
+    const getPlants = async () => {
+        try {
+          const url = `/api/plants`;
+      
+          const res = await fetch(url, {
+            cache: "no-store",
+          });
+      
+          if (!res.ok) {
+            throw new Error("Failed to fetch plants");
+          }
+      
+          return res.json();
+        } catch (error) {
+          console.log("Error loading plants: ", error);
+        }
+      };
+      
+        useEffect(() => {
+            async function fetchData() {
+            try {
+                const result = await getPlants();
+                setPlants(result);
+                const groups = [...new Set(data.map(item => item.group))];
+                setGroups(groups)
+                console.log(groups)
+            } catch (error) {
+                console.error("Error fetching plants:", error);
+            }
+            }
+            fetchData()
+        }, []);
+        console.log(plants)
+
     const [activeButtons, setActiveButtons] = useState({
         "Nom commun": false,
         "Famille": false,
@@ -81,7 +118,7 @@ export default function GameMenu() {
     <>
         <div className="lg:mt-20 lg:card w-screen lg:h-auto h-screen lg:w-auto bg-base-100 shadow-xl">
             <div className="card-body flex flex-col lg:min-w-[550px] justify-start">
-                <h2 className="pt-10 lg:pt-0 text-center text-2xl lg:text-4xl font-bold">Game Menu</h2>
+                <h2 className="pt-10 lg:pt-0 text-center text-2xl lg:text-3xl font-bold">Game Menu</h2>
 
                 <div className="mt-4">
                     <h2 className="sm:text-sm lg:text-lg h-10"><b>Difficulté :</b> {selectedLevel}</h2>
@@ -105,49 +142,43 @@ export default function GameMenu() {
                     <div className='flex flex-col'>
                         {selectedLevel === 'Chill' &&
                             <>
-                            <div className="mt-4 flex flex-col items-center">
-                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
-                                    <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
-                                        4 choix pour chaque élément
-                                </p>
+                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                                <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
+                                4 choix pour chaque élément
                             </div>
                             </>
                         }
                         {selectedLevel === 'Entrainement' &&
                             <>
-                            <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-3xl text-xl font-bold justify-center h-[120px] lg:h-[200px]">
-                                    Photo<ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
-                                    Nom commun
-                                </p>
+                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                                <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
+                                Nom commun
                             </div>
                             </>
                         }
                         {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
-                            <div className="mt-4 flex flex-col items-center">
-                                <p className="flex items-center lg:text-2xl text-md font-bold justify-center h-[120px] lg:h-[200px]">Photo
-                                    <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
-                                    <div className="flex flex-col text-md font-bold ml-8">
-                                        <p>1. Nom commun</p>
-                                        <p>2. Famille</p>
-                                        <p>3. Genre</p>
-                                        <p>4. Espèce</p>
-                                        <p>5. Cultivar</p>
-                                    </div>
-                                </p>
+                            <div className="flex self-center my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit h-fit p-4 border-4 border-[#059669]">Photo
+                                <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
+                                <div className="flex flex-col text-md font-bold ml-8">
+                                    <p>1. Nom commun</p>
+                                    <p>2. Famille</p>
+                                    <p>3. Genre</p>
+                                    <p>4. Espèce</p>
+                                    <p>5. Cultivar</p>
+                                </div>
                             </div>
                             </>
                         }
                         {selectedLevel === 'test' &&
                             <>
-                            <div className="mt-4 flex flex-col items-center">
-                            <div className="mt-4 flex flex-col items-center">
-                                <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
-                                    <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
-                                        Questions au hasard :
-                                </p>
-                            </div>
+                            <div className="flex flex-col items-center">
+                                <div className="flex flex-col items-center">
+                                    <p className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                                        <ImArrowDown style={{ marginTop: '4px', marginBottom: '4px' }} />
+                                            Questions au hasard :
+                                    </p>
+                                </div>
 
                                 <div className='w-[100%] text-center'>
                                     <button 

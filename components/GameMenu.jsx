@@ -8,7 +8,7 @@ import { BiSolidDownArrow } from 'react-icons/bi';
 
 
 export default function GameMenu() {
-    const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?', 'test']
+    const levels = ['Chill', 'Entrainement', 'Qui veut gagner des graines en masse ?', 'Custom']
     const [plants, setPlants] = useState([])
     const [groups, setGroups] = useState([])
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
@@ -170,7 +170,7 @@ export default function GameMenu() {
                             </div>
                             </>
                         }
-                        {selectedLevel === 'test' &&
+                        {selectedLevel === 'Custom' &&
                             <>
                             <div className="flex flex-col items-center">
                                 <div className="flex flex-col items-center">

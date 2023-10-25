@@ -11,16 +11,16 @@ export async function POST(request) {
     const user = await User.findOne({ pseudo });
 
     if (!user) {
-        return NextResponse.json({ message: "User not found" }, { status: 404 });
+        return NextResponse.json({ message: "Compte introuvable" }, { status: 404 });
     }
 
     const isMatch = await bcrypt.compare(password, user.password);
 
     if (!isMatch) {
-        return NextResponse.json({ message: "Invalid password" }, { status: 401 });
+        return NextResponse.json({ message: "Mauvais mot de passe..." }, { status: 401 });
     }
 
     // You can also add logic here to generate JWT or set session, etc. for user authentication
 
-    return NextResponse.json({ message: "Successfully logged in", role: user.role });
+    return NextResponse.json({ message: "Connexion réussie", role: user.role });
 }

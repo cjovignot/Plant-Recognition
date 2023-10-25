@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from 'react-toastify';
 import { RiAccountCircleLine } from 'react-icons/ri'
 
 export default function Login({ onUserLogin }) {
@@ -25,6 +26,7 @@ export default function Login({ onUserLogin }) {
     if (emptyFields.length) {
         const fieldsToFill = emptyFields.map(key => fieldNames[key]).join(', ');
         setErrorMessage(`Merci de remplir les champs suivants : ${fieldsToFill}`);
+        toast.error(`Merci de remplir les champs suivants : ${fieldsToFill}`)
         return;
     } else {
         setErrorMessage("");  // clear the error message if all fields are filled
@@ -46,10 +48,12 @@ export default function Login({ onUserLogin }) {
         localStorage.setItem('client', pseudo);
         localStorage.setItem('role', data.role);
         resetForm();
-        onUserLogin(pseudo); 
+        onUserLogin(pseudo);
+        toast.success(`Bienvenue ${pseudo} !`)
       } else {
           const data = await res.json();
           setErrorMessage(data.message);
+          toast.error(data.message || "Connexion impossible")
       }
     } catch (error) {
       console.log(error);

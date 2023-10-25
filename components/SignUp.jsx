@@ -2,6 +2,8 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { toast } from 'react-toastify';
+
 
 export default function SignUp() {
   const [pseudo, setPseudo] = useState("");
@@ -29,25 +31,24 @@ export default function SignUp() {
     }
 
     try {
-      // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/users`, {
-        const res = await fetch(`/api/users`, {
-        method: "POST",
-        headers: {
-          "Content-type": "application/json",
-        },
-        body: JSON.stringify({ pseudo, password }),
-    });
-    console.log("body:", res.body)
+      const res = await fetch(`/api/users`, {
+          method: "POST",
+          headers: {
+              "Content-type": "application/json",
+          },
+          body: JSON.stringify({ pseudo, password }),
+      });
+      
+      const data = await res.json(); // <-- Parse the response body here
 
-
-    if (res.ok) {
-        router.push("/");
-        resetForm(); // Call the function to re-fetch plants
+      if (res.ok) {
+          router.push("/");
+          resetForm();
       } else {
-        throw new Error("Failed to create a user");
+          toast.error(data.message || "Failed to create a user");
       }
     } catch (error) {
-      console.log(error);
+        toast.error(error.message);
     }
   };
   

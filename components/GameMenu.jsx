@@ -81,7 +81,7 @@ export default function GameMenu() {
     <>
         <div className="lg:mt-20 lg:card w-screen lg:h-auto h-screen lg:w-auto bg-base-100 shadow-xl">
             <div className="card-body flex flex-col lg:min-w-[550px] justify-start">
-                <h2 className="pt-20 lg:pt-0 text-center text-2xl lg:text-4xl font-bold">Game Menu</h2>
+                <h2 className="pt-10 lg:pt-0 text-center text-2xl lg:text-4xl font-bold">Game Menu</h2>
 
                 <div className="mt-4">
                     <h2 className="sm:text-sm lg:text-lg h-10"><b>Difficulté :</b> {selectedLevel}</h2>
@@ -142,49 +142,52 @@ export default function GameMenu() {
                         {selectedLevel === 'test' &&
                             <>
                             <div className="mt-4 flex flex-col items-center">
+                            <div className="mt-4 flex flex-col items-center">
                                 <p className="flex flex-col items-center lg:text-3xl text-xl text-center font-bold justify-center h-[120px] lg:h-[200px]">Photo
                                     <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
-                                        Question au hasard :
-                                    <div>
-                                        <button 
-                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Nom commun"] ? 'bg-[#059669] text-white' : ''}`} 
-                                            onClick={() => toggleButtonActive("Nom commun")}
-                                        >
-                                            Nom commun
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Famille"] ? 'bg-[#059669] text-white' : ''}`} 
-                                            onClick={() => toggleButtonActive("Famille")}
-                                        >
-                                            Famille
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Genre"] ? 'bg-[#059669] text-white' : ''}`} 
-                                            onClick={() => toggleButtonActive("Genre")}
-                                        >
-                                            Genre
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Espèce"] ? 'bg-[#059669] text-white' : ''}`} 
-                                            onClick={() => toggleButtonActive("Espèce")}
-                                        >
-                                            Espèce
-                                        </button>
-                                        <button 
-                                            className={`btn btn-sm mx-1 btn-ghost ${activeButtons["Cultivar"] ? 'bg-[#059669] text-white' : ''}`} 
-                                            onClick={() => toggleButtonActive("Cultivar")}
-                                        >
-                                            Cultivar
-                                        </button>
-                                    </div>
+                                        Questions au hasard :
                                 </p>
+                            </div>
+
+                                <div className='w-[100%] text-center'>
+                                    <button 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Nom commun"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        onClick={() => toggleButtonActive("Nom commun")}
+                                    >
+                                        Nom commun
+                                    </button>
+                                    <button 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Famille"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        onClick={() => toggleButtonActive("Famille")}
+                                    >
+                                        Famille
+                                    </button>
+                                    <button 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Genre"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        onClick={() => toggleButtonActive("Genre")}
+                                    >
+                                        Genre
+                                    </button>
+                                    <button 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Espèce"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        onClick={() => toggleButtonActive("Espèce")}
+                                    >
+                                        Espèce
+                                    </button>
+                                    <button 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Cultivar"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        onClick={() => toggleButtonActive("Cultivar")}
+                                    >
+                                        Cultivar
+                                    </button>
+                                </div>
                             </div>
                             </>
                         }
                     </div>
                 </div>
 
-                <div className="multi-select-dropdown mx-auto">
+                <div className="multi-select-dropdown mx-auto mt-10 lg:mt-0">
                     <div className="dropdown dropdown-top lg:dropdown-right">
                             
                         <label tabIndex={0} className="btn w-32">Groupes<BiSolidDownArrow/></label>

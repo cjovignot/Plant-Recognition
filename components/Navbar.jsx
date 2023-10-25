@@ -87,9 +87,11 @@ export default function Navbar() {
           <div className="dropdown dropdown-end flex items-center">
             {isLoggedIn &&
             <>
-              <div className="avatar online mx-2 rounded-full border-white border-2 w-7">
-                <p className='mx-auto font-bold'>{pseudo}</p>
+            <div className="avatar online placeholder mr-2">
+              <div className="bg-neutral-focus text-neutral-content rounded-full w-7">
+                <span className="text-lg font-bold">{pseudo}</span>
               </div>
+            </div>
             </>
             }
             <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>

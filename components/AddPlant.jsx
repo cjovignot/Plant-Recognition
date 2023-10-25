@@ -2,7 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
-import { HiOutlinePlus } from "react-icons/hi";
+import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
 export default function AddPlant({ onPlantAdded }) {
   const [name, setName] = useState("");
@@ -13,6 +13,10 @@ export default function AddPlant({ onPlantAdded }) {
   const [species, setSpecies] = useState("")
   const [cultivar, setCultivar] = useState("")
   const [group, setGroup] = useState("Groupe")
+  const [ph, setPh] = useState("")
+  const [exposition, setExposition] = useState("")
+  const [humidite, setHumidite] = useState("")
+  const [category, setCategory] = useState("")
   const [imageUrl, setImageUrl] = useState([])
   const [isUploading, setIsUploading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
@@ -112,12 +116,12 @@ export default function AddPlant({ onPlantAdded }) {
 
   return (
     <>
-    <dialog id="my_modal_5" className="z-10 modal modal-bottom sm:modal-middle">
+    <dialog id="my_modal_5" className="z-10 modal modal-middle lg:modal-middle">
         <div className="modal-box">
             <h2 className="text-3xl font-bold text-center my-8">Ajouter une plante</h2>
-            <div className="flex justify-center max-h-128">
+            <div className="flex justify-center lg:max-h-128">
                 {imageUrl.length > 0 && isUploading === false &&
-                    <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll pr-4 mr-4">
+                    <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll">
                         {imageUrl.map((url, index) => (
                             <>
                             <div key={index} className="m-1 rounded-lg w-[5rem] h-[5rem] mx-1 text-black text-opacity-50 flex justify-center items-center text-5xl" style={{
@@ -130,119 +134,166 @@ export default function AddPlant({ onPlantAdded }) {
                         ))}
                     </div>
                 }
-                <form onSubmit={handleSubmit} className="flex flex-col gap-3">
-                <div className="flex">
-                    {isUploading === true &&
-                        <span className="fixed right-10 mt-2 loading loading-spinner text-success w-8 h-8"></span>
-                    }
-                    <input 
-                        type="file"
-                        multiple
-                        onChange={(e) => {
-                            handleImageUpload(e);
-                        }}
-                        className="file-input file-input-sm file-input-bordered file-input-success w-full"
-                    />
-                </div>
-
-                <input
-                    onChange={(e) => setName(e.target.value)}
-                    value={name}
-                    type="text"
-                    placeholder="Nom commun"
-                    className="input input-sm input-bordered w-full"
-                />
-                <div className="form-control">
-                    <label className="label cursor-pointer">
+                <div className="w-[500px]">
+                    <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
+                        {isUploading === true &&
+                            <span className="fixed right-10 mt-2 loading loading-spinner text-success w-8 h-8"></span>
+                        }
                         <input 
-                            type="checkbox" 
-                            className="checkbox" 
-                            onChange={handleCheckboxChange}
+                            type="file"
+                            multiple
+                            onChange={(e) => {
+                                handleImageUpload(e);
+                            }}
+                            className="file-input file-input-sm file-input-bordered file-input-success lg:w-full w-60"
                         />
-                        <span className="label-text text-slate-400 ml-2">Ajouter une deuxième option de nom commun</span> 
-                    </label>
+
+                        <input
+                            onChange={(e) => setName(e.target.value)}
+                            value={name}
+                            type="text"
+                            placeholder="Nom commun"
+                            className="input input-sm input-bordered lg:w-full w-60"
+                        />
+                        <label className="label cursor-pointer">
+                            <input 
+                                type="checkbox" 
+                                className="checkbox" 
+                                onChange={handleCheckboxChange}
+                            />
+                            <span className="label-text text-slate-400 ml-2 text-start">Nom commun : Option 2</span> 
+                        </label>
+
+                        { secondNameAllowed && (
+                            <input
+                                onChange={handleSecondNameChange}
+                                value={secondName}
+                                type="text"
+                                placeholder="Nom commun autorisé"
+                                className="input input-sm input-bordered lg:w-full w-60"
+                            />
+                        ) }
+
+                        <input
+                            onChange={(e) => setFamily(e.target.value)}
+                            value={family}
+                            type="text"
+                            placeholder="Famille"
+                            className="input input-sm input-bordered lg:w-full w-60"
+                        />
+
+                        <input
+                            onChange={(e) => setGenre(e.target.value)}
+                            value={genre}
+                            type="text"
+                            placeholder="Genre"
+                            className="input input-sm input-bordered lg:w-full w-60"
+                        />
+
+                        <input
+                            onChange={(e) => setSpecies(e.target.value)}
+                            value={species}
+                            type="text"
+                            placeholder="Espèce"
+                            className="input input-sm input-bordered lg:w-full w-60"
+                        />
+
+                        <input
+                            onChange={(e) => setCultivar(e.target.value)}
+                            value={cultivar}
+                            type="text"
+                            placeholder="Cultivar"
+                            className="input input-sm input-bordered lg:w-full w-60"
+                        />
+
+                        <select className="select select-sm select-bordered lg:w-full w-60"
+                            onChange={(e) => setGroup(e.target.value)}
+                            value={group}
+                        >
+                            <option disabled selected>Groupe</option>
+                            {PLANT_GROUPS.map((groupValue) => (
+                                <option key={groupValue} value={groupValue}>
+                                    {groupValue}
+                                </option>
+                            ))}
+                        </select>
+
+                        <div className="divider">CARACTERISTIQUES</div>
+
+                        <select className="select select-sm select-bordered lg:w-full w-60"
+                            onChange={(e) => setPh(e.target.value)}
+                            value={ph}
+                        >
+                        <option disabled selected>PH</option>
+                        {PLANT_PH.map((value) => (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        ))}
+                        </select>
+
+                        <select className="select select-sm select-bordered lg:w-full w-60"
+                            onChange={(e) => setExposition(e.target.value)}
+                            value={exposition}
+                        >
+                        <option disabled selected>Exposition</option>
+                        {PLANT_EXPOSITION.map((value) => (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        ))}
+                        </select>
+
+                        <select className="select select-sm select-bordered lg:w-full w-60"
+                            onChange={(e) => setHumidite(e.target.value)}
+                            value={humidite}
+                        >
+                        <option disabled selected>Humidité</option>
+                        {PLANT_HUMIDITE.map((value) => (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        ))}
+                        </select>
+
+                        <select className="select select-sm select-bordered lg:w-full w-60"
+                            onChange={(e) => setCategory(e.target.value)}
+                            value={category}
+                        >
+                        <option disabled selected>Catégorie</option>
+                        {PLANT_CATEGORY.map((value) => (
+                            <option key={value} value={value}>
+                                {value}
+                            </option>
+                        ))}
+                        </select>
+                        {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
+
+                        <div className="flex my-4 pb-8 m-auto">
+                            <button
+                                type="button"
+                                className="bg-red-600 font-bold text-white py-3 px-6 w-fit m-auto rounded-lg mr-3"
+                                onClick={() => {
+                                    document.getElementById('my_modal_5').close();
+                                    resetForm();
+                                }}
+                            >
+                                Annuler
+                            </button>
+                            <button
+                                type="submit"
+                                className="bg-green-600 font-bold text-white py-3 px-6 w-fit m-auto rounded-lg ml-3"
+                                onClick={() => {
+                                    document.getElementById('my_modal_5').close();
+                                }}
+                            >
+                                Ajouter
+                            </button>
+                        </div>
+                    </form>
                 </div>
-
-                { secondNameAllowed && (
-                    <input
-                        onChange={handleSecondNameChange}
-                        value={secondName}
-                        type="text"
-                        placeholder="Nom commun autorisé"
-                        className="input input-sm input-bordered w-full"
-                    />
-                ) }
-
-                <input
-                    onChange={(e) => setFamily(e.target.value)}
-                    value={family}
-                    type="text"
-                    placeholder="Famille"
-                    className="input input-sm input-bordered w-full"
-                />
-
-                <input
-                    onChange={(e) => setGenre(e.target.value)}
-                    value={genre}
-                    type="text"
-                    placeholder="Genre"
-                    className="input input-sm input-bordered w-full"
-                />
-
-                <input
-                    onChange={(e) => setSpecies(e.target.value)}
-                    value={species}
-                    type="text"
-                    placeholder="Espèce"
-                    className="input input-sm input-bordered w-full"
-                />
-
-                <input
-                    onChange={(e) => setCultivar(e.target.value)}
-                    value={cultivar}
-                    type="text"
-                    placeholder="Cultivar"
-                    className="input input-sm input-bordered w-full"
-                />
-
-                <select className="select select-sm select-bordered w-full"
-                    onChange={(e) => setGroup(e.target.value)}
-                    value={group}
-                >
-                    <option disabled selected>Groupe</option>
-                    <option>1</option>
-                    <option>2</option>
-                    <option>3</option>
-                    <option>4</option>
-                    <option>5</option>
-                    <option>6</option>
-                </select>
-                {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
-
-                <div className="flex justify-between mt-4">
-                    <button
-                        type="button"
-                        className="bg-red-600 font-bold text-white py-3 px-6 w-fit m-auto rounded-lg"
-                        onClick={() => {
-                            document.getElementById('my_modal_5').close();
-                            resetForm();
-                        }}
-                    >
-                        Annuler
-                    </button>
-                    <button
-                        type="submit"
-                        className="bg-green-600 font-bold text-white py-3 px-6 w-fit m-auto rounded-lg"
-                        onClick={() => {
-                            document.getElementById('my_modal_5').close();
-                        }}
-                    >
-                        Ajouter
-                    </button>
-                </div>
-                </form>
             </div>
-            </div>
+        </div>
     </dialog>
     </>
   );

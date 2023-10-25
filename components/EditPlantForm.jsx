@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
+import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
 export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, imageUrl }) {
   const [newName, setNewName] = useState(name);
@@ -11,6 +12,10 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
   const [newCultivar, setNewCultivar] = useState(cultivar);
   const [newImageUrl, setNewImageUrl] = useState(imageUrl);
   const [newGroup, setNewGroup] = useState(group);
+  const [newPh, setNewPh] = useState("")
+  const [newExposition, setNewExposition] = useState("")
+  const [newHumidite, setNewHumidite] = useState("")
+  const [newCategory, setNewCategory] = useState("")
 
   const router = useRouter();
 
@@ -63,10 +68,10 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
 
   return (
     <>
-    <div className="pt-32 w-[90%] h-screen flex justify-around items-center">
+    <div className="w-[90%] h-screen flex justify-around lg:items-center items-start lg:mt-0 mt-20">
       <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll no-scrollbar">
         {newImageUrl.map((url, index) => (
-          <div key={index} className="h-38 rounded-2xl w-96 mb-4 mx-1 text-white text-opacity-50 flex pl-4 items-center text-8xl" style={{
+          <div key={index} className="h-38 rounded-2xl lg:w-96 w-28 mb-4 mx-1 text-white text-opacity-50 flex pl-4 items-center lg:text-8xl text-7xl" style={{
             backgroundImage: `url(${url})`,
             backgroundPosition: "center",
             backgroundSize: "cover"
@@ -75,14 +80,14 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
         ))}
       </div>
       <div className="w-[500px]">
-        <form onSubmit={handleSubmit} className="flex flex-col gap-3 max-h-128">
+        <form onSubmit={handleSubmit} className="flex flex-col items-center gap-2">
           <input 
               type="file"
               multiple
               onChange={(e) => {
                   handleImageUpload(e);
               }}
-              className="file-input file-input-bordered file-input-success w-full"
+              className="file-input file-input-sm file-input-bordered file-input-success lg:w-full w-60"
           />
           <input type="text" value={newImageUrl} hidden />
 
@@ -91,7 +96,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
               value={newName}
               type="text"
               placeholder="Nom commun"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered lg:w-full w-60"
           />
 
           <input
@@ -99,7 +104,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
               value={newFamily}
               type="text"
               placeholder="Famille"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered lg:w-full w-60"
           />
 
           <input
@@ -107,7 +112,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
               value={newGenre}
               type="text"
               placeholder="Genre"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered lg:w-full w-60"
           />
 
           <input
@@ -115,7 +120,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
               value={newSpecies}
               type="text"
               placeholder="Espèce"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered lg:w-full w-60"
           />
 
           <input
@@ -123,20 +128,69 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
               value={newCultivar}
               type="text"
               placeholder="Cultivar"
-              className="input input-bordered w-full"
+              className="input input-sm input-bordered lg:w-full w-60"
           />
 
-          <select className="select select-bordered w-full"
+          <select className="select select-sm select-bordered lg:w-full w-60"
               onChange={(e) => setNewGroup(e.target.value)}
               value={newGroup}
           >
-              <option disabled selected>Groupe</option>
-              <option>1</option>
-              <option>2</option>
-              <option>3</option>
-              <option>4</option>
-              <option>5</option>
-              <option>6</option>
+            <option disabled selected>Groupe</option>
+            {PLANT_GROUPS.map((groupValue) => (
+                <option key={groupValue} value={groupValue}>
+                    {groupValue}
+                </option>
+            ))}
+          </select>
+
+          <div className="divider">CARACTERISTIQUES</div>
+
+          <select className="select select-sm select-bordered lg:w-full w-60"
+              onChange={(e) => setNewPh(e.target.value)}
+              value={newPh}
+          >
+          <option disabled selected>PH</option>
+          {PLANT_PH.map((value) => (
+              <option key={value} value={value}>
+                  {value}
+              </option>
+          ))}
+          </select>
+
+          <select className="select select-sm select-bordered lg:w-full w-60"
+              onChange={(e) => setNewExposition(e.target.value)}
+              value={newExposition}
+          >
+          <option disabled selected>Exposition</option>
+          {PLANT_EXPOSITION.map((value) => (
+              <option key={value} value={value}>
+                  {value}
+              </option>
+          ))}
+          </select>
+
+          <select className="select select-sm select-bordered lg:w-full w-60"
+              onChange={(e) => setNewHumidite(e.target.value)}
+              value={newHumidite}
+          >
+          <option disabled selected>Humidité</option>
+          {PLANT_HUMIDITE.map((value) => (
+              <option key={value} value={value}>
+                  {value}
+              </option>
+          ))}
+          </select>
+
+          <select className="select select-sm select-bordered lg:w-full w-60"
+              onChange={(e) => setNewCategory(e.target.value)}
+              value={newCategory}
+          >
+          <option disabled selected>Catégorie</option>
+          {PLANT_CATEGORY.map((value) => (
+              <option key={value} value={value}>
+                  {value}
+              </option>
+          ))}
           </select>
 
           <button className="btn mt-10 w-40 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">

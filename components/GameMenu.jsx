@@ -14,7 +14,6 @@ export default function GameMenu() {
     const [selectedLevel, setSelectedLevel] = useState(levels[0]);
     const [selectedItems, setSelectedItems] = useState([]);
     const [selectAll, setSelectAll] = useState(false);
-    const levelNumbers = ['1', '2', '3', '4']
 
     const getPlants = async () => {
         try {
@@ -32,23 +31,24 @@ export default function GameMenu() {
         } catch (error) {
           console.log("Error loading plants: ", error);
         }
-      };
+    };
       
-        useEffect(() => {
-            async function fetchData() {
+    useEffect(() => {
+        async function fetchData() {
             try {
                 const result = await getPlants();
                 setPlants(result);
-                const groups = [...new Set(data.map(item => item.group))];
-                setGroups(groups)
-                console.log(groups)
+
+                const uniqueGroupValues = Array.from(new Set(result.plants.map(item => item.group)))
+                               .sort((a, b) => a.localeCompare(b));
+                setGroups(uniqueGroupValues);
             } catch (error) {
                 console.error("Error fetching plants:", error);
             }
-            }
-            fetchData()
-        }, []);
-        console.log(plants)
+        }
+        fetchData()
+    }, []);
+
 
     const [activeButtons, setActiveButtons] = useState({
         "Nom commun": false,
@@ -57,8 +57,6 @@ export default function GameMenu() {
         "Espèce": false,
         "Cultivar": false,
     });
-
-    console.log(activeButtons)
 
     const toggleButtonActive = (label) => {
         setActiveButtons(prevState => ({
@@ -240,7 +238,7 @@ export default function GameMenu() {
                             </div>
 
                             <div className='pt-1'>
-                                {levelNumbers.map((item) => (
+                                {groups.map((item) => (
                                     <li key={item}>
                                         <label>
                                         <input 

@@ -44,10 +44,10 @@ export default function PlantsList() {
     setFilteredPlants(result.plants || []);
   };
 
-  // const handleSearch = (query) => {
-  //   const searchResult = plants.filter(plant => plant.name[0].toLowerCase().includes(query.toLowerCase()));
-  //   setFilteredPlants(searchResult);
-  // };
+  const handleSearch = (query) => {
+    const searchResult = plants.filter(plant => plant.name[0].toLowerCase().includes(query.toLowerCase()));
+    setFilteredPlants(searchResult);
+  };
 
   useEffect(() => {
     loadPlants();
@@ -66,7 +66,7 @@ export default function PlantsList() {
     <>
       <div className="mt-16 lg:mt-24 flex flex-wrap justify-center max-w-[90%] m-auto">
         <div className="flex justify-between items-center w-[85%] lg:w-auto fixed z-10 top-18 lg:top-16 lg:right-2 bg-white rounded-full">
-          <Search plants={plants}/>
+          <Search plants={plants} onSearch={handleSearch} />
           {isAdmin &&
           <>
             <HiPlusCircle
@@ -78,12 +78,12 @@ export default function PlantsList() {
           </>
           }
         </div>
-      {plants.length === 0 ? (
+      {filteredPlants.length === 0 ? (
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
           </div>
         ) : (
-        plants.map((t) => (
+          filteredPlants.map((t) => (
           <>
           <div
             key={t._id}

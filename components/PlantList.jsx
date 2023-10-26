@@ -65,7 +65,7 @@ export default function PlantsList() {
   return (
     <>
       <div className="mt-16 lg:mt-24 flex flex-wrap justify-center max-w-[90%] m-auto">
-        <div className="flex justify-between items-center w-[85%] lg:w-auto fixed z-10 top-18 lg:top-16 lg:right-2 bg-white rounded-full">
+        <div className="flex justify-between items-center lg:w-fit w-[85%] fixed z-10 top-18 lg:top-16 lg:right-2 bg-white rounded-full">
           <Search plants={plants} onSearch={handleSearch} />
           {isAdmin &&
           <>

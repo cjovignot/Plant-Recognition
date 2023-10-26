@@ -43,6 +43,10 @@ export default function AddPlant({ onPlantAdded }) {
         cultivar: "Cultivar",
         imageUrl: "Image",
         group: "Groupe",
+        ph: "PH",
+        exposition: "Exposition",
+        humidite: "Humidité",
+        category: "Catégorie"
     };
 
     const emptyFields = Object.keys(fieldNames).filter(key => !eval(key)); // Here, `eval(key)` will get the value of the state variable named by the `key`
@@ -62,14 +66,12 @@ export default function AddPlant({ onPlantAdded }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, imageUrl }),
+        body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }),
     });
-    console.log("body:", res.body)
-
 
     if (res.ok) {
+        if (onPlantAdded) onPlantAdded();
         resetForm();
-        if (onPlantAdded) onPlantAdded();  // Call the function to re-fetch plants
       } else {
         throw new Error("Failed to create a plant");
       }
@@ -110,6 +112,10 @@ export default function AddPlant({ onPlantAdded }) {
     setSpecies("");
     setCultivar("");
     setGroup("Groupe");
+    setPh("");
+    setExposition("");
+    setHumidite("");
+    setCategory("");
     setImageUrl([]);
     setErrorMessage("");
 };
@@ -225,12 +231,12 @@ export default function AddPlant({ onPlantAdded }) {
                             onChange={(e) => setPh(e.target.value)}
                             value={ph}
                         >
-                        <option disabled selected>PH</option>
-                        {PLANT_PH.map((value) => (
-                            <option key={value} value={value}>
-                                {value}
-                            </option>
-                        ))}
+                            <option disabled selected>PH</option>
+                            {PLANT_PH.map((value) => (
+                                <option key={value} value={value}>
+                                    {value}
+                                </option>
+                            ))}
                         </select>
 
                         <select className="select select-sm select-bordered lg:w-full w-60"

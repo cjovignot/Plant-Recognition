@@ -3,7 +3,6 @@ import EditPlantForm from "@/components/EditPlantForm";
 
 const getPlantById = async (id) => {
   try {
-    // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/${id}`, {
     const res = await fetch(`/api/plants/${id}`, {
       cache: "no-store",
     });
@@ -21,11 +20,23 @@ const getPlantById = async (id) => {
 export default async function EditPlant({params}) {
   const { id } = params;
   const { plant } = await getPlantById(id);
-  const { name, family, genre, species, cultivar, group, imageUrl } = plant;
+  const { name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl } = plant;
 
   return (
     <div className="flex justify-center">
-      <EditPlantForm id={id} name={name} family={family} genre={genre} species={species} cultivar={cultivar} group={group} imageUrl={imageUrl} />
+      <EditPlantForm
+        id={id}
+        name={name}
+        family={family}
+        genre={genre}
+        species={species}
+        cultivar={cultivar}
+        group={group}
+        ph={ph}
+        exposition={exposition}
+        humidite={humidite}
+        category={category}
+        imageUrl={imageUrl} />
     </div>
   );
 }

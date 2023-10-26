@@ -65,9 +65,6 @@ export default function Navbar() {
                 <li onClick={closeDropdown}>
                   {isLoggedIn &&
                   <>
-                    {isAdmin &&
-                      <button className="btn btn-ghost btn-sm flex justify-start text-[11px] items-center" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={20} />Ajouter une plante</button>
-                    }
                     <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/settings"><PiPlantDuotone size={20}/>Végétaux</Link>
                   </>
                   }
@@ -139,9 +136,6 @@ export default function Navbar() {
           </div>
         </div>
       </div>
-
-
-      <AddPlant />
     </>
   );
 }

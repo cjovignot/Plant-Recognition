@@ -57,6 +57,15 @@ export default function PlantsList() {
   return (
     <>
       <div className="mt-16 lg:mt-24 flex flex-wrap justify-center max-w-[90%] m-auto">
+      {isAdmin &&
+        <button 
+            className="z-10 btn rounded-full w-auto w-10 h-10 fixed lg:right-4 lg:top-16 right-2 btn-sm bg-emerald-600 flex justify-start group" 
+            onClick={()=>document.getElementById('my_modal_5').showModal()}
+        >
+            <HiOutlinePlus size={15} style={{ color: 'white' }} />
+            <span className="hidden group-hover:inline-block text-[11px]">Ajouter</span>
+        </button>
+      }
       {plants.length === 0 ? (
           <div className="flex w-full h-[80vh] justify-center items-center">
             <span className="loading loading-spinner text-success w-16 h-16"></span>
@@ -94,13 +103,20 @@ export default function PlantsList() {
             <div className="card-body p-4 pb-0">
               <div className="flex items-center lg:text-sm"><FaLayerGroup style={{ marginRight: '8px', color: 'green' }}/><b>{t.group}</b></div>
               <h2 className="font-bold text-xl lg:text-sm">{t.name[0]}</h2>
-              <div className="lg:text-sm">
-                {t.family}<br />
-                <i>{t.genre}</i><br />
-                <i>{t.species}</i><br />
-                {t.cultivar}<br />
+              <div className="flex lg:flex-col justify-between">
+                <div className="lg:text-sm">
+                  {t.family}<br />
+                  <i>{t.genre}</i><br />
+                  <i>{t.species}</i><br />
+                  {t.cultivar}<br />
+                </div>
+                <div className="lg:mt-4 text-right">
+                  <div className="badge bg-[#fbbd23] text-black">{t.exposition}</div><br />
+                  <div className="badge bg-[#3abff8] text-black">{t.humidite}</div><br />
+                  <div className="badge bg-[#594839] text-white">{t.ph}</div><br />
+                  <div className="badge bg-[#059669] text-white">{t.category}</div><br />
+                </div>
               </div>
-              <div className="lg:text-sm"></div>
             </div>
 
             {isAdmin &&
@@ -116,14 +132,7 @@ export default function PlantsList() {
           ))
         )}
       <div className="flex w-80 lg:w-96 m-4 justify-center items-center h-inherit">
-        
-        {isAdmin &&
-          <>
-            {/* Open the modal using document.getElementById('ID').showModal() method */}
-            <button className="btn btn-ghost w-36 h-36 normal-case text-xl" onClick={()=>document.getElementById('my_modal_5').showModal()}><HiOutlinePlus size={60}/></button>
-          </>
-        }
-        <AddPlant onPlantAdded={loadPlants}/>
+        <AddPlant onPlantAdded={loadPlants} />
       </div>
       </div>
     </>

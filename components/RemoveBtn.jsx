@@ -66,7 +66,7 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
       </button>
 
       {showModal && (
-        <dialog open className="modal modal-bottom sm:modal-middle">
+        <dialog open className="modal modal-middle sm:modal-middle">
           <div className="hero-overlay bg-opacity-60"></div>
           <div className="modal-box">
       

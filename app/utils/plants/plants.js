@@ -1,6 +1,7 @@
 export const PLANT_GROUPS = [
     '1',
-    '2'
+    '2',
+    '3'
 ]
 
 export const PLANT_PH = [

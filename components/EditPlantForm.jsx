@@ -4,7 +4,7 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
-export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, imageUrl }) {
+export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }) {
   const [newName, setNewName] = useState(name);
   const [newFamily, setNewFamily] = useState(family);
   const [newGenre, setNewGenre] = useState(genre);
@@ -12,10 +12,10 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
   const [newCultivar, setNewCultivar] = useState(cultivar);
   const [newImageUrl, setNewImageUrl] = useState(imageUrl);
   const [newGroup, setNewGroup] = useState(group);
-  const [newPh, setNewPh] = useState("")
-  const [newExposition, setNewExposition] = useState("")
-  const [newHumidite, setNewHumidite] = useState("")
-  const [newCategory, setNewCategory] = useState("")
+  const [newPh, setNewPh] = useState(ph)
+  const [newExposition, setNewExposition] = useState(exposition)
+  const [newHumidite, setNewHumidite] = useState(humidite)
+  const [newCategory, setNewCategory] = useState(category)
 
   const router = useRouter();
 
@@ -29,13 +29,12 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newImageUrl }),
+        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newPh, newExposition, newHumidite, newCategory, newImageUrl }),
       });
 
       if (!res.ok) {
         throw new Error("Failed to update topic");
       }
-
       router.refresh();
       router.push("/settings");
     } catch (error) {

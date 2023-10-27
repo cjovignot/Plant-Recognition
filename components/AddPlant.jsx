@@ -13,10 +13,10 @@ export default function AddPlant({ onPlantAdded }) {
   const [species, setSpecies] = useState("")
   const [cultivar, setCultivar] = useState("")
   const [group, setGroup] = useState("Groupe")
-  const [ph, setPh] = useState("")
-  const [exposition, setExposition] = useState("")
-  const [humidite, setHumidite] = useState("")
-  const [category, setCategory] = useState("")
+//   const [ph, setPh] = useState("")
+//   const [exposition, setExposition] = useState("")
+//   const [humidite, setHumidite] = useState("")
+//   const [category, setCategory] = useState("")
   const [imageUrl, setImageUrl] = useState([])
   const [isUploading, setIsUploading] = useState(false)
   const [errorMessage, setErrorMessage] = useState("");
@@ -43,10 +43,10 @@ export default function AddPlant({ onPlantAdded }) {
         cultivar: "Cultivar",
         imageUrl: "Image",
         group: "Groupe",
-        ph: "PH",
-        exposition: "Exposition",
-        humidite: "Humidité",
-        category: "Catégorie"
+        // ph: "PH",
+        // exposition: "Exposition",
+        // humidite: "Humidité",
+        // category: "Catégorie"
     };
 
     const emptyFields = Object.keys(fieldNames).filter(key => !eval(key)); // Here, `eval(key)` will get the value of the state variable named by the `key`
@@ -66,7 +66,8 @@ export default function AddPlant({ onPlantAdded }) {
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }),
+        // body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }),
+        body: JSON.stringify({ name: combinedNames, family, genre, species, cultivar, group, imageUrl }),
     });
 
     if (res.ok) {
@@ -112,10 +113,10 @@ export default function AddPlant({ onPlantAdded }) {
     setSpecies("");
     setCultivar("");
     setGroup("Groupe");
-    setPh("");
-    setExposition("");
-    setHumidite("");
-    setCategory("");
+    // setPh("");
+    // setExposition("");
+    // setHumidite("");
+    // setCategory("");
     setImageUrl([]);
     setErrorMessage("");
 };
@@ -224,7 +225,7 @@ export default function AddPlant({ onPlantAdded }) {
                             ))}
                         </select>
 
-                        <div className="divider">CARACTERISTIQUES</div>
+                        {/* <div className="divider">CARACTERISTIQUES</div>
                         <p className='font-bold text-red-600 text-center -mt-3 mb-2'>🚧 En cours de développement 🚧</p>
 
                         <select className="select select-sm select-bordered lg:w-full w-60"
@@ -273,7 +274,7 @@ export default function AddPlant({ onPlantAdded }) {
                                 {value}
                             </option>
                         ))}
-                        </select>
+                        </select> */}
                         {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
 
                         <div className="flex my-4 pb-8 m-auto">

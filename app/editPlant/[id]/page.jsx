@@ -20,7 +20,8 @@ const getPlantById = async (id) => {
 export default async function EditPlant({params}) {
   const { id } = params;
   const { plant } = await getPlantById(id);
-  const { name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl } = plant;
+  // const { name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl } = plant;
+  const { name, family, genre, species, cultivar, group, imageUrl } = plant;
 
   return (
     <div className="flex justify-center">
@@ -32,10 +33,10 @@ export default async function EditPlant({params}) {
         species={species}
         cultivar={cultivar}
         group={group}
-        ph={ph}
-        exposition={exposition}
-        humidite={humidite}
-        category={category}
+        // ph={ph}
+        // exposition={exposition}
+        // humidite={humidite}
+        // category={category}
         imageUrl={imageUrl} />
     </div>
   );

@@ -11,10 +11,10 @@ export async function PUT(request, { params }) {
     newSpecies: species,
     newCultivar: cultivar,
     newGroup: group,
-    newPh: ph,
-    newExposition: exposition,
-    newHumidite: humidite,
-    newCategory: category,
+    // newPh: ph,
+    // newExposition: exposition,
+    // newHumidite: humidite,
+    // newCategory: category,
     newImageUrl: imageUrl
   } = await request.json();
   
@@ -27,10 +27,10 @@ export async function PUT(request, { params }) {
       species,
       cultivar,
       group,
-      ph,
-      exposition,
-      humidite,
-      category,
+      // ph,
+      // exposition,
+      // humidite,
+      // category,
       imageUrl
     }
   );

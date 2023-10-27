@@ -8,10 +8,10 @@ const plantSchema = new Schema(
     cultivar: String, // cultivar
     picture: String,
     group: String, // Groupe d'apprentissage
-    ph: String,
-    exposition: String,
-    humidite: String,
-    category: String,
+    // ph: String,
+    // exposition: String,
+    // humidite: String,
+    // category: String,
     imageUrl: [String]
   }
 );

@@ -4,7 +4,8 @@ import { useState, useEffect } from "react";
 import { useRouter } from "next/navigation";
 import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
-export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }) {
+// export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }) {
+  export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, imageUrl }) {
   const [newName, setNewName] = useState(name);
   const [newFamily, setNewFamily] = useState(family);
   const [newGenre, setNewGenre] = useState(genre);
@@ -12,10 +13,10 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
   const [newCultivar, setNewCultivar] = useState(cultivar);
   const [newImageUrl, setNewImageUrl] = useState(imageUrl);
   const [newGroup, setNewGroup] = useState(group);
-  const [newPh, setNewPh] = useState(ph)
-  const [newExposition, setNewExposition] = useState(exposition)
-  const [newHumidite, setNewHumidite] = useState(humidite)
-  const [newCategory, setNewCategory] = useState(category)
+  // const [newPh, setNewPh] = useState(ph)
+  // const [newExposition, setNewExposition] = useState(exposition)
+  // const [newHumidite, setNewHumidite] = useState(humidite)
+  // const [newCategory, setNewCategory] = useState(category)
 
   const router = useRouter();
 
@@ -29,7 +30,8 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
         headers: {
           "Content-type": "application/json",
         },
-        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newPh, newExposition, newHumidite, newCategory, newImageUrl }),
+        // body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newPh, newExposition, newHumidite, newCategory, newImageUrl }),
+        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newImageUrl }),
       });
 
       if (!res.ok) {
@@ -142,7 +144,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
             ))}
           </select>
 
-          <div className="divider">CARACTERISTIQUES</div>
+          {/* <div className="divider">CARACTERISTIQUES</div>
           <p className='font-bold text-red-600 text-center -mt-3 mb-2'>🚧 En cours de développement 🚧</p>
 
           <select className="select select-sm select-bordered lg:w-full w-60"
@@ -191,7 +193,7 @@ export default function EditPlantForm({ id, name, family, genre, species, cultiv
                   {value}
               </option>
           ))}
-          </select>
+          </select> */}
 
           <button className="btn mt-10 w-40 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">
             Sauvegarder

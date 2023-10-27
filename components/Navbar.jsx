@@ -49,7 +49,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-emerald-600	top-0 text-white fixed z-10 !min-h-[2rem]">
+      <div className="navbar bg-emerald-600	top-0 text-white fixed z-20 !min-h-[2rem]">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0}
@@ -60,7 +60,7 @@ export default function Navbar() {
             {dropdownOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 text-black"
               >
                 <li onClick={closeDropdown}>
                   {isLoggedIn &&
@@ -101,7 +101,7 @@ export default function Navbar() {
             )
             }
             <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
-            <ul tabIndex={0} className="dropdown-content z-[1] lg:mt-30 mt-[108px] menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
+            <ul tabIndex={0} className="dropdown-content mt-36 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
               {!isLoggedIn ? (
                 <>
                 <li>

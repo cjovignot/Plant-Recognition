@@ -3,9 +3,11 @@ import Plant from "@/models/plant";
 import { NextResponse } from "next/server";
 
 export async function POST(request) {
-  const { name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl } = await request.json();
+  // const { name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl } = await request.json();
+  const { name, family, genre, species, cultivar, group, imageUrl } = await request.json();
   await connectMongoDB();
-  await Plant.create({ name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl });
+  // await Plant.create({ name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl });
+  await Plant.create({ name, family, genre, species, cultivar, group, imageUrl });
   return NextResponse.json({ message: "Plant Created" }, { status: 201 });
 }
 

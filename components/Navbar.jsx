@@ -7,6 +7,7 @@ import SignUp from '@/components/SignUp';
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
 import { PiPlantDuotone } from 'react-icons/pi';
+import { MdOutlineAdminPanelSettings } from 'react-icons/md';
 import { FcAbout } from 'react-icons/fc';
 import { LuSettings } from 'react-icons/lu';
 import { HiOutlinePlus } from 'react-icons/hi';
@@ -126,11 +127,20 @@ export default function Navbar() {
                 </>
               )}
               {isLoggedIn &&
+              <>
                 <li>
                   <button>
-                    <FcStatistics size={20} disabled/>🚧 Statistiques 🚧
+                    <FcStatistics size={20}/>🚧 Statistiques 🚧
                   </button>
                 </li>
+                {isAdmin &&
+                  <li>
+                    <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/adminpage">
+                      <MdOutlineAdminPanelSettings size={20} />🚧 Administration
+                    </Link>
+                  </li>
+                }
+              </>
               }
             </ul>
           </div>

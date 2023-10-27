@@ -19,7 +19,7 @@ export async function POST(request) {
   const hashedPassword = await bcrypt.hash(password, saltRounds);
 
   // Save the hashed password
-  await User.create({ pseudo, password: hashedPassword, role: 'user' });
+  await User.create({ pseudo, password: hashedPassword, role: 'user', inscription: new Date() });
 
   return NextResponse.json({ message: "Compte créé avec succès !" }, { status: 201 });
 }

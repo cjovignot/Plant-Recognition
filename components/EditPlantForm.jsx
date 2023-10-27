@@ -35,7 +35,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
       });
 
       if (!res.ok) {
-        throw new Error("Failed to update topic");
+        throw new Error("Failed to update plant");
       }
       router.refresh();
       router.push("/settings");

@@ -13,3 +13,10 @@ function formatDate(isoString) {
 }
 
 export default formatDate;
+
+
+export const USER_ROLES = [
+    'user',
+    'admin',
+    'sysadmin'
+]

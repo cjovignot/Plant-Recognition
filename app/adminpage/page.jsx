@@ -2,6 +2,7 @@
 
 import { useRouter } from "next/navigation";
 import Users from '@/components/Admin/components/UsersTable';
+import { toast } from 'react-toastify';
 import { useEffect, useState } from 'react';
 
 const getUsers = async () => {
@@ -21,7 +22,8 @@ const getUsers = async () => {
   }
 };
 
-const updateUser = async (id, newRole) => {
+const updateRole = async (id, user, newRole) => {
+  console.log(id, newRole)
   try {
       const res = await fetch(`/api/users/${id}`, {
           method: "PUT",
@@ -30,11 +32,11 @@ const updateUser = async (id, newRole) => {
           },
           body: JSON.stringify({ role: newRole }),
       });
-
+      toast.success(`${user} est désormais ${newRole} !`)
       if (!res.ok) {
-          throw new Error("Failed to update user");
+        toast.error(`Echec de la mise à niveau..`)
+        throw new Error("Failed to update user");
       }
-      loadUsers();
   } catch (error) {
       console.log(error);
   }
@@ -67,16 +69,10 @@ export default function UsersTable() {
     }
   }, []);
 
-  const loadUsers = async () => {
-    const result = await getUsers();
-    setUsers(result.users || []);
-    setFilteredUsers(result.users || []);
-  };
-
-  const handleSearch = (query) => {
-    const searchResult = users.filter(user => user.pseudo.toLowerCase().includes(query.toLowerCase()));
-    setFilteredUsers(searchResult);
-  };
+  // const handleSearch = (query) => {
+  //   const searchResult = users.filter(user => user.pseudo.toLowerCase().includes(query.toLowerCase()));
+  //   setFilteredUsers(searchResult);
+  // };
 
   useEffect(() => {
     loadUsers();
@@ -90,19 +86,19 @@ export default function UsersTable() {
 
     fetchData();
   }, []);
-  
 
   
-  const handleRoleChange = async (userId, isChecked) => {
-    const newRole = isChecked ? 'admin' : 'user';
-    // You can call updateUser here, but make sure it accepts the necessary parameters
-    updateUser(userId, newRole);
-  }
+  // Load users from API and update state
+  const loadUsers = async () => {
+    const result = await getUsers();
+    setUsers(result.users || []);
+    // setFilteredPlants(result.plants || []);
+  };
 
   return (
     <div className="mx-8">
       {role === 'admin' ? (
-        <Users data={users} onRoleChange={handleRoleChange}/>
+        <Users data={users} updateRole={updateRole} onUserDeleted={loadUsers}/>
       ) : (
         <div className="flex w-full h-[80vh] justify-center items-center">
           <span className="loading loading-spinner text-success w-16 h-16"></span>

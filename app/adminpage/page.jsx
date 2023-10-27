@@ -42,7 +42,6 @@ const updateUser = async (id, newRole) => {
 
 
 export default function UsersTable() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false)
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
 
@@ -72,15 +71,6 @@ export default function UsersTable() {
     fetchData();
   }, []);
   
-  useEffect(() => {
-    // Check localStorage inside useEffect
-    const client = localStorage.getItem('client');
-    setIsLoggedIn(!!client); // Convert to boolean and set state
-
-    if (!client) {
-      router.push("/");
-    }
-  }, []);
 
   
   const handleRoleChange = async (userId, isChecked) => {

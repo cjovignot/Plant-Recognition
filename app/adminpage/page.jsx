@@ -44,8 +44,28 @@ const updateUser = async (id, newRole) => {
 export default function UsersTable() {
   const [users, setUsers] = useState([]);
   const [filteredUsers, setFilteredUsers] = useState([]);
+  const [isLoggedIn, setIsLoggedIn] = useState(false)
+  const [role, setRole] = useState('')
 
   const router = useRouter();
+
+  useEffect(() => {
+    // Check localStorage inside useEffect
+    const client = localStorage.getItem('client');
+    setIsLoggedIn(!!client); // Convert to boolean and set state
+
+    if (client) {
+      const role = localStorage.getItem('role');
+      setRole(role)
+      if (role !== 'admin') {
+        router.push("/");
+      }
+    }
+
+    if (!client) {
+      router.push("/");
+    }
+  }, []);
 
   const loadUsers = async () => {
     const result = await getUsers();
@@ -81,7 +101,13 @@ export default function UsersTable() {
 
   return (
     <div className="mx-8">
+      {role === 'admin' ? (
         <Users data={users} onRoleChange={handleRoleChange}/>
+      ) : (
+        <div className="flex w-full h-[80vh] justify-center items-center">
+          <span className="loading loading-spinner text-success w-16 h-16"></span>
+        </div>
+      )}
     </div>
   );
 }

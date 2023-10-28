@@ -2,6 +2,7 @@
 import React, { useState } from "react";
 import { useSpring, animated } from '@react-spring/web'
 import { HiOutlineTrash } from "react-icons/hi";
+import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
 
 export default function RemoveBtn({ id , onPlantDeleted }) {
@@ -34,9 +35,11 @@ export default function RemoveBtn({ id , onPlantDeleted }) {
     });
 
     if (res.ok) {
+      toast.success("Plante supprimée !")
       if (onPlantDeleted) onPlantDeleted();
       setShowModal(false);
     } else {
+      toast.error("Echec de la suppression..")
       throw new Error("Failed to delete the plant");
     }
   };

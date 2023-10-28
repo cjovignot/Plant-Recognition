@@ -5,6 +5,7 @@ import RemoveBtn from "./RemoveBtn";
 import { HiPencilAlt, HiPlusCircle } from "react-icons/hi";
 import { FaLayerGroup } from 'react-icons/fa';
 import { useState, useEffect } from 'react';
+import { toast } from 'react-toastify';
 import Search from '@/components/Filters/Search'
 
 const getPlants = async () => {
@@ -20,6 +21,7 @@ const getPlants = async () => {
 
     return res.json();
   } catch (error) {
+    toast.error("Problème de récupération... Ce n'est pas vous, c'est nous !")
     console.log("Error loading plants: ", error);
   }
 };

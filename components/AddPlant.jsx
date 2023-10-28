@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
 import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
@@ -71,9 +72,11 @@ export default function AddPlant({ onPlantAdded }) {
     });
 
     if (res.ok) {
+        toast.success('Plante ajoutée !')
         if (onPlantAdded) onPlantAdded();
         resetForm();
-      } else {
+    } else {
+        toast.error('Echec de l&apos;ajout')
         throw new Error("Failed to create a plant");
       }
     } catch (error) {

@@ -5,8 +5,8 @@ import { NextResponse } from "next/server";
 export async function PUT(request, { params }) {
   const { id } = params;
   const {
-    newTitle: title,
-    newDescription: description,
+    newTitle: name,
+    newDescription: family,
     newGenre: genre,
     newSpecies: species,
     newCultivar: cultivar,
@@ -21,8 +21,8 @@ export async function PUT(request, { params }) {
   await connectMongoDB();
   await Plant.findByIdAndUpdate(
     id, {
-      title,
-      description,
+      name,
+      family,
       genre,
       species,
       cultivar,

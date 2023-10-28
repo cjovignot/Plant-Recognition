@@ -1,12 +1,16 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { toast } from 'react-toastify';
 import { useRouter } from "next/navigation";
 import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGORY } from '@/app/utils/plants/plants'
 
 // export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, ph, exposition, humidite, category, imageUrl }) {
   export default function EditPlantForm({ id, name, family, genre, species, cultivar, group, imageUrl }) {
-  const [newName, setNewName] = useState(name);
+  const [newName, setNewName] = useState(name[0]);
+  const [secondNewNameAllowed, setSecondNewNameAllowed] = useState(name[1] && name[1] !== "");
+  
+  const [secondNewName, setSecondNewName] = useState(name[1] || "");
   const [newFamily, setNewFamily] = useState(family);
   const [newGenre, setNewGenre] = useState(genre);
   const [newSpecies, setNewSpecies] = useState(species);
@@ -20,8 +24,17 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
 
   const router = useRouter();
 
+  const handleCheckboxChange = (e) => {
+    setSecondNewNameAllowed(e.target.checked);
+  }
+  const handleSecondNewNameChange = (e) => {
+    setSecondNewName(e.target.value);
+  }
+
   const handleSubmit = async (e) => {
     e.preventDefault();
+
+    const combinedNames = [newName, secondNewName];
 
     try {
       // const res = await fetch(`${process.env.NEXT_PUBLIC_ROOTPATH}/api/plants/${id}`, {
@@ -31,12 +44,14 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
           "Content-type": "application/json",
         },
         // body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newPh, newExposition, newHumidite, newCategory, newImageUrl }),
-        body: JSON.stringify({ newName, newFamily, newGenre, newSpecies, newCultivar, newGroup, newImageUrl }),
+        body: JSON.stringify({ newTitle: combinedNames, newDescription: newFamily, newGenre, newSpecies, newCultivar, newGroup, newImageUrl }),
       });
 
       if (!res.ok) {
+        toast.error("Echec de la mise à jour..")
         throw new Error("Failed to update plant");
       }
+      toast.success(`${newName} mise à jour !`)
       router.refresh();
       router.push("/settings");
     } catch (error) {
@@ -99,6 +114,26 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               placeholder="Nom commun"
               className="input input-sm input-bordered lg:w-full w-60"
           />
+
+          <label className="self-start label cursor-pointer">
+              <input 
+                type="checkbox" 
+                className="checkbox" 
+                checked={secondNewNameAllowed}
+                onChange={handleCheckboxChange}
+              />
+              <span className="label-text text-slate-400 ml-2 text-start">Nom commun : Option 2</span> 
+          </label>
+
+          { secondNewNameAllowed && (
+              <input
+                  onChange={handleSecondNewNameChange}
+                  value={secondNewName}
+                  type="text"
+                  placeholder="Nom commun autorisé"
+                  className="input input-sm input-bordered lg:w-full w-60"
+              />
+          ) }
 
           <input
               onChange={(e) => setNewFamily(e.target.value)}

@@ -30,7 +30,7 @@ export default function Navbar() {
     setPseudo(client?.substring(0, 1).toUpperCase())
     const role = localStorage.getItem('role');
 
-    if(role === 'admin') {
+    if(role === 'admin' || role === 'sysadmin') {
       setIsAdmin(true); // Convert to boolean and set state
     }
     setIsLoggedIn(!!client); // Convert to boolean and set state

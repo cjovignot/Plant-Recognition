@@ -1,6 +1,7 @@
 "use client"
 import React, { useEffect, useState } from 'react';
 import formatDate, { USER_ROLES } from '../../../app/utils/users/users';
+import { HiOutlineTrash } from "react-icons/hi";
 import DeleteUser from '@/components/DeleteUser';
 
 export default function Table(data, {onUserDeleted}) {
@@ -9,6 +10,22 @@ export default function Table(data, {onUserDeleted}) {
     const [gamesDisplayed, setGamesDisplayed] = useState(false)
     const [avgScoreDisplayed, setAvgScoreDisplayed] = useState(false)
     const [newRole, setNewRole] = useState('');
+    const [selectedUserId, setSelectedUserId] = useState(null);
+    const [showModal, setShowModal] = useState(false);
+  
+    const handleConfirm = async () => {
+        const res = await fetch(`/api/users?id=${selectedUserId}`, {
+        method: "DELETE",
+      });
+  
+      if (res.ok) {
+        if (onUserDeleted) onUserDeleted();
+        setShowModal(false);
+        setSelectedUserId(null);
+      } else {
+        throw new Error("Failed to delete the user");
+      }
+    };
 
     useEffect(() => {
         setUsers(data.data)
@@ -86,11 +103,33 @@ export default function Table(data, {onUserDeleted}) {
                                 </td>
                                 <td className='flex text-[10px]'>
                                     <button className='btn btn-sm btn-ghost'>📧</button>
-                                    <DeleteUser id={user._id} onUserDeleted={onUserDeleted}/>
+                                    
+                                    <button 
+                                        onClick={() => {
+                                            setSelectedUserId(user._id);
+                                            setShowModal(true);
+                                        }}
+                                        className='btn btn-sm btn-ghost text-red-400'
+                                    >
+                                        <HiOutlineTrash size={18} />
+                                    </button>
+
                                 </td>
                             </tr>
                         ))
-                    )}
+                        )}
+                        {showModal && (
+                            <dialog open className="modal modal-middle sm:modal-middle">
+                            <div className="hero-overlay bg-opacity-60"></div>
+                            <div className="modal-box">
+                                <h3 className="font-bold text-lg text-center">Confirmer la suppression ?</h3>
+                                <div className="modal-action flex justify-between">
+                                <button onClick={() => setShowModal(false)} className="bg-red-600 font-bold text-white py-3 px-6 rounded-lg">Annuler</button>
+                                <button onClick={handleConfirm} className="bg-green-600 font-bold text-white py-3 px-6 rounded-lg">Confirmer</button>
+                                </div>
+                            </div>
+                            </dialog>
+                        )}
                 </tbody>
             </table>
         </div>

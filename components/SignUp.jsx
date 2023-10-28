@@ -43,6 +43,7 @@ export default function SignUp() {
 
       if (res.ok) {
           router.push("/");
+          toast.success('Inscription réussie !')
           resetForm();
       } else {
           toast.error(data.message || "Failed to create a user");

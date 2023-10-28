@@ -59,7 +59,7 @@ export default function UsersTable() {
     if (client) {
       const role = localStorage.getItem('role');
       setRole(role)
-      if (role !== 'admin') {
+      if (role !== 'admin' || role !== 'sysadmin') {
         router.push("/");
       }
     }
@@ -97,8 +97,8 @@ export default function UsersTable() {
 
   return (
     <div className="mx-8">
-      {role === 'admin' ? (
-        <Users data={users} updateRole={updateRole} onUserDeleted={loadUsers}/>
+      {role === 'admin' || role === 'sysadmin' ? (
+        <Users data={users} updateRole={updateRole} onUserDeleted={loadUsers()}/>
       ) : (
         <div className="flex w-full h-[80vh] justify-center items-center">
           <span className="loading loading-spinner text-success w-16 h-16"></span>

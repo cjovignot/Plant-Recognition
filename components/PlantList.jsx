@@ -32,7 +32,7 @@ export default function PlantsList() {
   useEffect(() => {
     const role = localStorage.getItem('role');
     
-    if(role === 'admin') {
+    if(role === 'admin' || role === 'sysadmin') {
       setIsAdmin(true); // Convert to boolean and set state
     }
   })

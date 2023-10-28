@@ -59,7 +59,7 @@ export default function UsersTable() {
     if (client) {
       const role = localStorage.getItem('role');
       setRole(role)
-      if (role !== 'admin' || role !== 'sysadmin') {
+      if (role !== 'admin' && role !== 'sysadmin') {
         router.push("/");
       }
     }

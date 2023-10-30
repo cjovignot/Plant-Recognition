@@ -61,7 +61,7 @@ export default function Table(data, {onUserDeleted}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.data.lenght === 0 ? (
+                    {data.data.length === 0 ? (
                         // This is the conditional rendering for the spinner
                         <tr>
                             <td colSpan="6" className="text-center">

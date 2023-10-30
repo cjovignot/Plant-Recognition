@@ -15,7 +15,7 @@ export default function Search({ onSearch }) {
           value={query}
           onChange={e => setQuery(e.target.value)}
           type="search"
-          placeholder="Type here"
+          placeholder="Rechercher"
           className="input input-bordered w-full input-sm lg:w-[200px] text-[16px] rounded-full dark:text-white"
         />
     </>

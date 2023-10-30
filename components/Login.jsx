@@ -72,7 +72,7 @@ export default function Login({ onUserLogin }) {
     <dialog id="my_modal_login" className="modal modal-middle  lg:modal-middle">
 
       <div className="modal-box flex flex-col items-center text-black">
-        <h2 className="text-3xl font-bold text-center mb-8 mt-4">Login</h2>
+        <h2 className="text-3xl font-bold text-center mb-8 mt-4 dark:text-white">Login</h2>
         <div className="flex flex-col justify-center max-h-128">
           <form onSubmit={handleSubmit} className="flex flex-col gap-3">
             <input
@@ -80,7 +80,7 @@ export default function Login({ onUserLogin }) {
                 value={pseudo}
                 type="text"
                 placeholder="Pseudo"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full dark:text-white"
             />
 
             <input
@@ -88,7 +88,7 @@ export default function Login({ onUserLogin }) {
                 value={password}
                 type="password"
                 placeholder="Mot de passe"
-                className="input input-bordered w-full"
+                className="input input-bordered w-full dark:text-white"
             />
             {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
 
@@ -115,8 +115,8 @@ export default function Login({ onUserLogin }) {
             </div>
           </form>
           <div className="flex flex-col mt-4">
-            <button className="btn btn-sm btn-ghost my-1 text-[12px]" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={20}/>SignUp</button>
-            <button className="btn btn-sm btn-ghost my-1 text-[12px]" onClick={()=>document.getElementById('my_modal_email').showModal()}><FaRegCircleQuestion size={18}/>Mot de passe oublié</button>
+            <button className="btn btn-sm btn-ghost my-1 text-[12px] dark:text-white" onClick={()=>document.getElementById('my_modal_signup').showModal()}><RiAccountCircleLine size={20}/>SignUp</button>
+            <button className="btn btn-sm btn-ghost my-1 text-[12px] dark:text-white" onClick={()=>document.getElementById('my_modal_email').showModal()}><FaRegCircleQuestion size={18}/>Mot de passe oublié</button>
           </div>
         </div>
       </div>

@@ -63,7 +63,7 @@ export default function SignUp() {
     <>
     <dialog id="my_modal_signup" className="modal modal-middle lg:modal-middle">
         <div className="modal-box text-black">
-            <h2 className="text-3xl font-bold text-center my-8">SignUp</h2>
+            <h2 className="text-3xl font-bold text-center my-8 dark:text-white">SignUp</h2>
             <div className="flex justify-center max-h-128">
                 <form onSubmit={handleSubmit} className="flex flex-col gap-3">
                 <input
@@ -71,7 +71,7 @@ export default function SignUp() {
                     value={pseudo}
                     type="text"
                     placeholder="Pseudo"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:text-white"
                 />
 
                 <input
@@ -79,7 +79,7 @@ export default function SignUp() {
                     value={password}
                     type="password"
                     placeholder="Mot de passe"
-                    className="input input-bordered w-full"
+                    className="input input-bordered w-full dark:text-white"
                 />
                 {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
 

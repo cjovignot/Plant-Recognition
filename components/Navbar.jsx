@@ -51,7 +51,7 @@ export default function Navbar() {
 
   return (
     <>
-      <div className="navbar bg-emerald-600	top-0 text-white fixed z-20 !min-h-[2rem]">
+      <div className="navbar bg-emerald-600 dark:bg-emerald-900	top-0 text-white fixed z-20 !min-h-[2rem]">
         <div className="navbar-start">
           <div className="dropdown">
             <label tabIndex={0}
@@ -62,14 +62,14 @@ export default function Navbar() {
             {dropdownOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-white rounded-box w-52 text-black"
+                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 dark:text-white text-black divide-y divide-solid"
               >
                 <li onClick={closeDropdown}>
                   {isLoggedIn &&
-                  <>
                     <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/settings"><PiPlantDuotone size={20}/>Végétaux</Link>
-                  </>
                   }
+                </li>
+                <li onClick={closeDropdown}>
                   <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/"><FcAbout size={20}/>A propos</Link>
                 </li>
               </ul>
@@ -106,7 +106,7 @@ export default function Navbar() {
             <label tabIndex={0} onClick={toggleDropdown} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
             
             {dropdownOpen && (
-              <ul tabIndex={0} className="dropdown-content mt-36 menu p-2 shadow bg-white rounded-box w-52 text-black divide-y divide-solid">
+              <ul tabIndex={0} className="dropdown-content mt-36 menu p-2 shadow bg-base-100 rounded-box w-52 dark:text-white text-black divide-y divide-solid">
                 {!isLoggedIn ? (
                   <>
                   <li onClick={closeDropdown}>

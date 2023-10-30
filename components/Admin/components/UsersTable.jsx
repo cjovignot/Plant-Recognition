@@ -55,7 +55,7 @@ export default function Table(data, {onUserDeleted}) {
                     Scores
                 </button>
             </div>
-            <table className="table dark:text-white">
+            <table className="table dark:text-white w-auto m-auto">
                 <thead>
                     <tr>
                         <th>Pseudo</th>

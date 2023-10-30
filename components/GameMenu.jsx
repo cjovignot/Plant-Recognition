@@ -115,12 +115,12 @@ export default function GameMenu() {
 
   return (
     <>
-        <div className="lg:mt-20 lg:card w-screen lg:h-auto h-screen lg:w-auto bg-white shadow-xl">
+        <div className="lg:mt-20 lg:card w-screen lg:h-auto h-screen lg:w-auto bg-base-100 shadow-xl">
             <div className="card-body flex flex-col lg:min-w-[550px] justify-start">
-                <h2 className="pt-10 lg:pt-0 text-center text-2xl lg:text-3xl font-bold text-black">Game Menu</h2>
+                <h2 className="pt-10 lg:pt-0 text-center text-2xl lg:text-3xl font-bold dark:text-white">Game Menu</h2>
 
                 <div className="mt-4">
-                    <h2 className="sm:text-sm lg:text-lg h-10 text-black"><b>Difficulté :</b> {selectedLevel}</h2>
+                    <h2 className="sm:text-sm lg:text-lg h-10 dark:text-white"><b>Difficulté :</b> {selectedLevel}</h2>
                     <input
                         onChange={handleRangeChange}
                         type="range"
@@ -141,7 +141,7 @@ export default function GameMenu() {
                     <div className='flex flex-col'>
                         {selectedLevel === 'Chill' &&
                             <>
-                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold dark:text-white justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
                                 <ImArrowDown style={{ marginTop: '10px', marginBottom: '10px' }} />
                                 4 choix pour chaque élément
                             </div>
@@ -149,7 +149,7 @@ export default function GameMenu() {
                         }
                         {selectedLevel === 'Entrainement' &&
                             <>
-                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                            <div className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold dark:text-white justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
                                 <ImArrowDown style={{ marginLeft: '10px', marginRight: '10px' }} />
                                 Nom commun
                             </div>
@@ -158,7 +158,7 @@ export default function GameMenu() {
                         {selectedLevel === 'Qui veut gagner des graines en masse ?' &&
                             <>
                             <p className='font-bold text-red-600 text-center'>🚧 En cours de développement 🚧</p>
-                            <div className="flex self-center my-4 items-center lg:text-lg text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit h-fit p-4 border-4 border-[#059669]">Photo
+                            <div className="flex self-center my-4 items-center lg:text-lg dark:text-white text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit h-fit p-4 border-4 border-[#059669]">Photo
                                 <ImArrowRight style={{ marginLeft: '10px', marginRight: '10px' }} />
                                 <div className="flex flex-col text-md font-bold ml-8">
                                     <p>1. Nom commun</p>
@@ -175,7 +175,7 @@ export default function GameMenu() {
                             <div className="flex flex-col items-center">
                                 <p className='font-bold text-red-600 text-center'>🚧 En cours de développement 🚧</p>
                                 <div className="flex flex-col items-center">
-                                    <p className="flex self-center flex-col my-4 items-center lg:text-lg text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
+                                    <p className="flex self-center flex-col my-4 items-center dark:text-white lg:text-lg text-md font-bold text-black justify-center h-[120px] border rounded-lg w-fit p-4 border-4 border-[#059669]">Photo
                                         <ImArrowDown style={{ marginTop: '4px', marginBottom: '4px' }} />
                                             Questions au hasard :
                                     </p>
@@ -183,31 +183,31 @@ export default function GameMenu() {
 
                                 <div className='w-[100%] text-center'>
                                     <button 
-                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Nom commun"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost dark:text-white border-4 text-black ${activeButtons["Nom commun"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                                         onClick={() => toggleButtonActive("Nom commun")}
                                     >
                                         Nom commun
                                     </button>
                                     <button 
-                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Famille"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost dark:text-white border-4 text-black ${activeButtons["Famille"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                                         onClick={() => toggleButtonActive("Famille")}
                                     >
                                         Famille
                                     </button>
                                     <button 
-                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Genre"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost dark:text-white border-4 text-black ${activeButtons["Genre"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                                         onClick={() => toggleButtonActive("Genre")}
                                     >
                                         Genre
                                     </button>
                                     <button 
-                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Espèce"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost dark:text-white border-4 text-black ${activeButtons["Espèce"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                                         onClick={() => toggleButtonActive("Espèce")}
                                     >
                                         Espèce
                                     </button>
                                     <button 
-                                        className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${activeButtons["Cultivar"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                                        className={`btn btn-sm rounded-full m-1 btn-ghost dark:text-white border-4 text-black ${activeButtons["Cultivar"] ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                                         onClick={() => toggleButtonActive("Cultivar")}
                                     >
                                         Cultivar
@@ -222,8 +222,8 @@ export default function GameMenu() {
                 <div className="multi-select-dropdown mx-auto mt-10 lg:mt-0">
                     <div className="dropdown dropdown-top lg:dropdown-right">
                             
-                        <label tabIndex={0} className="btn w-32 text-black bg-white hover:bg-emerald-600">Groupes<BiSolidDownArrow/></label>
-                        <ul tabIndex={0} className="dropdown-content w-32 mb-2 bg-white max-h-60 z-[1] menu p-2 shadow bg-base-100 rounded-box">
+                        <label tabIndex={0} className="btn w-32 dark:text-white dark:border dark:border-white bg-base-200 hover:bg-emerald-600">Groupes<BiSolidDownArrow/></label>
+                        <ul tabIndex={0} className="dropdown-content w-32 mb-2 bg-base-200 dark:border dark:border-white mx-1 max-h-60 z-[1] menu p-2 shadow bg-base-100 rounded-box">
                         <div className='overflow-y-scroll divide-y divide-solid'>
                             <div className='flex justify-around mb-2'>
                                 <button

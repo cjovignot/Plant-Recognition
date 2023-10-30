@@ -99,11 +99,9 @@ export default function UsersTable() {
   return (
     <div className="mx-8">
       {role === 'admin' || role === 'sysadmin' ? (
-        <div className="mt-16">
-          <div className="flex justify-center w-full">
-            <div className="fixed top-16 bg-white p-1 w-fit rounded-full">
-              <Search onSearch={handleSearch} />
-            </div>
+        <div className="flex justify-center">
+          <div className="w-[80%] lg:w-[209px] fixed z-10 mt-16 p-1 bg-white rounded-full">
+            <Search onSearch={handleSearch} />
           </div>
           <Users data={filteredUsers} updateRole={updateRole} onUserDeleted={loadUsers}/>
         </div>

@@ -29,7 +29,7 @@ export default function Table(data, {onUserDeleted}) {
     return (
         <>
         <div className="mt-12 mb-20">
-            <div className="mt-12 flex justify-center mb-4 border-b border-[#059669] pb-1">
+            <div className="mt-16 flex justify-center mb-4 border-b border-[#059669] pb-1">
                 <button
                     onClick={() => setInscriptionDisplayed(!inscriptionDisplayed)}
                     className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black dark:text-white ${inscriptionDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 

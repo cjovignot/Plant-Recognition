@@ -16,7 +16,7 @@ export default function Search({ onSearch }) {
             onChange={e => setQuery(e.target.value)}
             type="search"
             placeholder="Type here"
-            className="input input-bordered input-sm w-[85%] lg:w-[200px] text-[16px] rounded-full m-1"
+            className="input input-bordered input-sm w-[85%] lg:w-[200px] text-[16px] rounded-full m-1 bg-white"
         />
     </>
   );

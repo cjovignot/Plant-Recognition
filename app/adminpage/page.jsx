@@ -23,7 +23,6 @@ const getUsers = async () => {
 };
 
 const updateRole = async (id, user, newRole) => {
-  console.log(id, newRole)
   try {
       const res = await fetch(`/api/users/${id}`, {
           method: "PUT",
@@ -38,7 +37,7 @@ const updateRole = async (id, user, newRole) => {
         throw new Error("Failed to update user");
       }
   } catch (error) {
-      console.log(error);
+    console.log(error);
   }
 }
 

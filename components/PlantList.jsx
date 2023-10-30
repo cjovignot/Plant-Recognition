@@ -73,6 +73,7 @@ export default function PlantsList() {
           <>
             <HiPlusCircle
               size={40}
+              className="hover:cursor-pointer"
               style={{ color: '#059669' }} 
               onClick={()=>document.getElementById('my_modal_5').showModal()}
             />
@@ -89,7 +90,7 @@ export default function PlantsList() {
           <>
           <div
             key={t._id}
-            className="card w-80 bg-base-100 shadow-xl lg:m-4 my-12"
+            className="card w-80 bg-base-100 shadow-xl lg:m-4 my-12 dark:bg-base-300 dark:text-gray"
           >
             <div className="flex">
               <div className="w-48 h-42 lg:h-48 rounded-tl-2xl mr-1" style={{

@@ -4,6 +4,7 @@ import { useEffect, useState } from 'react';
 import Link from "next/link";
 import Login from '@/components/Login';
 import SignUp from '@/components/SignUp';
+import SendEmail from '@/components/SendEmail';
 import { RiAccountCircleLine } from 'react-icons/ri';
 import { FaUserCircle } from 'react-icons/fa';
 import { PiPlantDuotone } from 'react-icons/pi';
@@ -61,7 +62,7 @@ export default function Navbar() {
             {dropdownOpen && (
               <ul
                 tabIndex={0}
-                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-base-100 rounded-box w-52 text-black"
+                className="menu menu-sm dropdown-content mt-3 z-10 p-2 shadow bg-white rounded-box w-52 text-black"
               >
                 <li onClick={closeDropdown}>
                   {isLoggedIn &&
@@ -81,6 +82,7 @@ export default function Navbar() {
 
         <Login onUserLogin={handleUserLogin}/>
         <SignUp/>
+        <SendEmail />
         <div className="navbar-end">
           <div className="dropdown dropdown-end flex items-center">
             {isLoggedIn ? (
@@ -101,48 +103,51 @@ export default function Navbar() {
               </>
             )
             }
-            <label tabIndex={0} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
-            <ul tabIndex={0} className="dropdown-content mt-36 menu p-2 shadow bg-base-100 rounded-box w-52 text-black divide-y divide-solid">
-              {!isLoggedIn ? (
-                <>
-                <li>
-                  <button onClick={()=>document.getElementById('my_modal_login').showModal()}>
-                    <TbLogin2 size={20}/>Login
-                  </button>
-                </li>
-                </>
-              ) : (
-                <>
-                <li>
-                  <button
-                    onClick={()=> {
-                      localStorage.removeItem('client')
-                      localStorage.removeItem('role')
-                      setIsLoggedIn(false)
-                      setPseudo("")
-                      router.push("/");
-                    }
-                    }><TbLogout2 size={20}/>Logout</button>
-                </li>
-                </>
-              )}
-              {isLoggedIn &&
-              <>
-                <li>
-                  <button>
-                    <FcStatistics size={20}/>🚧 Statistiques 🚧
-                  </button>
-                </li>
-                {isAdmin &&
-                  <li>
-                    <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/adminpage">
-                      <MdOutlineAdminPanelSettings size={20} />🚧 Administration
-                    </Link>
+            <label tabIndex={0} onClick={toggleDropdown} className="btn btn-sm btn-ghost btn-circle"><LuSettings size={20} /></label>
+            
+            {dropdownOpen && (
+              <ul tabIndex={0} className="dropdown-content mt-36 menu p-2 shadow bg-white rounded-box w-52 text-black divide-y divide-solid">
+                {!isLoggedIn ? (
+                  <>
+                  <li onClick={closeDropdown}>
+                    <button onClick={() => document.getElementById('my_modal_login').showModal()}>
+                      <TbLogin2 size={20}/>Login
+                    </button>
                   </li>
+                  </>
+                ) : (
+                  <>
+                  <li onClick={closeDropdown}>
+                    <button
+                      onClick={()=> {
+                        localStorage.removeItem('client')
+                        localStorage.removeItem('role')
+                        setIsLoggedIn(false)
+                        setPseudo("")
+                        router.push("/");
+                      }
+                      }><TbLogout2 size={20}/>Logout</button>
+                  </li>
+                  </>
+                )}
+                {isLoggedIn &&
+                <>
+                  <li onClick={closeDropdown}>
+                    <button>
+                      <FcStatistics size={20}/>🚧 Statistiques 🚧
+                    </button>
+                  </li>
+                  {isAdmin &&
+                    <li onClick={closeDropdown}>
+                      <Link className='btn btn-ghost btn-sm flex justify-start text-[11px] items-center' href="/adminpage">
+                        <MdOutlineAdminPanelSettings size={20} />🚧 Administration
+                      </Link>
+                    </li>
+                  }
+                </>
                 }
-              </>
-              }
-            </ul>
+              </ul>
+            )}
           </div>
         </div>
       </div>

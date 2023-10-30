@@ -11,7 +11,7 @@ export default function Home() {
           <h1 className="mb-5 text-5xl lg:text-8xl text-white font-bold">Vegetal Reco&apos;</h1>
         </div>
       </div>
-      <Link href="/gameMenu" className="btn mt-60 w-[30%] lg:fixed lg:bottom-40 lg:w-96 btn-outline border-white hover:bg-emerald-600 hover:border-emerald-600 text-white">Jouer</Link>
+      <Link href="/gameMenu" className="btn mt-60 w-[30%] lg:fixed lg:bottom-40 lg:w-96 btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-white focus:text-white focus:bg-emerald-600">Jouer</Link>
     </div>
   );
 }

@@ -38,24 +38,24 @@ export default function Table(data, {onUserDeleted}) {
             <div className="flex justify-center mb-4 border-b border-[#059669] pb-1">
                 <button
                     onClick={() => setInscriptionDisplayed(!inscriptionDisplayed)}
-                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${inscriptionDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black dark:text-white ${inscriptionDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                 >
                     Inscription
                 </button>
                 <button
                     onClick={() => setGamesDisplayed(!gamesDisplayed)}
-                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${gamesDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black dark:text-white ${gamesDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                 >
                     Parties
                 </button>
                 <button
                     onClick={() => setAvgScoreDisplayed(!avgScoreDisplayed)}
-                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black ${avgScoreDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
+                    className={`btn btn-sm rounded-full m-1 btn-ghost border-4 text-black dark:text-white ${avgScoreDisplayed ? 'border-[#059669] border-4 text-[#059669]' : ''}`} 
                 >
                     Scores
                 </button>
             </div>
-            <table className="table">
+            <table className="table dark:text-white">
                 <thead>
                     <tr>
                         <th>Pseudo</th>

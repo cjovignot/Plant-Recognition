@@ -259,7 +259,7 @@ export default function Level1({params}) {
               <form onSubmit={handleSubmit} className="flex flex-col justify-center gap-3">
                 <div className='flex flex-col items-center'>
                   <div className='flex mt-4 w-80 lg:w-96'>
-                    <select className="select select-sm select-success w-[100%] mb-2"
+                    <select className="select select-sm select-success w-[100%] mb-2 bg-white text-black"
                       value={answers.name}
                       onChange={(e) => setAnswers(prev => ({ ...prev, name: e.target.value }))}
                     >
@@ -271,7 +271,7 @@ export default function Level1({params}) {
                   </div>
 
                   <div className="flex w-80 lg:w-96">
-                    <select className="select select-sm select-success w-[100%] mr-1"
+                    <select className="select select-sm select-success w-[100%] mr-1 bg-white text-black"
                       value={answers.family}
                       onChange={(e) => setAnswers(prev => ({ ...prev, family: e.target.value }))}
                     >
@@ -280,7 +280,7 @@ export default function Level1({params}) {
                         <option key={index}>{family}</option>
                       ))}
                     </select>
-                    <select className="select select-sm select-success w-[100%] ml-1"
+                    <select className="select select-sm select-success w-[100%] ml-1 bg-white text-black"
                       value={answers.genre}
                       onChange={(e) => setAnswers(prev => ({ ...prev, genre: e.target.value }))}
                     >
@@ -292,7 +292,7 @@ export default function Level1({params}) {
                   </div>
 
                   <div className="flex mt-2 w-80 lg:w-96">
-                    <select className="select select-sm select-success w-[100%] mr-1"
+                    <select className="select select-sm select-success w-[100%] mr-1 bg-white text-black"
                       value={answers.species}
                       required
                       onChange={(e) => setAnswers(prev => ({ ...prev, species: e.target.value }))}
@@ -302,7 +302,7 @@ export default function Level1({params}) {
                         <option key={index}>{species}</option>
                       ))}
                     </select>
-                    <select className="select select-sm select-success w-[100%] ml-1 mb-2"
+                    <select className="select select-sm select-success w-[100%] ml-1 mb-2 bg-white text-black"
                       value={answers.cultivar}
                       onChange={(e) => setAnswers(prev => ({ ...prev, cultivar: e.target.value }))}
                     >
@@ -316,7 +316,7 @@ export default function Level1({params}) {
                   {plants.length === 1 ? (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600 w-80 lg:w-96 mb-2"
+                        className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-white focus:text-white focus:bg-emerald-600 w-80 lg:w-96 mb-2"
                         onClick={handleButtonClick}
                     >
                         Valider
@@ -324,7 +324,7 @@ export default function Level1({params}) {
                   ) : (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600 w-80 lg:w-96 mb-2"
+                        className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-white focus:text-white focus:bg-emerald-600 w-80 lg:w-96 mb-2"
                     >
                         Valider
                     </button>

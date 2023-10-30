@@ -128,8 +128,8 @@ export default function AddPlant({ onPlantAdded }) {
     <>
     <dialog id="my_modal_5" className="z-10 modal modal-middle lg:modal-middle">
         <div className="modal-box">
-            <h2 className="text-3xl font-bold text-center my-8">Ajouter une plante</h2>
-            <div className="flex justify-center lg:max-h-128">
+            <h2 className="text-3xl font-bold text-center my-8 dark:text-white">Ajouter une plante</h2>
+            <div className="flex justify-center lg:max-h-128 dark:text-white">
                 {imageUrl.length > 0 && isUploading === false &&
                     <div className="flex flex-col max-h-128 overflow-hidden overflow-y-scroll">
                         {imageUrl.map((url, index) => (
@@ -163,15 +163,15 @@ export default function AddPlant({ onPlantAdded }) {
                             value={name}
                             type="text"
                             placeholder="Nom commun"
-                            className="input input-sm input-bordered lg:w-full w-60"
+                            className="input input-sm input-bordered lg:w-full w-60 text-black bg-white"
                         />
                         <label className="label cursor-pointer">
                             <input 
                                 type="checkbox" 
-                                className="checkbox" 
+                                className="checkbox dark:bg-white" 
                                 onChange={handleCheckboxChange}
                             />
-                            <span className="label-text text-slate-400 ml-2 text-start">Nom commun : Option 2</span> 
+                            <span className="label-text text-slate-400 ml-2 text-start dark:text-white">Nom commun : Option 2</span> 
                         </label>
 
                         { secondNameAllowed && (
@@ -180,7 +180,7 @@ export default function AddPlant({ onPlantAdded }) {
                                 value={secondName}
                                 type="text"
                                 placeholder="Nom commun autorisé"
-                                className="input input-sm input-bordered lg:w-full w-60"
+                                className="input input-sm input-bordered lg:w-full w-60 text-black bg-white"
                             />
                         ) }
 
@@ -189,7 +189,7 @@ export default function AddPlant({ onPlantAdded }) {
                             value={family}
                             type="text"
                             placeholder="Famille"
-                            className="input input-sm input-bordered lg:w-full w-60"
+                            className="input input-sm input-bordered lg:w-full w-60 text-black bg-white"
                         />
 
                         <input
@@ -197,7 +197,7 @@ export default function AddPlant({ onPlantAdded }) {
                             value={genre}
                             type="text"
                             placeholder="Genre"
-                            className="input input-sm input-bordered lg:w-full w-60"
+                            className="input input-sm input-bordered lg:w-full w-6 text-black bg-white"
                         />
 
                         <input
@@ -205,7 +205,7 @@ export default function AddPlant({ onPlantAdded }) {
                             value={species}
                             type="text"
                             placeholder="Espèce"
-                            className="input input-sm input-bordered lg:w-full w-60"
+                            className="input input-sm input-bordered lg:w-full w-60 text-black bg-white"
                         />
 
                         <input
@@ -213,10 +213,10 @@ export default function AddPlant({ onPlantAdded }) {
                             value={cultivar}
                             type="text"
                             placeholder="Cultivar"
-                            className="input input-sm input-bordered lg:w-full w-60"
+                            className="input input-sm input-bordered lg:w-full w-60 text-black bg-white"
                         />
 
-                        <select className="select select-sm select-bordered lg:w-full w-60"
+                        <select className="select select-sm select-bordered lg:w-full w-60 text-black bg-white"
                             onChange={(e) => setGroup(e.target.value)}
                             value={group}
                         >

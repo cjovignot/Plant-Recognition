@@ -175,14 +175,14 @@ export default function Level2({params}) {
                       type="text"
                       placeholder="Nom commun"
                       // placeholder={plants[0].name}
-                      className="input input-bordered w-full"
+                      className="input input-bordered w-full bg-white text-black"
                   />
                   {errorMessage && <p className="text-red-600 mb-4">{errorMessage}</p>}
 
                   {plants.length === 1 ? (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600"
+                        className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-white focus:text-white focus:bg-emerald-600"
                         onClick={handleButtonClick}
                     >
                         Valider
@@ -190,7 +190,7 @@ export default function Level2({params}) {
                   ) : (
                     <button
                         type="submit"
-                        className="btn btn-outlined bg-green-600"
+                        className="btn btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-white focus:text-white focus:bg-emerald-600"
                     >
                         Valider
                     </button>

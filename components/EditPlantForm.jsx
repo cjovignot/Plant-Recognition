@@ -103,7 +103,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               onChange={(e) => {
                   handleImageUpload(e);
               }}
-              className="file-input file-input-sm file-input-bordered file-input-success lg:w-full w-60"
+              className="file-input file-input-sm file-input-bordered file-input-success lg:w-full w-60 dark:bg-white"
           />
           <input type="text" value={newImageUrl} hidden />
 
@@ -112,17 +112,17 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               value={newName}
               type="text"
               placeholder="Nom commun"
-              className="input input-sm input-bordered lg:w-full w-60"
+              className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
           />
 
           <label className="self-start label cursor-pointer">
               <input 
                 type="checkbox" 
-                className="checkbox" 
+                className="checkbox dark:bg-white" 
                 checked={secondNewNameAllowed}
                 onChange={handleCheckboxChange}
               />
-              <span className="label-text text-slate-400 ml-2 text-start">Nom commun : Option 2</span> 
+              <span className="label-text text-slate-400 ml-2 text-start dark:text-white">Nom commun : Option 2</span> 
           </label>
 
           { secondNewNameAllowed && (
@@ -131,7 +131,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
                   value={secondNewName}
                   type="text"
                   placeholder="Nom commun autorisé"
-                  className="input input-sm input-bordered lg:w-full w-60"
+                  className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
               />
           ) }
 
@@ -140,7 +140,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               value={newFamily}
               type="text"
               placeholder="Famille"
-              className="input input-sm input-bordered lg:w-full w-60"
+              className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
           />
 
           <input
@@ -148,7 +148,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               value={newGenre}
               type="text"
               placeholder="Genre"
-              className="input input-sm input-bordered lg:w-full w-60"
+              className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
           />
 
           <input
@@ -156,7 +156,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               value={newSpecies}
               type="text"
               placeholder="Espèce"
-              className="input input-sm input-bordered lg:w-full w-60"
+              className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
           />
 
           <input
@@ -164,10 +164,10 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
               value={newCultivar}
               type="text"
               placeholder="Cultivar"
-              className="input input-sm input-bordered lg:w-full w-60"
+              className="input input-sm input-bordered lg:w-full w-60 dark:bg-white text-black"
           />
 
-          <select className="select select-sm select-bordered lg:w-full w-60"
+          <select className="select select-sm select-bordered lg:w-full w-60 dark:bg-white text-black"
               onChange={(e) => setNewGroup(e.target.value)}
               value={newGroup}
           >
@@ -230,7 +230,7 @@ import { PLANT_GROUPS, PLANT_PH, PLANT_EXPOSITION, PLANT_HUMIDITE, PLANT_CATEGOR
           ))}
           </select> */}
 
-          <button className="btn mt-10 w-40 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600">
+          <button className="btn w-32 m-auto btn-outline border-emerald-600 hover:bg-emerald-600 hover:border-emerald-600 text-emerald-600 focus:text-white focus:bg-emerald-600">
             Sauvegarder
           </button>
         </form>

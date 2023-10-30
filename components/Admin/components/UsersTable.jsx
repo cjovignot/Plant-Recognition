@@ -5,7 +5,6 @@ import { HiOutlineTrash } from "react-icons/hi";
 import DeleteUser from '@/components/DeleteUser';
 
 export default function Table(data, {onUserDeleted}) {
-    const [users, setUsers] = useState([])
     const [inscriptionDisplayed, setInscriptionDisplayed] = useState(false)
     const [gamesDisplayed, setGamesDisplayed] = useState(false)
     const [avgScoreDisplayed, setAvgScoreDisplayed] = useState(false)
@@ -27,14 +26,9 @@ export default function Table(data, {onUserDeleted}) {
       }
     };
 
-    useEffect(() => {
-        setUsers(data.data)
-    }, [data])
-
-
     return (
         <>
-        <div className="mt-16 mb-20">
+        <div className="mt-12 mb-20">
             <div className="flex justify-center mb-4 border-b border-[#059669] pb-1">
                 <button
                     onClick={() => setInscriptionDisplayed(!inscriptionDisplayed)}
@@ -67,7 +61,7 @@ export default function Table(data, {onUserDeleted}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {users.lenght === 0 ? (
+                    {data.data.lenght === 0 ? (
                         // This is the conditional rendering for the spinner
                         <tr>
                             <td colSpan="6" className="text-center">
@@ -75,7 +69,7 @@ export default function Table(data, {onUserDeleted}) {
                             </td> 
                         </tr>
                     ) : (
-                        users?.map((user, index) => (
+                        data.data?.map((user, index) => (
                             <tr key={index}>
                                 <td>{user.pseudo}</td>
                                 {inscriptionDisplayed && <td className='text-[10px]'>{formatDate(user.inscription)}</td>}

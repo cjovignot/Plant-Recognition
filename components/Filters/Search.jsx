@@ -12,11 +12,11 @@ export default function Search({ onSearch }) {
   return (
     <>
         <input
-            value={query}
-            onChange={e => setQuery(e.target.value)}
-            type="search"
-            placeholder="Type here"
-            className="input input-bordered input-sm w-[85%] lg:w-[200px] text-[16px] rounded-full m-1 dark:text-white"
+          value={query}
+          onChange={e => setQuery(e.target.value)}
+          type="search"
+          placeholder="Type here"
+          className="input input-bordered w-full input-sm lg:w-[200px] text-[16px] rounded-full dark:text-white"
         />
     </>
   );

@@ -3,6 +3,7 @@
 import { useRouter } from "next/navigation";
 import Users from '@/components/Admin/components/UsersTable';
 import { toast } from 'react-toastify';
+import Search from '@/components/Filters/Search'
 import { useEffect, useState } from 'react';
 
 const getUsers = async () => {
@@ -49,7 +50,7 @@ export default function UsersTable() {
   const [role, setRole] = useState('')
 
   const router = useRouter();
-
+  
   useEffect(() => {
     // Check localStorage inside useEffect
     const client = localStorage.getItem('client');
@@ -68,10 +69,17 @@ export default function UsersTable() {
     }
   }, []);
 
-  // const handleSearch = (query) => {
-  //   const searchResult = users.filter(user => user.pseudo.toLowerCase().includes(query.toLowerCase()));
-  //   setFilteredUsers(searchResult);
-  // };
+  // Load users from API and update state
+  const loadUsers = async () => {
+    const result = await getUsers();
+    setUsers(result.users || []);
+    setFilteredUsers(result.users || []);
+  };
+
+  const handleSearch = (query) => {
+    const searchResult = users.filter(user => user.pseudo.toLowerCase().includes(query.toLowerCase()));
+    setFilteredUsers(searchResult);
+  };
 
   useEffect(() => {
     loadUsers();
@@ -81,23 +89,24 @@ export default function UsersTable() {
     async function fetchData() {
       const result = await getUsers();
       setUsers(result.users || []);
+      setFilteredUsers(result.users || [])
     }
 
     fetchData();
   }, []);
 
-  
-  // Load users from API and update state
-  const loadUsers = async () => {
-    const result = await getUsers();
-    setUsers(result.users || []);
-    // setFilteredPlants(result.plants || []);
-  };
 
   return (
     <div className="mx-8">
       {role === 'admin' || role === 'sysadmin' ? (
-        <Users data={users} updateRole={updateRole} onUserDeleted={loadUsers()}/>
+        <div className="mt-16">
+          <div className="flex justify-center w-full">
+            <div className="fixed top-16 bg-white p-1 w-fit rounded-full">
+              <Search onSearch={handleSearch} />
+            </div>
+          </div>
+          <Users data={filteredUsers} updateRole={updateRole} onUserDeleted={loadUsers}/>
+        </div>
       ) : (
         <div className="flex w-full h-[80vh] justify-center items-center">
           <span className="loading loading-spinner text-success w-16 h-16"></span>

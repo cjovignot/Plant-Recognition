@@ -8,7 +8,7 @@ export default function Scores({ trueArray, falseArray, level }) {
 
     return (
         <>      
-            <div className="flex justify-center items-center m-auto lg:pt-20">
+            <div className="flex justify-center items-center m-auto lg:pt-20 dark:text-white">
                 <div className="bg-base-100 shadow-xl lg:rounded-lg">
                     <div className="flex flex-col h-screen lg:h-[600px] w-screen lg:max-w-[1000px] justify-between p-1">
                         <div className="flex flex-col items-center overflow-y-scroll overflow-x-hidden">

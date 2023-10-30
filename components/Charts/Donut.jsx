@@ -14,6 +14,7 @@ function Donut({ series }) {
         },
         colors: ['#49a14c', '#f35b5b'],
         legend: {
+            show: false,
             position: 'bottom'
         },
         plotOptions: {
@@ -27,7 +28,7 @@ function Donut({ series }) {
                             fontSize: '22px',
                             fontFamily: 'Helvetica, Arial, sans-serif',
                             fontWeight: 600,
-                            color: '#373d3f',
+                            color: '#ebce68',
                             offsetY: -10
                         },
                         value: {
@@ -35,7 +36,7 @@ function Donut({ series }) {
                             fontSize: '16px',
                             fontFamily: 'Helvetica, Arial, sans-serif',
                             fontWeight: 400,
-                            color: '#373d3f',
+                            color: '#ebce68',
                             offsetY: 16,
                             formatter: function (val) {
                                 return val;
@@ -47,7 +48,7 @@ function Donut({ series }) {
                             label: 'Total',
                             fontSize: '22px',
                             fontWeight: 600,
-                            color: '#373d3f',
+                            color: '#ebce68',
                             formatter: function (w) {
                                 return ratio;
                             }

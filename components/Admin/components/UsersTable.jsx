@@ -2,28 +2,45 @@
 import React, { useEffect, useState } from 'react';
 import formatDate, { USER_ROLES } from '../../../app/utils/users/users';
 import { HiOutlineTrash } from "react-icons/hi";
-import DeleteUser from '@/components/DeleteUser';
+// import DeleteUser from '@/components/DeleteUser';
 
-export default function Table(data, {onUserDeleted}) {
+export default function Table({ users, updateRole, onUserDeleted }) {
     const [inscriptionDisplayed, setInscriptionDisplayed] = useState(false)
     const [gamesDisplayed, setGamesDisplayed] = useState(false)
     const [avgScoreDisplayed, setAvgScoreDisplayed] = useState(false)
     const [newRole, setNewRole] = useState('');
     const [selectedUserId, setSelectedUserId] = useState(null);
     const [showModal, setShowModal] = useState(false);
+    const [userDeletedTrue, setUserDeletedTrue] = useState(false)
   
     const handleConfirm = async () => {
-        const res = await fetch(`/api/users?id=${selectedUserId}`, {
-        method: "DELETE",
-      });
-  
-      if (res.ok) {
-        if (onUserDeleted) onUserDeleted();
-        setShowModal(false);
-        setSelectedUserId(null);
-      } else {
-        throw new Error("Failed to delete the user");
-      }
+        if (selectedUserId) {
+            const res = await fetch(`/api/users?id=${selectedUserId}`, {
+                method: "DELETE",
+            });
+    
+            if (res.ok) {
+                // Call onUserDeleted with the selectedUserId after successful deletion
+                if (onUserDeleted) {
+                    onUserDeleted()
+                }
+                setUserDeletedTrue(false)
+                setShowModal(false);
+                setSelectedUserId(null); // Reset the selected user ID
+            } else {
+                // Handle the error appropriately
+                console.error("Failed to delete the user");
+            }
+        } else {
+            // Handle the case where selectedUserId is null or undefined
+            console.error("No user selected for deletion");
+        }
+    };
+
+    const handleDeleteClick = (userId) => {
+        setUserDeletedTrue(true)
+        setSelectedUserId(userId);
+        setShowModal(true);
     };
 
     return (
@@ -61,7 +78,7 @@ export default function Table(data, {onUserDeleted}) {
                     </tr>
                 </thead>
                 <tbody>
-                    {data.data.length === 0 ? (
+                    {users.length === 0 ? (
                         // This is the conditional rendering for the spinner
                         <tr>
                             <td colSpan="6" className="text-center">
@@ -69,7 +86,7 @@ export default function Table(data, {onUserDeleted}) {
                             </td> 
                         </tr>
                     ) : (
-                        data.data?.map((user, index) => (
+                        users?.map((user, index) => (
                             <tr key={index}>
                                 <td>{user.pseudo}</td>
                                 {inscriptionDisplayed && <td className='text-[10px]'>{formatDate(user.inscription)}</td>}
@@ -78,13 +95,11 @@ export default function Table(data, {onUserDeleted}) {
                                 <td className='text-[10px]'>
                                 <select 
                                     className="select select-sm select-bordered lg:w-full w-fit"
-                                    value={user.role} // Set the current value to user's role
+                                    value={user.role}
                                     onChange={(e) => {
-                                        const updatedUsers = [...users];
-                                        updatedUsers[index].role = e.target.value;
-                                        setUsers(updatedUsers);
-                                        // Optionally call a function to update the role in your backend or wherever needed.
-                                        data.updateRole(user._id, user.pseudo, e.target.value); 
+                                        const updatedRole = e.target.value;
+                                        // Call the passed-in updateRole function with the necessary parameters
+                                        updateRole(user._id, user.pseudo, updatedRole);
                                     }}
                                 >
                                     <option disabled>Role</option>
@@ -97,36 +112,35 @@ export default function Table(data, {onUserDeleted}) {
                                 </td>
                                 <td className='flex text-[10px]'>
                                     <button className='btn btn-sm btn-ghost'>📧</button>
+                                    {/* <DeleteUser size={20} id={user._id} onUserDeleted={onUserDeleted}/> */}
                                     
-                                    <button 
-                                        onClick={() => {
-                                            setSelectedUserId(user._id);
-                                            setShowModal(true);
-                                        }}
-                                        className='btn btn-sm btn-ghost text-red-400'
-                                    >
+                                    <>                                          
+                                    {/* Delete button with onClick event calling handleDeleteClick with user's id */}
+                                    <button onClick={() => handleDeleteClick(user._id)}
+                                        className='btn btn-sm btn-ghost text-red-400'>
                                         <HiOutlineTrash size={18} />
                                     </button>
-
+                                    </>
                                 </td>
                             </tr>
                         ))
                         )}
-                        {showModal && (
-                            <dialog open className="modal modal-middle sm:modal-middle">
-                            <div className="hero-overlay bg-opacity-60"></div>
-                            <div className="modal-box">
-                                <h3 className="font-bold text-lg text-center">Confirmer la suppression ?</h3>
-                                <div className="modal-action flex justify-between">
-                                <button onClick={() => setShowModal(false)} className="bg-red-600 font-bold text-white py-3 px-6 rounded-lg">Annuler</button>
-                                <button onClick={handleConfirm} className="bg-green-600 font-bold text-white py-3 px-6 rounded-lg">Confirmer</button>
-                                </div>
-                            </div>
-                            </dialog>
-                        )}
                 </tbody>
             </table>
         </div>
+        
+        {showModal && (
+            <dialog open className="modal modal-middle sm:modal-middle">
+            <div className="hero-overlay bg-opacity-60"></div>
+            <div className="modal-box">
+                <h3 className="font-bold text-lg text-center">Confirmer la suppression ?</h3>
+                <div className="modal-action flex justify-between">
+                <button onClick={() => setShowModal(false)} className="bg-red-600 font-bold text-white py-3 px-6 rounded-lg">Annuler</button>
+                <button onClick={handleConfirm} className="bg-green-600 font-bold text-white py-3 px-6 rounded-lg">Confirmer</button>
+                </div>
+            </div>
+            </dialog>
+        )}
         </>
     );
 }

@@ -55,15 +55,6 @@ export default function PlantsList() {
     loadPlants();
   }, []);
 
-  useEffect(() => {
-    async function fetchData() {
-      const result = await getPlants();
-      setPlants(result.plants || []);
-    }
-
-    fetchData();
-  }, []);
-
   return (
     <>
       <div className="mt-16 lg:mt-24 flex flex-wrap justify-center max-w-[90%] m-auto">
